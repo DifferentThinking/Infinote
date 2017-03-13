@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Infinote</string>
+    <string name="buttonText">New note</string>
+    <string name="noNotesText">No notes yet</string>
 </resources>
