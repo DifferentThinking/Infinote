@@ -1,6 +1,69 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#26A69A</color>
+
+    <color name="colorBackground">#f2fffe</color>
+
+    <color name="black_trans80">#14000000</color>
+    <color name="colorCoolBlue">#3498DB</color>
+    <color name="colorThunderbirdRed">#D91E18</color>
+    <color name="colorDarkGreen">#26A65B</color>
+    <color name="colorYellowSandStorm">#E9D460</color>
+
+
+    <!--Indigo 500-->
+    <color name="primary_500">#3F51B5</color>
+    <!--Indigo 700-->
+    <color name="primary_700">#303F9F</color>
+    <!--Pink 500-->
+    <color name="accent_500">#26A69A</color>
+    <!--Pink 700-->
+    <color name="accent_700">#C2185B</color>
+
+    <color name="indicator_unselected">#4D000000</color>
+
+
+    <color name="blue_grey">#455A64</color>
+    <color name="red">#F44336</color>
+    <color name="pink">#E91E63</color>
+    <color name="purple">#9C27B0</color>
+    <color name="deep_purple">#673AB7</color>
+    <color name="indigo">#3F51B5</color>
+    <color name="blue">#2196F3</color>
+    <color name="light_blue">#03A9F4</color>
+    <color name="cyan">#00BCD4</color>
+    <color name="teal">#2eecdb</color>
+    <color name="green">#4CAF50</color>
+    <color name="light_green">#8BC34A</color>
+    <color name="lime">#CDDC39</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="amber">#FFC107</color>
+    <color name="orange">#FF9800</color>
+    <color name="deep_orange">#FF5722</color>
+
+    <!--COLORS-->
+    <color name="btn_bg">#26A69A</color>
+    <color name="btn_bg2">#3CE6D6</color>
+
+    <color name="bg_activities">#212121</color>
+
+
+    <color name="primary">#26A69A</color>
+    <color name="primary_dark">#26A69A</color>
+    <color name="primary_darker">#CC1D1D</color>
+    <color name="accent">#FFFFFF</color>
+
+    <color name="black">#000000</color>
+    <color name="jet">#222222</color>
+    <color name="oil">#333333</color>
+    <color name="monsoon">#777777</color>
+    <color name="jumbo">#888888</color>
+    <color name="aluminum">#999999</color>
+    <color name="base">#AAAAAA</color>
+    <color name="iron">#CCCCCC</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="white_70">#B3FFFFFF</color>
+
 </resources>

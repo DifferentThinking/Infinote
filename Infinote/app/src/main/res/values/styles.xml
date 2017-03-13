@@ -8,4 +8,42 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@color/btn_bg</item>
+    </style>
+
+    <style name="EditTextHint" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/iron</item>
+    </style>
+
+    <style name="AppName">
+        <item name="android:textColor">@color/iron</item>
+    </style>
+
+    <!--Product customization-->
+    <style name="CustomizationTitleText">
+        <item name="android:textSize">30dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="CustomizationSubtitletext">
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="CustomizationSizeBtn">
+        <item name="android:shadowColor">#A8A8A8</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowRadius">5</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <!--Home-->
+    <style name="homeBtn" >
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:layout_margin">2dp</item>
+    </style>
+
 </resources>
