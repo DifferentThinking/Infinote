@@ -26,15 +26,15 @@ public class ListNotesActivity extends AppCompatActivity {
                 }
         );
 
-        accountButton.setOnClickListener(
-                new Button.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        Intent intent = new Intent(ListNotesActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                    }
-                }
-        );
+//        accountButton.setOnClickListener(
+//                new Button.OnClickListener(){
+//                    @Override
+//                    public void onClick(View v){
+//                        Intent intent = new Intent(ListNotesActivity.this, LoginActivity.class);
+//                        startActivity(intent);
+//                    }
+//                }
+//        );
 
     }
 }
