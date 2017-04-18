@@ -1,22 +1,40 @@
 package com.infinote.differentthinking.infinote.data;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.infinote.differentthinking.infinote.config.ApiConstants;
+import com.infinote.differentthinking.infinote.models.IHttpResponse;
 import com.infinote.differentthinking.infinote.models.IUser;
+import com.infinote.differentthinking.infinote.models.User;
+import com.infinote.differentthinking.infinote.utils.GsonParser;
+import com.infinote.differentthinking.infinote.utils.HashProvider;
 import com.infinote.differentthinking.infinote.utils.OkHttpRequester;
+import com.infinote.differentthinking.infinote.utils.UserSession;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class UserData implements IUserData {
 
     private final OkHttpRequester httpRequester;
+    private final HashProvider hashProvider;
+    private final ApiConstants apiConstants;
+    private final GsonParser jsonParser;
+    private final UserSession userSession;
+    private final Type userModelType;
 
-    public UserData() {
+    public UserData(Context context) {
+        this.jsonParser = new GsonParser();
+        this.hashProvider = new HashProvider();
         this.httpRequester = new OkHttpRequester();
+        this.apiConstants = new ApiConstants();
+        this.userSession = new UserSession(context);
+        this.userModelType = User.class;
     }
 
     @Override
