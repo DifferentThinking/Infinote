@@ -1,16 +1,12 @@
 <resources>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="button_home_width_height">150dp</dimen>
     <dimen name="button_home_width">150dp</dimen>
     <dimen name="home_title_size">28dp</dimen>
     <dimen name="coloumn_width_size_modal_three_coloumns">100dp</dimen>
-
-    <dimen name="fab_elevation">8dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
-    <dimen name="fab_elevation_press">12dp</dimen>
-    <dimen name="fab_size">56dp</dimen>
 
     <dimen name="statusbar_size">24dp</dimen>
 

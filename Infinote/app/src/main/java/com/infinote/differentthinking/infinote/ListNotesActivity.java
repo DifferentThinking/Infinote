@@ -1,6 +1,7 @@
 package com.infinote.differentthinking.infinote;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,11 +14,11 @@ public class ListNotesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_notes);
 
-        Button newNoteButton = (Button) this.findViewById(R.id.newNoteButton);
         Button accountButton = (Button) this.findViewById(R.id.accountButton);
+        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
 
-        newNoteButton.setOnClickListener(
-                new Button.OnClickListener(){
+        fab.setOnClickListener(
+                new FloatingActionButton.OnClickListener(){
                     @Override
                     public void onClick(View v){
                         Intent intent = new Intent(ListNotesActivity.this, NoteActivity.class);
@@ -26,15 +27,15 @@ public class ListNotesActivity extends AppCompatActivity {
                 }
         );
 
-//        accountButton.setOnClickListener(
-//                new Button.OnClickListener(){
-//                    @Override
-//                    public void onClick(View v){
-//                        Intent intent = new Intent(ListNotesActivity.this, LoginActivity.class);
-//                        startActivity(intent);
-//                    }
-//                }
-//        );
+        accountButton.setOnClickListener(
+                new Button.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        Intent intent = new Intent(ListNotesActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
 
     }
 }

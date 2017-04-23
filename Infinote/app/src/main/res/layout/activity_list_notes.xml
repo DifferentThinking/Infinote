@@ -30,13 +30,6 @@
             android:layout_height="60dp"
             android:gravity="center"
             android:text=""/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/newButtonText"
-            android:id="@+id/newNoteButton"
-            />
     </LinearLayout>
 
     <TextView
@@ -46,5 +39,50 @@
         android:id="@+id/textView"
         android:textSize="22sp"
         android:layout_marginTop="20dp"
-    />
+        />
+    
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.CoordinatorLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <!--android:id="@+id/main_content"-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:id="@+id/fab"
+            android:src="@drawable/ic_action_newnote" />
+
+    </RelativeLayout>
+
+    <!--<android.support.design.widget.CoordinatorLayout android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+        <!--&lt;!&ndash;android:id="@+id/main_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;xmlns:android="http://schemas.android.com/apk/res/android"&ndash;&gt;-->
+        <!--&lt;!&ndash;xmlns:app="http://schemas.android.com/apk/res-auto"&ndash;&gt;-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+        <!--android:src="@mipmap/ic_launcher" />-->
+
 </LinearLayout>
+
