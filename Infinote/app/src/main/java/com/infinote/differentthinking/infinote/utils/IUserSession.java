@@ -1,6 +1,6 @@
-package com.infinote.differentthinking.infinote.utils.base;
+package com.infinote.differentthinking.infinote.utils;
 
-public interface UserSessionContract {
+public interface IUserSession {
     String getUsername();
 
     void setUsername(String username);

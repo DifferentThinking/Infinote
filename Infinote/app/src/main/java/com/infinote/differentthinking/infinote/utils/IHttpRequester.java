@@ -1,11 +1,11 @@
-package com.infinote.differentthinking.infinote.utils.base;
+package com.infinote.differentthinking.infinote.utils;
 
 import com.infinote.differentthinking.infinote.models.IHttpResponse;
 
 import io.reactivex.Observable;
 import java.util.Map;
 
-public interface OkHttpRequesterContract {
+public interface IHttpRequester {
 
     Observable<IHttpResponse> get(final String url);
 

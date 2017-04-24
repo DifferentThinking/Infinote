@@ -7,13 +7,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.infinote.differentthinking.infinote.utils.base.GsonParserContract;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GsonParser implements GsonParserContract {
+public class GsonParser implements IGsonParser {
 
     @Override
     public String toJson(Object src) {

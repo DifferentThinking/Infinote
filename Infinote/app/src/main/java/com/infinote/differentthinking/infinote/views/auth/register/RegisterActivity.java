@@ -31,7 +31,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         this.presenter = new RegisterPresenter(registerFragment, this);
 
-        this.dialong = new InfinoteProgressDialog();
         this.dialong.setContext(this);
         registerFragment.setDialog(this.dialong);
         registerFragment.setPresenter(this.presenter);
