@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-public class UserSession implements IUserSession {
+import com.infinote.differentthinking.infinote.utils.base.UserSessionContract;
+
+public class UserSession implements UserSessionContract {
     private final SharedPreferences sharedPreferences;
 
     public UserSession(Context context) {

@@ -5,19 +5,18 @@ import android.util.Log;
 import com.infinote.differentthinking.infinote.models.HttpResponseFactory;
 import com.infinote.differentthinking.infinote.models.IHttpResponse;
 import com.infinote.differentthinking.infinote.models.IHttpResponseFactory;
+import com.infinote.differentthinking.infinote.utils.base.OkHttpRequesterContract;
 
 import java.io.IOException;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
-import io.reactivex.internal.observers.LambdaObserver;
 import okhttp3.*;
 
-        import java.util.Map;
-        import java.util.concurrent.Callable;
+import java.util.concurrent.Callable;
 
-public class OkHttpRequester implements IHttpRequester {
+public class OkHttpRequester implements OkHttpRequesterContract {
 
     private final IHttpResponseFactory responseFactory;
     private final OkHttpClient httpClient;

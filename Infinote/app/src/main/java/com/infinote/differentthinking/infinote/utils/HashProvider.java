@@ -1,8 +1,10 @@
 package com.infinote.differentthinking.infinote.utils;
 
+import com.infinote.differentthinking.infinote.utils.base.HashProviderContract;
+
 import java.security.MessageDigest;
 
-public class HashProvider implements IHashProvider {
+public class HashProvider implements HashProviderContract {
 
     public String hashPassword(String password) {
         return this.SHA1(password);

@@ -3,7 +3,9 @@ package com.infinote.differentthinking.infinote.utils;
 import android.app.ProgressDialog;
 import android.content.Context;
 
-public class InfinoteProgressDialog implements IInfinoteProgressDialog {
+import com.infinote.differentthinking.infinote.utils.base.InfinoteProgressDialogContract;
+
+public class InfinoteProgressDialog implements InfinoteProgressDialogContract {
     ProgressDialog dialog;
 
     public void setContext(Context context) {
