@@ -1,12 +1,11 @@
 package com.infinote.differentthinking.infinote.data;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.infinote.differentthinking.infinote.config.ApiConstants;
-import com.infinote.differentthinking.infinote.models.IHttpResponse;
-import com.infinote.differentthinking.infinote.models.IUser;
+import com.infinote.differentthinking.infinote.data.base.UserDataContract;
+import com.infinote.differentthinking.infinote.models.base.HttpResponseContract;
+import com.infinote.differentthinking.infinote.models.base.UserContract;
 import com.infinote.differentthinking.infinote.models.User;
 import com.infinote.differentthinking.infinote.utils.GsonParser;
 import com.infinote.differentthinking.infinote.utils.HashProvider;
@@ -20,7 +19,7 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserData implements IUserData {
+public class UserData implements UserDataContract {
 
     private final OkHttpRequester httpRequester;
     private final HashProvider hashProvider;
@@ -39,7 +38,7 @@ public class UserData implements IUserData {
     }
 
     @Override
-    public Observable<IUser> signIn(String username, String password) {
+    public Observable<UserContract> signIn(String username, String password) {
         Map<String, String> userCredentials = new HashMap<>();
         String passHash = hashProvider.hashPassword(password);
         userCredentials.put("username", username.toLowerCase());
@@ -47,15 +46,15 @@ public class UserData implements IUserData {
 
         return httpRequester
                 .post(apiConstants.signInUrl(), userCredentials)
-                .map(new Function<IHttpResponse, IUser>() {
+                .map(new Function<HttpResponseContract, UserContract>() {
                     @Override
-                    public IUser apply(IHttpResponse iHttpResponse) throws Exception {
+                    public UserContract apply(HttpResponseContract iHttpResponse) throws Exception {
                         if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
                             throw new Error(iHttpResponse.getMessage());
                         }
                         String responseBody = iHttpResponse.getBody().toString();
                         String userJson = jsonParser.getDirectMember(responseBody, "result");
-                        IUser resultUser = jsonParser.fromJson(userJson, userModelType);
+                        UserContract resultUser = jsonParser.fromJson(userJson, userModelType);
 
                         userSession.setUsername(resultUser.getUsername());
                         userSession.setId(resultUser.getId());
@@ -65,7 +64,7 @@ public class UserData implements IUserData {
     }
 
     @Override
-    public Observable<IUser> signUp(String username, String password) {
+    public Observable<UserContract> signUp(String username, String password) {
         Map<String, String> userCredentials = new HashMap<>();
         String passHash = hashProvider.hashPassword(password);
         userCredentials.put("username", username.toLowerCase());
@@ -73,16 +72,16 @@ public class UserData implements IUserData {
 
         return httpRequester
                 .post(apiConstants.signUpUrl(), userCredentials)
-                .map(new Function<IHttpResponse, IUser>() {
+                .map(new Function<HttpResponseContract, UserContract>() {
                     @Override
-                    public IUser apply(IHttpResponse iHttpResponse) throws Exception {
+                    public UserContract apply(HttpResponseContract iHttpResponse) throws Exception {
                         if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
                             throw new Error(iHttpResponse.getMessage());
                         }
 
                         String responseBody = iHttpResponse.getBody().toString();
                         String userJson = jsonParser.getDirectMember(responseBody, "result");
-                        IUser resultUser = jsonParser.fromJson(userJson, userModelType);
+                        UserContract resultUser = jsonParser.fromJson(userJson, userModelType);
 
                         return resultUser;
                     }

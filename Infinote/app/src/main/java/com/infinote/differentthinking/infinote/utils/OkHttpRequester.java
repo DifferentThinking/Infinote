@@ -3,23 +3,22 @@ package com.infinote.differentthinking.infinote.utils;
 import android.util.Log;
 
 import com.infinote.differentthinking.infinote.models.HttpResponseFactory;
-import com.infinote.differentthinking.infinote.models.IHttpResponse;
-import com.infinote.differentthinking.infinote.models.IHttpResponseFactory;
+import com.infinote.differentthinking.infinote.models.base.HttpResponseContract;
+import com.infinote.differentthinking.infinote.models.base.HttpResponseFactoryContract;
+import com.infinote.differentthinking.infinote.utils.base.OkHttpRequesterContract;
 
 import java.io.IOException;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
-import io.reactivex.internal.observers.LambdaObserver;
 import okhttp3.*;
 
-        import java.util.Map;
-        import java.util.concurrent.Callable;
+import java.util.concurrent.Callable;
 
-public class OkHttpRequester implements IHttpRequester {
+public class OkHttpRequester implements OkHttpRequesterContract {
 
-    private final IHttpResponseFactory responseFactory;
+    private final HttpResponseFactoryContract responseFactory;
     private final OkHttpClient httpClient;
 
     public OkHttpRequester() {
@@ -27,10 +26,10 @@ public class OkHttpRequester implements IHttpRequester {
         this.httpClient = new OkHttpClient();
     }
 
-    public Observable<IHttpResponse> get(final String url) {
-        return Observable.defer(new Callable<ObservableSource<? extends IHttpResponse>>() {
+    public Observable<HttpResponseContract> get(final String url) {
+        return Observable.defer(new Callable<ObservableSource<? extends HttpResponseContract>>() {
             @Override
-            public ObservableSource<? extends IHttpResponse> call() throws Exception {
+            public ObservableSource<? extends HttpResponseContract> call() throws Exception {
                 Request request = new Request.Builder()
                         .url(url)
                         .build();
@@ -40,10 +39,10 @@ public class OkHttpRequester implements IHttpRequester {
         });
     }
 
-    public Observable<IHttpResponse> get(final String url, final Map<String, String> headers) {
-        return Observable.defer(new Callable<ObservableSource<? extends IHttpResponse>>() {
+    public Observable<HttpResponseContract> get(final String url, final Map<String, String> headers) {
+        return Observable.defer(new Callable<ObservableSource<? extends HttpResponseContract>>() {
             @Override
-            public ObservableSource<? extends IHttpResponse> call() throws Exception {
+            public ObservableSource<? extends HttpResponseContract> call() throws Exception {
                 Request.Builder requestBuilder = new Request.Builder()
                         .url(url);
 
@@ -57,10 +56,10 @@ public class OkHttpRequester implements IHttpRequester {
         });
     }
 
-    public Observable<IHttpResponse> post(final String url, final Map<String, String> body) {
-        return Observable.defer(new Callable<ObservableSource<? extends IHttpResponse>>() {
+    public Observable<HttpResponseContract> post(final String url, final Map<String, String> body) {
+        return Observable.defer(new Callable<ObservableSource<? extends HttpResponseContract>>() {
             @Override
-            public ObservableSource<? extends IHttpResponse> call() throws Exception {
+            public ObservableSource<? extends HttpResponseContract> call() throws Exception {
                 RequestBody requestBody = createRequestBody(body);
 
                 Request request = new Request.Builder()
@@ -73,12 +72,12 @@ public class OkHttpRequester implements IHttpRequester {
         });
     }
 
-    public Observable<IHttpResponse> post(final String url, final Map<String, String> body,
-                                          final Map<String, String> headers) {
+    public Observable<HttpResponseContract> post(final String url, final Map<String, String> body,
+                                                 final Map<String, String> headers) {
 
-        return Observable.defer(new Callable<ObservableSource<? extends IHttpResponse>>() {
+        return Observable.defer(new Callable<ObservableSource<? extends HttpResponseContract>>() {
             @Override
-            public ObservableSource<? extends IHttpResponse> call() throws Exception {
+            public ObservableSource<? extends HttpResponseContract> call() throws Exception {
                 RequestBody requestBody = createRequestBody(body);
 
                 Request.Builder requestBuilder = new Request.Builder()
@@ -106,11 +105,11 @@ public class OkHttpRequester implements IHttpRequester {
         return requestBody;
     }
 
-    private Observable<IHttpResponse> createResponse(Request request) {
+    private Observable<HttpResponseContract> createResponse(Request request) {
         try {
             Response response = httpClient.newCall(request).execute();
 
-            IHttpResponse responseParsed = responseFactory.createResponse(
+            HttpResponseContract responseParsed = responseFactory.createResponse(
                     response.headers().toMultimap(), response.body().string(),
                     response.message(), response.code());
             Log.d("HERE: ", response.message());

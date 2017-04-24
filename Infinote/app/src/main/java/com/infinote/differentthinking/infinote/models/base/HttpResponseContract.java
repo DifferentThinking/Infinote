@@ -1,9 +1,9 @@
-package com.infinote.differentthinking.infinote.models;
+package com.infinote.differentthinking.infinote.models.base;
 
 import java.util.List;
 import java.util.Map;
 
-public interface IHttpResponse {
+public interface HttpResponseContract {
     Map<String, List<String>> getHeaders();
 
     String getBody();

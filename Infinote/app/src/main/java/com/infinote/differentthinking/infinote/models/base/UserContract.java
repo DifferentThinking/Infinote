@@ -1,6 +1,6 @@
-package com.infinote.differentthinking.infinote.models;
+package com.infinote.differentthinking.infinote.models.base;
 
-public interface IUser {
+public interface UserContract {
     String getId();
 
     void setId(String id);

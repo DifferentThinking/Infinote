@@ -1,9 +1,10 @@
 package com.infinote.differentthinking.infinote.views.auth.register;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.infinote.differentthinking.infinote.data.UserData;
-import com.infinote.differentthinking.infinote.models.IUser;
+import com.infinote.differentthinking.infinote.models.base.UserContract;
 import com.infinote.differentthinking.infinote.views.auth.register.base.RegisterContract;
 
 import io.reactivex.Observer;
@@ -26,19 +27,23 @@ public class RegisterPresenter implements RegisterContract.Presenter {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                new Observer<IUser>() {
+                new Observer<UserContract>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         view.showDialogForLoading();
                     }
 
                     @Override
-                    public void onNext(IUser value) {
-                        view.dismissDialog();
+                    public void onNext(UserContract value) {
+                        Log.d("HERE", "sdfhadsfg");
+                        view.notifySuccessful();
+                        view.showListNotesActivity();
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.d("err", e.getMessage());
+                        view.notifyError("Error registering!");
                         view.dismissDialog();
                     }
 

@@ -1,32 +1,37 @@
 package com.infinote.differentthinking.infinote.views.auth.login;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.infinote.differentthinking.infinote.R;
-import com.infinote.differentthinking.infinote.views.auth.register.RegisterActivity;
+import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
+import com.infinote.differentthinking.infinote.views.auth.login.base.LoginContract;
 
 public class LoginActivity extends AppCompatActivity {
+    private LoginContract.Presenter presenter;
+    private InfinoteProgressDialog dialong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        TextView createAccountView = (TextView) this.findViewById(R.id.tv_no_account);
+        LoginFragment loginFragment =
+                (LoginFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
 
-        createAccountView.setOnClickListener(
-                new Button.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                        startActivity(intent);
-                    }
-                }
-        );
+        if (loginFragment == null) {
+            loginFragment = LoginFragment.newInstance();
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.fragment_container, loginFragment)
+                    .commit();
+        }
+
+        this.presenter = new LoginPresenter(loginFragment, this);
+        this.dialong = new InfinoteProgressDialog();
+        this.dialong.setContext(this);
+        loginFragment.setDialog(this.dialong);
+        loginFragment.setPresenter(this.presenter);
     }
 }

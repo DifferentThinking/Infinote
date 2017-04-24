@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
+import com.infinote.differentthinking.infinote.views.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.auth.login.LoginActivity;
 import com.infinote.differentthinking.infinote.views.auth.register.base.RegisterContract;
 
@@ -68,12 +70,6 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
@@ -94,7 +90,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
 
     @Override
     public void showListNotesActivity() {
-        Intent intent = new Intent(this.context, LoginActivity.class);
+        Intent intent = new Intent(this.context, ListNotesActivity.class);
         startActivity(intent);
     }
 
@@ -106,5 +102,17 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     @Override
     public void dismissDialog() {
         this.progressDialog.dismissProgress();
+    }
+
+    @Override
+    public void notifySuccessful() {
+        Toast.makeText(this.context, this.firstnameEditText + getString(R.string.user_registered_notify_message), Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    @Override
+    public void notifyError(String errorMessage) {
+        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG)
+                .show();
     }
  }

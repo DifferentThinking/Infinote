@@ -16,6 +16,8 @@
     <string name="last_name_text">Last name</string>
     <string name="repeat_password_text">Repeat password</string>
     <string name="address_optional_text">Address(Optional)</string>
+    <string name="user_loggedin_notify_message">"You have successfully logged in"</string>
+    <string name="user_registered_notify_message">" successfully registered"</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

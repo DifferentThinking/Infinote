@@ -1,15 +1,18 @@
 package com.infinote.differentthinking.infinote.models;
 
+import com.infinote.differentthinking.infinote.models.base.HttpResponseContract;
+import com.infinote.differentthinking.infinote.models.base.HttpResponseFactoryContract;
+
 import java.util.List;
 import java.util.Map;
 
-public class HttpResponseFactory implements IHttpResponseFactory {
+public class HttpResponseFactory implements HttpResponseFactoryContract {
 
-    public IHttpResponse createResponse(
+    public HttpResponseContract createResponse(
             final Map<String, List<String>> headers, final String body,
             final String message, final int code) {
 
-        return new IHttpResponse() {
+        return new HttpResponseContract() {
             @Override
             public Map<String, List<String>> getHeaders() {
                 return headers;

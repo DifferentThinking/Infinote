@@ -8,6 +8,10 @@ public interface RegisterContract {
         void dismissDialog();
 
         void showListNotesActivity();
+
+        void notifySuccessful();
+
+        void notifyError(String errorMessage);
     }
 
     interface Presenter{

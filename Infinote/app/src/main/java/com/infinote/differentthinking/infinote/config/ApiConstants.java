@@ -1,6 +1,8 @@
 package com.infinote.differentthinking.infinote.config;
 
-public class ApiConstants implements IApiConstants{
+import com.infinote.differentthinking.infinote.config.base.ApiConstantsContract;
+
+public class ApiConstants implements ApiConstantsContract {
 
     private static final String API_URL = "https://infinote.herokuapp.com/api";
     //private static final String API_URL = "http://10.0.2.2:8080";
