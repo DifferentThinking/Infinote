@@ -1,13 +1,9 @@
-package com.infinote.differentthinking.infinote;
+package com.infinote.differentthinking.infinote.views;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
+import android.support.v7.app.AppCompatActivity;
 
 public class NoteActivity extends AppCompatActivity {
 

@@ -2,6 +2,7 @@ package com.infinote.differentthinking.infinote.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.infinote.differentthinking.infinote.config.ApiConstants;
 import com.infinote.differentthinking.infinote.models.IHttpResponse;
@@ -52,14 +53,12 @@ public class UserData implements IUserData {
                         if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
                             throw new Error(iHttpResponse.getMessage());
                         }
-
                         String responseBody = iHttpResponse.getBody().toString();
                         String userJson = jsonParser.getDirectMember(responseBody, "result");
                         IUser resultUser = jsonParser.fromJson(userJson, userModelType);
 
                         userSession.setUsername(resultUser.getUsername());
                         userSession.setId(resultUser.getId());
-
                         return resultUser;
                     }
                 });

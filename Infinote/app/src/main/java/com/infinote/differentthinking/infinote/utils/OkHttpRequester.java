@@ -1,5 +1,7 @@
 package com.infinote.differentthinking.infinote.utils;
 
+import android.util.Log;
+
 import com.infinote.differentthinking.infinote.models.HttpResponseFactory;
 import com.infinote.differentthinking.infinote.models.IHttpResponse;
 import com.infinote.differentthinking.infinote.models.IHttpResponseFactory;
@@ -9,6 +11,7 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
+import io.reactivex.internal.observers.LambdaObserver;
 import okhttp3.*;
 
         import java.util.Map;
@@ -110,9 +113,10 @@ public class OkHttpRequester implements IHttpRequester {
             IHttpResponse responseParsed = responseFactory.createResponse(
                     response.headers().toMultimap(), response.body().string(),
                     response.message(), response.code());
-
+            Log.d("HERE: ", response.message());
             return Observable.just(responseParsed);
         } catch (IOException e) {
+            Log.d("HERE: ", e.getMessage());
             return Observable.error(e);
         }
     }

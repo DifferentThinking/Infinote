@@ -1,11 +1,14 @@
-package com.infinote.differentthinking.infinote;
+package com.infinote.differentthinking.infinote.views;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.infinote.differentthinking.infinote.R;
+import com.infinote.differentthinking.infinote.views.auth.login.LoginActivity;
 
 public class ListNotesActivity extends AppCompatActivity {
 

@@ -22,13 +22,6 @@
             android:layout_marginBottom="5dp"
             android:textColor="@color/black"/>
 
-        <!--<android.support.design.widget.TextInputLayout-->
-            <!--android:theme="@style/EditTextHint"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:layout_marginTop="8dp">-->
-
             <EditText
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
@@ -37,14 +30,6 @@
                 android:textColorHint="@color/black"
                 android:textColor="@color/black"
                 android:inputType="textEmailAddress" />
-        <!--</android.support.design.widget.TextInputLayout>-->
-
-        <!--<android.support.design.widget.TextInputLayout-->
-            <!--android:theme="@style/EditTextHint"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:layout_marginTop="8dp">-->
 
             <EditText
                 android:id="@+id/et_password"
@@ -54,14 +39,6 @@
                 android:textColorHint="@color/black"
                 android:textColor="@color/black"
                 android:inputType="textPassword" />
-        <!--</android.support.design.widget.TextInputLayout>-->
-
-        <!--<android.support.design.widget.TextInputLayout-->
-            <!--android:theme="@style/EditTextHint"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:layout_marginTop="8dp">-->
 
             <EditText
                 android:id="@+id/et_confirm_password"
@@ -71,14 +48,6 @@
                 android:textColorHint="@color/black"
                 android:textColor="@color/black"
                 android:inputType="textPassword" />
-        <!--</android.support.design.widget.TextInputLayout>-->
-
-        <!--<android.support.design.widget.TextInputLayout-->
-            <!--android:theme="@style/EditTextHint"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:layout_marginTop="8dp">-->
 
             <EditText
                 android:id="@+id/et_first_name"
@@ -87,14 +56,6 @@
                 android:hint="@string/first_name_text"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"/>
-        <!--</android.support.design.widget.TextInputLayout>-->
-
-        <!--<android.support.design.widget.TextInputLayout-->
-            <!--android:theme="@style/EditTextHint"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:layout_marginTop="8dp">-->
 
             <EditText
                 android:id="@+id/et_last_name"
@@ -103,23 +64,6 @@
                 android:hint="@string/last_name_text"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"/>
-        <!--</android.support.design.widget.TextInputLayout>-->
-
-        <!--<android.support.design.widget.TextInputLayout-->
-            <!--android:theme="@style/EditTextHint"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:layout_marginTop="8dp">-->
-
-            <EditText
-                android:id="@+id/et_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/address_optional_text"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"/>
-        <!--</android.support.design.widget.TextInputLayout>-->
 
         <Button
             android:id="@+id/btn_register"
