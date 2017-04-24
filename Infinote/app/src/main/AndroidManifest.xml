@@ -13,6 +13,19 @@
         android:icon="@mipmap/infinote"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"></application>
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".views.ListNotesActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".views.auth.login.LoginActivity" />
+        <activity android:name=".views.auth.register.RegisterActivity" />
+        <activity android:name=".views.NoteActivity" />
+
+    </application>
 
 </manifest>
