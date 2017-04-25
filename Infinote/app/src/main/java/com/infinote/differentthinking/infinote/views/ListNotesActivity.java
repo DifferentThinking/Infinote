@@ -17,7 +17,7 @@ public class ListNotesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_notes);
 
-        Button accountButton = (Button) this.findViewById(R.id.accountButton);
+        at.markushi.ui.CircleButton accountButton = (at.markushi.ui.CircleButton) this.findViewById(R.id.account_button);
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
 
         fab.setOnClickListener(
