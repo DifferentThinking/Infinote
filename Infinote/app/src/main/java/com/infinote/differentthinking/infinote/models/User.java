@@ -1,6 +1,8 @@
 package com.infinote.differentthinking.infinote.models;
 
-public class User {
+import com.infinote.differentthinking.infinote.models.base.UserContract;
+
+public class User implements UserContract {
     private String id;
     private String username;
 

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
+import com.infinote.differentthinking.infinote.views.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.auth.login.LoginActivity;
 import com.infinote.differentthinking.infinote.views.auth.login.base.LoginContract;
 import com.infinote.differentthinking.infinote.views.auth.register.RegisterActivity;
@@ -98,7 +99,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
 
     @Override
     public void showListNotesActivity() {
-        Intent intent = new Intent(this.context, LoginActivity.class);
+        Intent intent = new Intent(this.context, ListNotesActivity.class);
         startActivity(intent);
     }
 

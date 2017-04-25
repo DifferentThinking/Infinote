@@ -3,7 +3,6 @@ package com.infinote.differentthinking.infinote.views.auth.register;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -106,7 +105,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
 
     @Override
     public void notifySuccessful() {
-        Toast.makeText(this.context, this.firstnameEditText + getString(R.string.user_registered_notify_message), Toast.LENGTH_SHORT)
+        Toast.makeText(getContext(), this.firstnameEditText.getText().toString() + getString(R.string.user_registered_notify_message), Toast.LENGTH_SHORT)
                 .show();
     }
 

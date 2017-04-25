@@ -57,7 +57,7 @@ public class UserData implements UserDataContract {
                         UserContract resultUser = jsonParser.fromJson(userJson, userModelType);
 
                         userSession.setUsername(resultUser.getUsername());
-                        userSession.setId(resultUser.getId());
+                        //userSession.setId(resultUser.getId());
                         return resultUser;
                     }
                 });
