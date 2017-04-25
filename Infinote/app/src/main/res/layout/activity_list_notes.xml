@@ -19,10 +19,21 @@
         android:gravity="right|center_horizontal"
         >
 
+        <TextView
+            android:text="Infinotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/infinotes_text"
+            android:textSize="22sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="100dp"
+
+            />
+
         <at.markushi.ui.CircleButton
             android:layout_width="50dip"
             android:layout_height="50dip"
-            android:layout_marginRight="300dp"
+            android:layout_gravity="left"
             android:id="@+id/account_button"
             android:src="@drawable/ic_action_account"
             app:cb_color="#3796e5" />
