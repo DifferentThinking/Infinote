@@ -16,27 +16,36 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
-        android:gravity="right|center_horizontal"
-        >
-
-        <TextView
-            android:text="Infinotes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/infinotes_text"
-            android:textSize="22sp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="100dp"
-
-            />
+        android:weightSum="1">
 
         <at.markushi.ui.CircleButton
+            android:id="@+id/account_button"
             android:layout_width="50dip"
             android:layout_height="50dip"
-            android:layout_gravity="left"
-            android:id="@+id/account_button"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/ic_action_account"
             app:cb_color="#3796e5" />
+
+        <TextView
+            android:id="@+id/infinotes_text"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:fontFamily="serif-monospace"
+            android:text="Infinotes"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/edit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:fontFamily="sans-serif"
+            android:text="Edit"
+            android:textAlignment="textEnd"
+            android:textSize="24sp" />
 
     </LinearLayout>
 
@@ -63,6 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_margin="10dp"
             android:src="@drawable/ic_action_newnote" />
 
