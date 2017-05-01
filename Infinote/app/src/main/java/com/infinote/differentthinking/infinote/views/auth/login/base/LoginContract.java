@@ -16,7 +16,7 @@ public interface LoginContract {
         void showRegisterActivty();
     }
 
-    interface Presenter{
+    interface Presenter {
         void loginUser(String email, String password);
 
         void onCreateAccountClicked();

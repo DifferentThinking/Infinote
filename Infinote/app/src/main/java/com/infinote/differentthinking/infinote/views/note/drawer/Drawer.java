@@ -1,4 +1,4 @@
-package com.infinote.differentthinking.infinote.views;
+package com.infinote.differentthinking.infinote.views.note.drawer;
 
 
 import android.content.Context;
@@ -9,15 +9,7 @@ import android.graphics.Path;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class MyCanvas extends View {
-
-//    @Override
-//    protected void onDraw(Canvas canvas) {
-//        super.onDraw(canvas);
-//        Paint pBackground = new Paint();
-//        pBackground.setColor(Color.WHITE);
-//        canvas.drawRect(0, 0, 630, 1000, pBackground);
-//    }
+public class Drawer extends View {
 
     public int width;
     public  int height;
@@ -26,23 +18,15 @@ public class MyCanvas extends View {
     private Path mPath;
     private Paint   mBitmapPaint;
     Context context;
-//    private Paint circlePaint;
-//    private Path circlePath;
+
     private Paint mPaint;
 
-    public MyCanvas(Context c, Paint p) {
+    public Drawer(Context c, Paint p) {
         super(c);
         mPaint = p;
         context=c;
         mPath = new Path();
         mBitmapPaint = new Paint(Paint.DITHER_FLAG);
-//        circlePaint = new Paint();
-//        circlePath = new Path();
-//        circlePaint.setAntiAlias(true);
-//        circlePaint.setColor(Color.BLUE);
-//        circlePaint.setStyle(Paint.Style.STROKE);
-//        circlePaint.setStrokeJoin(Paint.Join.MITER);
-//        circlePaint.setStrokeWidth(4f);
     }
 
     @Override
@@ -59,38 +43,31 @@ public class MyCanvas extends View {
 
         canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
         canvas.drawPath(mPath, mPaint);
-//        canvas.drawPath(circlePath, circlePaint);
     }
 
     private float mX, mY;
     private static final float TOUCH_TOLERANCE = 4;
 
-    private void touch_start(float x, float y) {
+    private void touchStart(float x, float y) {
         mPath.reset();
         mPath.moveTo(x, y);
         mX = x;
         mY = y;
     }
 
-    private void touch_move(float x, float y) {
+    private void touchMove(float x, float y) {
         float dx = Math.abs(x - mX);
         float dy = Math.abs(y - mY);
         if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
             mPath.quadTo(mX, mY, (x + mX)/2, (y + mY)/2);
             mX = x;
             mY = y;
-
-//            circlePath.reset();
-//            circlePath.addCircle(mX, mY, 30, Path.Direction.CW);
         }
     }
 
-    private void touch_up() {
+    private void touchUp() {
         mPath.lineTo(mX, mY);
-//        circlePath.reset();
-        // commit the path to our offscreen
         mCanvas.drawPath(mPath,  mPaint);
-        // kill this so we don't double draw
         mPath.reset();
     }
 
@@ -101,15 +78,15 @@ public class MyCanvas extends View {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                touch_start(x, y);
+                touchStart(x, y);
                 invalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
-                touch_move(x, y);
+                touchMove(x, y);
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
-                touch_up();
+                touchUp();
                 invalidate();
                 break;
         }

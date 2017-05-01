@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.views.auth.login.LoginActivity;
+import com.infinote.differentthinking.infinote.views.note.NoteActivity;
 
 public class ListNotesActivity extends AppCompatActivity {
 

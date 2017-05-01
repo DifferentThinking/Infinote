@@ -1,9 +1,9 @@
-package com.infinote.differentthinking.infinote.data;
+package com.infinote.differentthinking.infinote.data.remote;
 
 import android.content.Context;
 
 import com.infinote.differentthinking.infinote.config.ApiConstants;
-import com.infinote.differentthinking.infinote.data.base.UserDataContract;
+import com.infinote.differentthinking.infinote.data.remote.base.UserDataContract;
 import com.infinote.differentthinking.infinote.models.base.HttpResponseContract;
 import com.infinote.differentthinking.infinote.models.base.UserContract;
 import com.infinote.differentthinking.infinote.models.User;
@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserData implements UserDataContract {
-
     private final OkHttpRequester httpRequester;
     private final HashProvider hashProvider;
     private final ApiConstants apiConstants;
