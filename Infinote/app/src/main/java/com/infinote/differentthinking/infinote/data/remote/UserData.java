@@ -10,7 +10,7 @@ import com.infinote.differentthinking.infinote.models.User;
 import com.infinote.differentthinking.infinote.utils.GsonParser;
 import com.infinote.differentthinking.infinote.utils.HashProvider;
 import com.infinote.differentthinking.infinote.utils.OkHttpRequester;
-import com.infinote.differentthinking.infinote.utils.UserSession;
+import com.infinote.differentthinking.infinote.data.local.UserSession;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;

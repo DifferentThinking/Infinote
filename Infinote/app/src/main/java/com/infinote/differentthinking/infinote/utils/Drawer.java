@@ -1,4 +1,4 @@
-package com.infinote.differentthinking.infinote.views.note.drawer;
+package com.infinote.differentthinking.infinote.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,7 +10,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class Drawer extends View {
+import com.infinote.differentthinking.infinote.utils.base.DrawerContract;
+
+public class Drawer extends View implements DrawerContract {
 
     public int width;
     public int height;

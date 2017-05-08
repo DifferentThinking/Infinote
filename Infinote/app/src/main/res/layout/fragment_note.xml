@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.infinote.differentthinking.infinote.views.note.NoteFragment" >
+<<<<<<< HEAD
 
 
     <LinearLayout
@@ -31,9 +32,20 @@
             app:aebMaskBackgroundColor="@color/transparent"
             app:aebSubButtonSizeDp="30dp" />
     </LinearLayout>
+=======
+>>>>>>> origin/master
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/note_save_button" />
 
+<<<<<<< HEAD
     <com.infinote.differentthinking.infinote.views.note.drawer.Drawer
+=======
+    <com.infinote.differentthinking.infinote.utils.Drawer
+>>>>>>> origin/master
         android:id="@+id/note_drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

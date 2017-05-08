@@ -22,6 +22,12 @@ public class ApiConstants implements ApiConstantsContract {
         return URL_SIGN_UP;
     }
 
+    public String postImageUrl(String username) {
+        String result = API_URL + "/users/" + username + "/notes";
+
+        return result;
+    }
+
     @Override
     public int responseSuccessCode() {
         return RESPONSE_SUCCESS_CODE;
