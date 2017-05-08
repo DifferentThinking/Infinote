@@ -121,12 +121,12 @@ public class NoteFragment extends Fragment implements NoteContract.View {
         for (int i = 0; i < 10; i++) {
             ButtonData buttonData =  ButtonData.buildTextButton("");
 //            buttonData.setBackgroundColor(44242);
+//            buttonData.setBackgroundColorId(context, R.color.blue);
             buttonDatas.add(buttonData);
         }
 
         ButtonData test =  ButtonData.buildIconButton(context, R.drawable.ic_action_circle, 0);
-//        test.setBackgroundColorId(context, 0x90fae);
-        test.setBackgroundColor(0x90fae);
+        test.setBackgroundColorId(context, R.color.blue);
         buttonDatas.add(test);
 
         button.setButtonDatas(buttonDatas);

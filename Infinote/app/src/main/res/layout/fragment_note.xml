@@ -30,6 +30,7 @@
             app:aebMainButtonSizeDp="30dp"
             app:aebMaskBackgroundColor="@color/transparent"
             app:aebSubButtonSizeDp="30dp" />
+
     </LinearLayout>
 
     <com.infinote.differentthinking.infinote.utils.Drawer
