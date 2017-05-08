@@ -3,7 +3,6 @@ package com.infinote.differentthinking.infinote.views.auth.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +14,9 @@ import android.widget.Toast;
 
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
-import com.infinote.differentthinking.infinote.views.ListNotesActivity;
-import com.infinote.differentthinking.infinote.views.auth.login.LoginActivity;
+import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.auth.login.base.LoginContract;
 import com.infinote.differentthinking.infinote.views.auth.register.RegisterActivity;
-import com.infinote.differentthinking.infinote.views.auth.register.base.RegisterContract;
 
 
 public class LoginFragment extends Fragment implements LoginContract.View {
@@ -33,8 +30,8 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     private InfinoteProgressDialog progressDialog;
     private Context context;
 
-
-    public LoginFragment() {
+    public static LoginFragment newInstance() {
+        return new LoginFragment();
     }
 
     @Override
@@ -85,14 +82,12 @@ public class LoginFragment extends Fragment implements LoginContract.View {
         this.context = context;
     }
 
-    public static LoginFragment newInstance() {
-        return new LoginFragment();
-    }
-
+    @Override
     public void setDialog(InfinoteProgressDialog progressDialog) {
         this.progressDialog = progressDialog;
     }
 
+    @Override
     public void setPresenter(LoginContract.Presenter presenter) {
         this.presenter = presenter;
     }

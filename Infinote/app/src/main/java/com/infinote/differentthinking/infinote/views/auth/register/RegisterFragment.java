@@ -14,8 +14,7 @@ import android.widget.Toast;
 
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
-import com.infinote.differentthinking.infinote.views.ListNotesActivity;
-import com.infinote.differentthinking.infinote.views.auth.login.LoginActivity;
+import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.auth.register.base.RegisterContract;
 
 
@@ -26,13 +25,12 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     private EditText firstnameEditText;
     private EditText lastnameEditText;
 
-
     private RegisterContract.Presenter presenter;
     private InfinoteProgressDialog progressDialog;
     private Context context;
 
-
-    public RegisterFragment() {
+    public static RegisterFragment newInstance() {
+        return new RegisterFragment();
     }
 
     @Override
@@ -75,14 +73,12 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
         this.context = context;
     }
 
-    public static RegisterFragment newInstance() {
-        return new RegisterFragment();
-    }
-
+    @Override
     public void setDialog(InfinoteProgressDialog progressDialog) {
         this.progressDialog = progressDialog;
     }
 
+    @Override
     public void setPresenter(RegisterContract.Presenter presenter) {
         this.presenter = presenter;
     }

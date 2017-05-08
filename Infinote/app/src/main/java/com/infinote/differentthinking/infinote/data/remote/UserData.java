@@ -87,8 +87,11 @@ public class UserData implements UserDataContract {
                 });
     }
 
-    @Override
-    public Observable<UserContract> saveNote() {
-        return null;
+    public void logoutUser() {
+        this.userSession.clearSession();
+    }
+
+    public boolean isLoggedIn() {
+        return this.userSession.isUserLoggedIn();
     }
 }

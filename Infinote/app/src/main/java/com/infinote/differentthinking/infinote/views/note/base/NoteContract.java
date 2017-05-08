@@ -1,8 +1,10 @@
 package com.infinote.differentthinking.infinote.views.note.base;
 
+import com.infinote.differentthinking.infinote.base.BaseView;
+import com.infinote.differentthinking.infinote.views.note.NotePresenter;
 
 public interface NoteContract {
-    interface View {
+    interface View extends BaseView<NoteContract.Presenter> {
         void showListNotesActivity();
 
         void showDialogForLoading();

@@ -19,7 +19,7 @@ import com.fangxu.allangleexpandablebutton.ButtonEventListener;
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.Drawer;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
-import com.infinote.differentthinking.infinote.views.ListNotesActivity;
+import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
 
 import java.util.ArrayList;
@@ -34,6 +34,10 @@ public class NoteFragment extends Fragment implements NoteContract.View {
     private Button noteSaveButton;
 
     private Drawer drawer ;
+
+    public static NoteFragment newInstance() {
+        return new NoteFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,16 +71,14 @@ public class NoteFragment extends Fragment implements NoteContract.View {
         this.context = context;
     }
 
+    @Override
     public void setPresenter(NoteContract.Presenter presenter) {
         this.presenter = presenter;
     }
 
+    @Override
     public void setDialog(InfinoteProgressDialog progressDialog) {
         this.progressDialog = progressDialog;
-    }
-
-    public static NoteFragment newInstance() {
-        return new NoteFragment();
     }
 
     private byte[] getCanvasData(Bitmap bm) {
@@ -136,6 +138,13 @@ public class NoteFragment extends Fragment implements NoteContract.View {
             buttonDatas.add(buttonData);
         }
 
+<<<<<<< HEAD
+=======
+        final ButtonData test =  ButtonData.buildIconButton(context, R.drawable.ic_action_circle, 0);
+        test.setBackgroundColorId(context, R.color.blue);
+        buttonDatas.add(test);
+
+>>>>>>> origin/master
         button.setButtonDatas(buttonDatas);
         button.setButtonEventListener(new ButtonEventListener() {
             @Override
@@ -169,7 +178,6 @@ public class NoteFragment extends Fragment implements NoteContract.View {
 
             @Override
             public void onExpand() {
-
             }
 
             @Override

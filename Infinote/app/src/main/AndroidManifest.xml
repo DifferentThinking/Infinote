@@ -2,20 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.infinote.differentthinking.infinote">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>-->
-    <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>-->
-    <!--<uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>-->
-    <!--<uses-permission android:name="android.permission.CALL_PHONE"/>-->
+    <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/> -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/> -->
+    <!-- <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/> -->
+    <!-- <uses-permission android:name="android.permission.CALL_PHONE"/> -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/infinote"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".views.ListNotesActivity">
+        <activity android:name=".views.list_notes.ListNotesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +24,10 @@
         <activity android:name=".views.auth.login.LoginActivity" />
         <activity android:name=".views.auth.register.RegisterActivity" />
         <activity android:name=".views.note.NoteActivity" />
-
+        <activity
+            android:name=".views.profile.ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
