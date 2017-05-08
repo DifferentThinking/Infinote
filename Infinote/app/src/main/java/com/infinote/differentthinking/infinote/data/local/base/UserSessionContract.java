@@ -1,4 +1,4 @@
-package com.infinote.differentthinking.infinote.utils.base;
+package com.infinote.differentthinking.infinote.data.local.base;
 
 public interface UserSessionContract {
     String getUsername();

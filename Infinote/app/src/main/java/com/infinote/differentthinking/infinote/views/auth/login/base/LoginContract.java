@@ -5,7 +5,7 @@ public interface LoginContract {
     interface View {
         void showListNotesActivity();
 
-        public void showDialogForLoading();
+        void showDialogForLoading();
 
         void dismissDialog();
 

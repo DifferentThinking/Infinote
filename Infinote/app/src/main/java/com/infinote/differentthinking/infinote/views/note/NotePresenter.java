@@ -1,9 +1,10 @@
 package com.infinote.differentthinking.infinote.views.note;
 
 import android.content.Context;
+import android.util.Log;
 
-import com.infinote.differentthinking.infinote.data.remote.UserData;
-import com.infinote.differentthinking.infinote.models.base.UserContract;
+import com.infinote.differentthinking.infinote.data.remote.NoteData;
+import com.infinote.differentthinking.infinote.models.base.NoteModelContract;
 import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
 
 import io.reactivex.Observer;
@@ -12,41 +13,41 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class NotePresenter implements NoteContract.Presenter {
-    private UserData userData;
+    private NoteData noteData;
     NoteContract.View view;
 
     public NotePresenter(NoteContract.View view, Context context) {
         this.view = view;
-        userData = new UserData(context);
+        noteData = new NoteData(context);
     }
 
     @Override
-    public void saveNote() {
-        this.userData.saveNote()
+    public void saveNote(String encodedPicture) {
+        this.noteData.saveNote(encodedPicture)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                new Observer<UserContract>() {
+                new Observer<Boolean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-//                        view.showDialogForLoading();
+                        view.showDialogForLoading();
                     }
 
                     @Override
-                    public void onNext(UserContract value) {
-//                        view.notifySuccessful();
-//                        view.showListNotesActivity();
+                    public void onNext(Boolean value) {
+                        view.notifySuccessful();
+                        view.showListNotesActivity();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-//                        view.notifyError("Invalid useranme or password");
-//                        view.dismissDialog();
+                        view.notifyError("Error saving");
+                        view.dismissDialog();
                     }
 
                     @Override
                     public void onComplete() {
-//                        view.dismissDialog();
+                        view.dismissDialog();
                     }
                 });
     }

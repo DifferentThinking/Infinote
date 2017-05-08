@@ -1,22 +1,24 @@
 package com.infinote.differentthinking.infinote.models;
 
-public class Note {
+import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
+
+public class Note implements NoteContract {
     private String id;
-    private String owner;
+    private byte[] bytes;
 
     public String getId() {
         return id;
-    }
-
-    public String getOwner() {
-        return owner;
     }
 
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public byte[] getBytes() {
+        return bytes;
+    }
+
+    public void setBytes(byte[] bytes) {
+        this.bytes = bytes;
     }
 }

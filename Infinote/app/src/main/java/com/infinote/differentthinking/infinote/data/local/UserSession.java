@@ -1,10 +1,10 @@
-package com.infinote.differentthinking.infinote.utils;
+package com.infinote.differentthinking.infinote.data.local;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.infinote.differentthinking.infinote.utils.base.UserSessionContract;
+import com.infinote.differentthinking.infinote.data.local.base.UserSessionContract;
 
 public class UserSession implements UserSessionContract {
     private final SharedPreferences sharedPreferences;

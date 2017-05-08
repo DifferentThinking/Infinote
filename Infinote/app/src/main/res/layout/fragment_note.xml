@@ -1,29 +1,19 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.infinote.differentthinking.infinote.views.note.NoteFragment" >
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:text="Save"
+        android:id="@+id/note_save_button" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save"
-            android:id="@+id/note_save_button" />
-
-        <com.infinote.differentthinking.infinote.views.note.drawer.Drawer
-            android:id="@+id/note_drawer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="#FFFFFF" />
-    </LinearLayout>
-
-
-</FrameLayout>
+    <com.infinote.differentthinking.infinote.utils.Drawer
+        android:id="@+id/note_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="#FFFFFF" />
+</LinearLayout>
