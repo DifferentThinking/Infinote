@@ -23,10 +23,8 @@ public class NoteFragment extends Fragment implements NoteContract.View {
     private InfinoteProgressDialog progressDialog;
 
     private Button noteSaveButton;
-    private ImageView noteDrawer;
 
-    private Drawer dv ;
-    private Paint paint;
+    private Drawer drawer ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,9 +32,8 @@ public class NoteFragment extends Fragment implements NoteContract.View {
         View view = inflater.inflate(R.layout.fragment_note, container, false);
 
         this.noteSaveButton = (Button) view.findViewById(R.id.note_save_button);
-        this.noteDrawer = (ImageView) view.findViewById(R.id.note_drawer);
-        this.setupCanvas();
-
+        this.drawer = (Drawer) view.findViewById(R.id.note_drawer);
+    this.drawer.
         this.noteSaveButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,20 +61,5 @@ public class NoteFragment extends Fragment implements NoteContract.View {
 
     public static NoteFragment newInstance() {
         return new NoteFragment();
-    }
-
-    private void setupCanvas() {
-        paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setDither(true);
-        paint.setColor(Color.RED);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeJoin(Paint.Join.ROUND);
-        paint.setStrokeCap(Paint.Cap.ROUND);
-        paint.setStrokeWidth(12);
-
-
-        dv = new Drawer(this.noteDrawer.getContext(), paint);
-//        this.getActivity().setContentView(dv);
     }
 }

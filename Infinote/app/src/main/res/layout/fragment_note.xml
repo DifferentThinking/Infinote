@@ -7,16 +7,23 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.infinote.differentthinking.infinote.views.note.NoteFragment" >
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:id="@+id/note_save_button" />
-
-    <ImageView
-        android:id="@+id/note_drawer"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:id="@+id/note_save_button" />
+
+        <com.infinote.differentthinking.infinote.views.note.drawer.Drawer
+            android:id="@+id/note_drawer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
 
 </FrameLayout>
