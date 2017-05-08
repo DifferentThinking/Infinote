@@ -12,10 +12,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.fangxu.allangleexpandablebutton.AllAngleExpandableButton;
+import com.fangxu.allangleexpandablebutton.ButtonData;
+import com.fangxu.allangleexpandablebutton.ButtonEventListener;
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.views.note.drawer.Drawer;
 import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NoteFragment extends Fragment implements NoteContract.View {
     private NoteContract.Presenter presenter;
@@ -33,7 +39,41 @@ public class NoteFragment extends Fragment implements NoteContract.View {
 
         this.noteSaveButton = (Button) view.findViewById(R.id.note_save_button);
         this.drawer = (Drawer) view.findViewById(R.id.note_drawer);
-    this.drawer.
+
+        AllAngleExpandableButton button = (AllAngleExpandableButton) view.findViewById(R.id.button_expandable);
+        final List<ButtonData> buttonDatas = new ArrayList<>();
+//        int drawable = R.drawable.ic_action_red;
+//        ButtonData buttonData = ButtonData.buildIconButton(context, drawable[i], 0);
+        for (int i = 0; i < 10; i++) {
+            ButtonData buttonData =  ButtonData.buildTextButton("");
+//            buttonData.setBackgroundColor(44242);
+            buttonDatas.add(buttonData);
+        }
+
+        ButtonData test =  ButtonData.buildIconButton(context, R.drawable.ic_action_circle, 0);
+//        test.setBackgroundColorId(context, 0x90fae);
+        test.setBackgroundColor(0x90fae);
+        buttonDatas.add(test);
+
+        button.setButtonDatas(buttonDatas);
+        button.setButtonEventListener(new ButtonEventListener() {
+            @Override
+            public void onButtonClicked(int index) {
+                //do whatever you want,the param index is counted from startAngle to endAngle,
+                //the value is from 1 to buttonCount - 1(buttonCount if aebIsSelectionMode=true)
+            }
+
+            @Override
+            public void onExpand() {
+
+            }
+
+            @Override
+            public void onCollapse() {
+
+            }
+        });
+
         this.noteSaveButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {

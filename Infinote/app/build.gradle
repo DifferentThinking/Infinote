@@ -10,6 +10,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        renderscriptTargetApi 18
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
@@ -22,6 +24,7 @@ android {
 repositories {
     mavenCentral()
     mavenLocal()
+    maven { url "https://jitpack.io" }
 }
 
 
@@ -41,5 +44,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.github.markushi:circlebutton:1.1'
+    compile 'com.github.uin3566:AllAngleExpandableButton:v1.2.0'
     testCompile 'junit:junit:4.12'
 }

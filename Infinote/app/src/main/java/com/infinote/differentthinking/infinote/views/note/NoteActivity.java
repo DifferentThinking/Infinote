@@ -28,6 +28,8 @@ public class NoteActivity extends AppCompatActivity {
                     .commit();
         }
 
+
+
         this.presenter = new NotePresenter(noteFragment, this);
         this.dialong = new InfinoteProgressDialog();
         this.dialong.setContext(this);

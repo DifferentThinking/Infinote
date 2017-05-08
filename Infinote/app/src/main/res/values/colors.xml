@@ -6,6 +6,7 @@
     <color name="colorBackground">#f2fffe</color>
 
     <color name="black_trans80">#14000000</color>
+    <color name="transparent">#80000000</color>
     <color name="colorCoolBlue">#3498DB</color>
     <color name="colorThunderbirdRed">#D91E18</color>
     <color name="colorDarkGreen">#26A65B</color>
@@ -41,6 +42,7 @@
     <color name="amber">#FFC107</color>
     <color name="orange">#FF9800</color>
     <color name="deep_orange">#FF5722</color>
+
 
     <!--COLORS-->
     <color name="btn_bg">#26A69A</color>
