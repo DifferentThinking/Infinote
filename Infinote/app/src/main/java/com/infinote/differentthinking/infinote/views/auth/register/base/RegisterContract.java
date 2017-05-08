@@ -1,8 +1,10 @@
 package com.infinote.differentthinking.infinote.views.auth.register.base;
 
+import com.infinote.differentthinking.infinote.base.BaseView;
+
 public interface RegisterContract {
 
-    interface View {
+    interface View extends BaseView<RegisterContract.Presenter> {
         void showDialogForLoading();
 
         void dismissDialog();

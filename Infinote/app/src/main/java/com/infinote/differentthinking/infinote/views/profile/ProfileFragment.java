@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
@@ -19,6 +20,10 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     private InfinoteProgressDialog progressDialog;
 
     private Button logoutButton;
+
+    public static ProfileFragment newInstance() {
+        return new ProfileFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,18 +49,17 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         this.context = context;
     }
 
+    @Override
     public void setPresenter(ProfileContract.Presenter presenter) {
         this.presenter = presenter;
     }
 
+    @Override
     public void setDialog(InfinoteProgressDialog progressDialog) {
         this.progressDialog = progressDialog;
     }
 
-    public static ProfileFragment newInstance() {
-        return new ProfileFragment();
-    }
-
+    @Override
     public void notifyLogout() {
         Toast.makeText(getContext(), "You have logged out successfully.", Toast.LENGTH_SHORT)
                 .show();

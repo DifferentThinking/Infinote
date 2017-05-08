@@ -34,6 +34,10 @@ public class NoteFragment extends Fragment implements NoteContract.View {
 
     private Drawer drawer ;
 
+    public static NoteFragment newInstance() {
+        return new NoteFragment();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,16 +70,14 @@ public class NoteFragment extends Fragment implements NoteContract.View {
         this.context = context;
     }
 
+    @Override
     public void setPresenter(NoteContract.Presenter presenter) {
         this.presenter = presenter;
     }
 
+    @Override
     public void setDialog(InfinoteProgressDialog progressDialog) {
         this.progressDialog = progressDialog;
-    }
-
-    public static NoteFragment newInstance() {
-        return new NoteFragment();
     }
 
     private byte[] getCanvasData(Bitmap bm) {

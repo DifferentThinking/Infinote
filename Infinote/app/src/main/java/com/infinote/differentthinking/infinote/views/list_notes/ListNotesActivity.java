@@ -1,45 +1,40 @@
 package com.infinote.differentthinking.infinote.views.list_notes;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 
 import com.infinote.differentthinking.infinote.R;
-import com.infinote.differentthinking.infinote.views.auth.login.LoginActivity;
-import com.infinote.differentthinking.infinote.views.note.NoteActivity;
+import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
+import com.infinote.differentthinking.infinote.views.list_notes.base.ListNotesContract;
 
 public class ListNotesActivity extends AppCompatActivity {
+    private ListNotesContract.Presenter presenter;
+    private InfinoteProgressDialog dialong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_notes);
+        setContentView(R.layout.activity_note);
 
-        at.markushi.ui.CircleButton accountButton = (at.markushi.ui.CircleButton) this.findViewById(R.id.account_button);
-        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
+        ListNotesFragment listNotesFragment =
+                (ListNotesFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
 
-        fab.setOnClickListener(
-                new FloatingActionButton.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        Intent intent = new Intent(ListNotesActivity.this, NoteActivity.class);
-                        startActivity(intent);
-                    }
-                }
-        );
+        if (listNotesFragment == null) {
+            listNotesFragment = ListNotesFragment.newInstance();
 
-        accountButton.setOnClickListener(
-                new Button.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        Intent intent = new Intent(ListNotesActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                    }
-                }
-        );
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.fragment_container, listNotesFragment)
+                    .commit();
+        }
+
+
+
+        this.presenter = new ListNotesPresenter(listNotesFragment, this);
+        this.dialong = new InfinoteProgressDialog();
+        this.dialong.setContext(this);
+        listNotesFragment.setDialog(this.dialong);
+        listNotesFragment.setPresenter(this.presenter);
 
     }
 }

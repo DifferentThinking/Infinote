@@ -30,8 +30,8 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     private InfinoteProgressDialog progressDialog;
     private Context context;
 
-
-    public LoginFragment() {
+    public static LoginFragment newInstance() {
+        return new LoginFragment();
     }
 
     @Override
@@ -82,14 +82,12 @@ public class LoginFragment extends Fragment implements LoginContract.View {
         this.context = context;
     }
 
-    public static LoginFragment newInstance() {
-        return new LoginFragment();
-    }
-
+    @Override
     public void setDialog(InfinoteProgressDialog progressDialog) {
         this.progressDialog = progressDialog;
     }
 
+    @Override
     public void setPresenter(LoginContract.Presenter presenter) {
         this.presenter = presenter;
     }

@@ -1,7 +1,9 @@
 package com.infinote.differentthinking.infinote.views.profile.base;
 
+import com.infinote.differentthinking.infinote.base.BaseView;
+
 public interface ProfileContract {
-    interface View {
+    interface View extends BaseView<ProfileContract.Presenter> {
         void notifyLogout();
     }
 
