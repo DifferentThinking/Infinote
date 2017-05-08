@@ -21,12 +21,9 @@ import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.views.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
-=======
 import java.io.ByteArrayOutputStream;
->>>>>>> origin/master
 
 public class NoteFragment extends Fragment implements NoteContract.View {
     private NoteContract.Presenter presenter;
@@ -44,7 +41,6 @@ public class NoteFragment extends Fragment implements NoteContract.View {
 
         this.noteSaveButton = (Button) view.findViewById(R.id.note_save_button);
         this.drawer = (Drawer) view.findViewById(R.id.note_drawer);
-<<<<<<< HEAD
 
         AllAngleExpandableButton button = (AllAngleExpandableButton) view.findViewById(R.id.button_expandable);
         final List<ButtonData> buttonDatas = new ArrayList<>();
@@ -79,9 +75,7 @@ public class NoteFragment extends Fragment implements NoteContract.View {
 
             }
         });
-=======
         this.drawer.setDrawingCacheEnabled(true);
->>>>>>> origin/master
 
         this.noteSaveButton.setOnClickListener(new Button.OnClickListener() {
             @Override
