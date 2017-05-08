@@ -87,4 +87,8 @@ public class UserData implements UserDataContract {
                 });
     }
 
+    @Override
+    public Observable<UserContract> saveNote() {
+        return null;
+    }
 }

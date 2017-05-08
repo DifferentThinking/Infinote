@@ -9,5 +9,7 @@ public interface UserDataContract {
     Observable<UserContract> signIn(String username, String password);
 
     Observable<UserContract> signUp(String username, String password);
+
+    Observable<UserContract> saveNote();
 }
 

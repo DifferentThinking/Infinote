@@ -7,6 +7,6 @@ public interface NoteContract {
     }
 
     interface Presenter {
-
+        void saveNote();
     }
 }

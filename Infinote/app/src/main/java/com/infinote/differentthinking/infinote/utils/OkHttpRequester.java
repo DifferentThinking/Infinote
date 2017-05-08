@@ -73,7 +73,7 @@ public class OkHttpRequester implements OkHttpRequesterContract {
     }
 
     public Observable<HttpResponseContract> post(final String url, final Map<String, String> body,
-                                                 final Map<String, String> headers) {
+                                                final Map<String, String> headers) {
 
         return Observable.defer(new Callable<ObservableSource<? extends HttpResponseContract>>() {
             @Override
@@ -100,6 +100,7 @@ public class OkHttpRequester implements OkHttpRequesterContract {
         for (Map.Entry<String, String> pair : bodyMap.entrySet()) {
             bodyBuilder.add(pair.getKey(), pair.getValue());
         }
+
 
         RequestBody requestBody = bodyBuilder.build();
         return requestBody;

@@ -2,7 +2,7 @@ package com.infinote.differentthinking.infinote.views.auth.register;
 
 import android.content.Context;
 
-import com.infinote.differentthinking.infinote.data.UserData;
+import com.infinote.differentthinking.infinote.data.remote.UserData;
 import com.infinote.differentthinking.infinote.models.base.UserContract;
 import com.infinote.differentthinking.infinote.views.auth.register.base.RegisterContract;
 
