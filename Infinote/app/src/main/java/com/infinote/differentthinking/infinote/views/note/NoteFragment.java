@@ -3,6 +3,7 @@ package com.infinote.differentthinking.infinote.views.note;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
@@ -118,23 +119,52 @@ public class NoteFragment extends Fragment implements NoteContract.View {
         final List<ButtonData> buttonDatas = new ArrayList<>();
 //        int drawable = R.drawable.ic_action_red;
 //        ButtonData buttonData = ButtonData.buildIconButton(context, drawable[i], 0);
-        for (int i = 0; i < 10; i++) {
+        ButtonData mainButton = ButtonData.buildIconButton(context, R.drawable.ic_action_pallette, 0);
+        buttonDatas.add(mainButton);
+        int[] colors = {R.color.red,
+                       R.color.blue,
+                       R.color.orange,
+                       R.color.yellow,
+                       R.color.light_blue,
+                       R.color.purple,
+                       R.color.green,
+                       R.color.light_green,
+                       R.color.pink};
+        for (int i = 0; i < colors.length; i++) {
             ButtonData buttonData =  ButtonData.buildTextButton("");
-//            buttonData.setBackgroundColor(44242);
-//            buttonData.setBackgroundColorId(context, R.color.blue);
+            buttonData.setBackgroundColorId(context, colors[i]);
             buttonDatas.add(buttonData);
         }
-
-        ButtonData test =  ButtonData.buildIconButton(context, R.drawable.ic_action_circle, 0);
-        test.setBackgroundColorId(context, R.color.blue);
-        buttonDatas.add(test);
 
         button.setButtonDatas(buttonDatas);
         button.setButtonEventListener(new ButtonEventListener() {
             @Override
             public void onButtonClicked(int index) {
-                //do whatever you want,the param index is counted from startAngle to endAngle,
-                //the value is from 1 to buttonCount - 1(buttonCount if aebIsSelectionMode=true)
+                Toast.makeText(getActivity(), "clicked index: " + index,
+                        Toast.LENGTH_LONG).show();
+
+                switch (index) {
+                    case 1:  drawer.setColor(Color.BLACK);
+                        break;
+                    case 2:  drawer.setColor(Color.rgb(244, 67, 54));
+                        break;
+                    case 3:  drawer.setColor(Color.rgb(33,150,243));
+                        break;
+                    case 4:  drawer.setColor(Color.rgb(255, 165, 0));
+                        break;
+                    case 5:  drawer.setColor(Color.rgb(255,235,59));
+                        break;
+                    case 6:  drawer.setColor(Color.rgb(3,169,244));
+                        break;
+                    case 7:  drawer.setColor(Color.rgb(156,39,176));
+                        break;
+                    case 8:  drawer.setColor(Color.rgb(76,175,80));
+                        break;
+                    case 9:  drawer.setColor(Color.rgb(139,195,74));
+                        break;
+                    case 10:  drawer.setColor(Color.rgb(233,30,99));
+                        break;
+                }
             }
 
             @Override

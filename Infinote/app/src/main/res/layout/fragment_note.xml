@@ -28,6 +28,7 @@
             app:aebMainButtonRotateAnimDurationMillis="130"
             app:aebMainButtonRotateDegree="0"
             app:aebMainButtonSizeDp="30dp"
+            app:aebIsSelectionMode="true"
             app:aebMaskBackgroundColor="@color/transparent"
             app:aebSubButtonSizeDp="30dp" />
 
@@ -37,5 +38,5 @@
         android:id="@+id/note_drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#FFFFFF" />
+        />
 </LinearLayout>
