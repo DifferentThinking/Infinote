@@ -28,8 +28,6 @@ public class ProfileActivity extends AppCompatActivity {
                     .commit();
         }
 
-
-
         this.presenter = new ProfilePresenter(profileFragment, this);
         this.dialong = new InfinoteProgressDialog();
         this.dialong.setContext(this);

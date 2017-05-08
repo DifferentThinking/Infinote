@@ -1,6 +1,7 @@
 package com.infinote.differentthinking.infinote.views.profile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
+import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.profile.base.ProfileContract;
 
 public class ProfileFragment extends Fragment implements ProfileContract.View {
@@ -35,7 +37,8 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         this.logoutButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                presenter.logoutUser();
+                showListNotesActivity();
             }
         });
 
@@ -63,5 +66,11 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     public void notifyLogout() {
         Toast.makeText(getContext(), "You have logged out successfully.", Toast.LENGTH_SHORT)
                 .show();
+    }
+
+    @Override
+    public void showListNotesActivity() {
+        Intent intent = new Intent(this.context, ListNotesActivity.class);
+        startActivity(intent);
     }
 }

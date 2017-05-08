@@ -13,12 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.fangxu.allangleexpandablebutton.AllAngleExpandableButton;
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.Drawer;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
+import com.infinote.differentthinking.infinote.views.auth.login.LoginActivity;
 import com.infinote.differentthinking.infinote.views.list_notes.base.ListNotesContract;
-import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
+import com.infinote.differentthinking.infinote.views.note.NoteActivity;
+import com.infinote.differentthinking.infinote.views.profile.ProfileActivity;
 
 
 public class ListNotesFragment extends Fragment implements ListNotesContract.View {
@@ -40,26 +41,29 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
         View view = inflater.inflate(R.layout.fragment_list_notes, container, false);
 
         at.markushi.ui.CircleButton accountButton = (at.markushi.ui.CircleButton) view.findViewById(R.id.account_button);
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        FloatingActionButton newNoteButton = (FloatingActionButton) view.findViewById(R.id.fab);
 
-        fab.setOnClickListener(
-                new FloatingActionButton.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-//                        Intent intent = new Intent(ListNotesActivity.this, NoteActivity.class);
-//                        startActivity(intent);
-                    }
+        newNoteButton.setOnClickListener(
+            new FloatingActionButton.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                showNewNoteActivity();
                 }
+            }
         );
 
         accountButton.setOnClickListener(
-                new Button.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-//                        Intent intent = new Intent(ListNotesActivity.this, LoginActivity.class);
-//                        startActivity(intent);
+            new Button.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    if (presenter.isUserLoggedIn()) {
+                        showProfileActivity();
+                    }
+                    else {
+                        showLoginActivity();
                     }
                 }
+            }
         );
 
         return view;
@@ -80,6 +84,24 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
     @Override
     public void setDialog(InfinoteProgressDialog progressDialog) {
         this.progressDialog = progressDialog;
+    }
+
+    @Override
+    public void showProfileActivity() {
+        Intent intent = new Intent(this.context, ProfileActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showLoginActivity() {
+        Intent intent = new Intent(this.context, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showNewNoteActivity() {
+        Intent intent = new Intent(this.context, NoteActivity.class);
+        startActivity(intent);
     }
 }
 

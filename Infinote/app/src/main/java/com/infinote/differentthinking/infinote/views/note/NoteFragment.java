@@ -127,7 +127,7 @@ public class NoteFragment extends Fragment implements NoteContract.View {
             buttonDatas.add(buttonData);
         }
 
-        ButtonData test =  ButtonData.buildIconButton(context, R.drawable.ic_action_circle, 0);
+        final ButtonData test =  ButtonData.buildIconButton(context, R.drawable.ic_action_circle, 0);
         test.setBackgroundColorId(context, R.color.blue);
         buttonDatas.add(test);
 
@@ -141,7 +141,6 @@ public class NoteFragment extends Fragment implements NoteContract.View {
 
             @Override
             public void onExpand() {
-
             }
 
             @Override
