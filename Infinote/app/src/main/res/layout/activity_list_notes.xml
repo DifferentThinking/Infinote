@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.infinote.differentthinking.infinote.views.ListNotesActivity">
+    tools:context="com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -18,7 +18,7 @@ import com.fangxu.allangleexpandablebutton.ButtonEventListener;
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.Drawer;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
-import com.infinote.differentthinking.infinote.views.ListNotesActivity;
+import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
 
 import java.util.ArrayList;
