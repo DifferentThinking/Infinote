@@ -281,7 +281,13 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
                         Bitmap bm = drawer.getDrawingCache();
                         byte[] canvasData = getCanvasData(bm);
                         String encodedPicture = Base64.encodeToString(canvasData, Base64.DEFAULT);
-                        presenter.saveNote(encodedPicture, editText.getText().toString());
+
+                        String title = editText.getText().toString();
+                        if (title == "" || title == null) {
+                           title = "no title";
+                        }
+
+                        presenter.saveNote(encodedPicture, title);
                     }
                 });
 

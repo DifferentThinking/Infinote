@@ -178,9 +178,7 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
                     }
                 });
 
-//                TextView tvTitle = (TextView) view.findViewById(R.id.user_list_title);
-//
-//                tvTitle.setText(this.getItem(position));
+                noteTitle.setText(notes.get(position).getTitle());
 
                 return view;
             }
