@@ -11,6 +11,7 @@
         android:layout_height="50dp" />
 
     <TextView
+        android:id="@+id/tv_note_title"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="Note name here"
@@ -18,8 +19,15 @@
         android:gravity="center"/>
 
     <Button
+        android:id="@+id/note_delete_button"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="Delete" />
+
+    <Button
+        android:id="@+id/note_edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Edit" />
 
 </LinearLayout>

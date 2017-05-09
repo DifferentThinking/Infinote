@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -24,6 +27,7 @@ import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.single_note.base.SingleNoteContract;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.ByteArrayOutputStream;
@@ -59,6 +63,7 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
         darkModeButton.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
         darkModeButton.setImageResource(R.drawable.ic_action_darkmode);
 
+
         darkModeButton.setOnClickListener(
                 new FloatingActionButton.OnClickListener(){
                     @Override
@@ -79,7 +84,6 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
                 }
         );
 
-
         this.createColorsButton(colorsButton);
 
 
@@ -93,6 +97,13 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
                 presenter.saveNote(encodedPicture);
             }
         });
+
+        byte[] decodedString = this.getActivity().getIntent().getByteArrayExtra("ENCODED_IMAGE");
+        if (decodedString != null) {
+            Bitmap bm = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            Drawable drawable = new BitmapDrawable(getResources(), bm);
+            this.drawer.setBackgroundDrawable(drawable);
+        }
 
         return view;
     }

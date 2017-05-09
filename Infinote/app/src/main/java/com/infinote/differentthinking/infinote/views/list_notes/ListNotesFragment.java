@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.infinote.differentthinking.infinote.R;
@@ -124,6 +125,15 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
     }
 
     @Override
+    public void showNewNoteActivityWithImage(byte[] encodedImage) {
+        Intent intent = new Intent(this.context, SingleNoteActivity.class);
+
+        intent.putExtra("ENCODED_IMAGE", encodedImage);
+
+        startActivity(intent);
+    }
+
+    @Override
     public void notifySuccessful() {
         Toast.makeText(getContext(), "Info loaded successfully.", Toast.LENGTH_SHORT)
                 .show();
@@ -152,11 +162,21 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
                 }
 
                 ImageView imagePreview = (ImageView) view.findViewById(R.id.note_image_preview);
-                String encodedImage = notes.get(position).getPicture();
-                byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
-                Bitmap bm = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                TextView noteTitle = (TextView) view.findViewById(R.id.tv_note_title);
+                Button noteDeleteButton = (Button) view.findViewById(R.id.note_delete_button);
+                Button noteEditButton = (Button) view.findViewById(R.id.note_edit_button);
 
+                String encodedImage = notes.get(position).getPicture();
+                final byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+                Bitmap bm = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                 imagePreview.setImageBitmap(bm);
+
+                noteEditButton.setOnClickListener(new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showNewNoteActivityWithImage(decodedString);
+                    }
+                });
 
 //                TextView tvTitle = (TextView) view.findViewById(R.id.user_list_title);
 //

@@ -1,5 +1,7 @@
 package com.infinote.differentthinking.infinote.views.list_notes.base;
 
+import android.graphics.Bitmap;
+
 import com.infinote.differentthinking.infinote.base.BaseView;
 import com.infinote.differentthinking.infinote.models.base.NoteContract;
 
@@ -20,6 +22,8 @@ public interface ListNotesContract {
         void notifySuccessful();
 
         void hideLoadingPanel();
+
+        void showNewNoteActivityWithImage(byte[] encodedImage);
     }
 
     interface Presenter {
