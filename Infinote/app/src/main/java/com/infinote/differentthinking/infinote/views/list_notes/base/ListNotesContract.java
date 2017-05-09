@@ -1,7 +1,7 @@
 package com.infinote.differentthinking.infinote.views.list_notes.base;
 
 import com.infinote.differentthinking.infinote.base.BaseView;
-import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
+import com.infinote.differentthinking.infinote.models.base.NoteContract;
 
 import java.util.List;
 
@@ -18,6 +18,8 @@ public interface ListNotesContract {
         void notifyError(String errorMessage);
 
         void notifySuccessful();
+
+        void hideLoadingPanel();
     }
 
     interface Presenter {

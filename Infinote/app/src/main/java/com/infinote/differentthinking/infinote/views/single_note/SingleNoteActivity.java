@@ -1,14 +1,14 @@
-package com.infinote.differentthinking.infinote.views.note;
+package com.infinote.differentthinking.infinote.views.single_note;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
-import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
+import com.infinote.differentthinking.infinote.views.single_note.base.SingleNoteContract;
 
-public class NoteActivity extends AppCompatActivity {
-    private NoteContract.Presenter presenter;
+public class SingleNoteActivity extends AppCompatActivity {
+    private SingleNoteContract.Presenter presenter;
     private InfinoteProgressDialog dialong;
 
     @Override
@@ -16,11 +16,11 @@ public class NoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
 
-        NoteFragment noteFragment =
-                (NoteFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        SingleNoteFragment noteFragment =
+                (SingleNoteFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
 
         if (noteFragment == null) {
-            noteFragment = NoteFragment.newInstance();
+            noteFragment = SingleNoteFragment.newInstance();
 
             getSupportFragmentManager()
                     .beginTransaction()
@@ -30,7 +30,7 @@ public class NoteActivity extends AppCompatActivity {
 
 
 
-        this.presenter = new NotePresenter(noteFragment, this);
+        this.presenter = new SingleNotePresenter(noteFragment, this);
         this.dialong = new InfinoteProgressDialog();
         this.dialong.setContext(this);
         noteFragment.setDialog(this.dialong);

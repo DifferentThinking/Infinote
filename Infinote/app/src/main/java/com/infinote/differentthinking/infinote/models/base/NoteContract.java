@@ -1,11 +1,11 @@
 package com.infinote.differentthinking.infinote.models.base;
 
-public interface NoteModelContract {
+public interface NoteContract {
     String getId();
 
     void setId(String id);
 
-    byte[] getBytes();
+    String getPicture();
 
-    void setBytes(byte[] bytes);
+    void setPicture(String picture);
 }

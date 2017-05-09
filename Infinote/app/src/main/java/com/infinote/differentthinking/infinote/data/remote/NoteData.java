@@ -6,13 +6,10 @@ import android.util.Log;
 import com.infinote.differentthinking.infinote.config.ApiConstants;
 import com.infinote.differentthinking.infinote.data.remote.base.NoteDataContract;
 import com.infinote.differentthinking.infinote.models.Note;
-import com.infinote.differentthinking.infinote.models.User;
 import com.infinote.differentthinking.infinote.models.base.HttpResponseContract;
-import com.infinote.differentthinking.infinote.models.base.UserContract;
 import com.infinote.differentthinking.infinote.utils.GsonParser;
 import com.infinote.differentthinking.infinote.utils.OkHttpRequester;
 import com.infinote.differentthinking.infinote.data.local.UserSession;
-import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -62,11 +59,11 @@ public class NoteData implements NoteDataContract {
                 });
     }
 
-    public Observable<List<? extends NoteContract>> getAllNotesForCurrentUser() {
+    public Observable<List<Note>> getAllNotesForCurrentUser() {
         return httpRequester.get(apiConstants.imageUrl(userSession.getUsername()))
-                .map(new Function<HttpResponseContract, List<? extends NoteContract>>() {
+                .map(new Function<HttpResponseContract, List<Note>>() {
                     @Override
-                    public List<? extends NoteContract> apply(HttpResponseContract iHttpResponse) throws Exception {
+                    public List<Note> apply(HttpResponseContract iHttpResponse) throws Exception {
                         if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
                             throw new Error(iHttpResponse.getMessage());
                         }

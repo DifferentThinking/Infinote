@@ -37,6 +37,13 @@
 
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/loading_panel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true" />
+
     <ListView
         android:id="@+id/lv_notes"
         android:layout_width="wrap_content"

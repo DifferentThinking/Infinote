@@ -1,22 +1,20 @@
-package com.infinote.differentthinking.infinote.views.note;
+package com.infinote.differentthinking.infinote.views.single_note;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.infinote.differentthinking.infinote.data.remote.NoteData;
-import com.infinote.differentthinking.infinote.models.base.NoteModelContract;
-import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
+import com.infinote.differentthinking.infinote.views.single_note.base.SingleNoteContract;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class NotePresenter implements NoteContract.Presenter {
+public class SingleNotePresenter implements SingleNoteContract.Presenter {
     private NoteData noteData;
-    NoteContract.View view;
+    SingleNoteContract.View view;
 
-    public NotePresenter(NoteContract.View view, Context context) {
+    public SingleNotePresenter(SingleNoteContract.View view, Context context) {
         this.view = view;
         noteData = new NoteData(context);
     }

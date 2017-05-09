@@ -4,31 +4,32 @@ package com.infinote.differentthinking.infinote.views.list_notes;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.infinote.differentthinking.infinote.R;
-import com.infinote.differentthinking.infinote.models.Note;
+import com.infinote.differentthinking.infinote.models.base.NoteContract;
 import com.infinote.differentthinking.infinote.utils.Drawer;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.views.auth.login.LoginActivity;
 import com.infinote.differentthinking.infinote.views.list_notes.base.ListNotesContract;
-import com.infinote.differentthinking.infinote.views.note.NoteActivity;
-import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
+import com.infinote.differentthinking.infinote.views.single_note.SingleNoteActivity;
 import com.infinote.differentthinking.infinote.views.profile.ProfileActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,6 +38,7 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
     private Context context;
     private InfinoteProgressDialog progressDialog;
     private ListView listViewNotes;
+    private ProgressBar loadingPanel;
 
     private Button noteSaveButton;
 
@@ -52,6 +54,7 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
         View view = inflater.inflate(R.layout.fragment_list_notes, container, false);
 
         this.listViewNotes = (ListView) view.findViewById(R.id.lv_notes);
+        this.loadingPanel = (ProgressBar) view.findViewById(R.id.loading_panel);
         at.markushi.ui.CircleButton accountButton = (at.markushi.ui.CircleButton) view.findViewById(R.id.account_button);
         FloatingActionButton newNoteButton = (FloatingActionButton) view.findViewById(R.id.fab);
 
@@ -116,7 +119,7 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
 
     @Override
     public void showNewNoteActivity() {
-        Intent intent = new Intent(this.context, NoteActivity.class);
+        Intent intent = new Intent(this.context, SingleNoteActivity.class);
         startActivity(intent);
     }
 
@@ -132,8 +135,13 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
                 .show();
     }
 
-    public void setupNotesAdapter(List<? extends NoteContract> notes) {
-        ArrayAdapter<NoteContract> noteAdapter = new ArrayAdapter<NoteContract>(this.getContext(), -1,(List<NoteContract>) notes) {
+    @Override
+    public void hideLoadingPanel() {
+        this.loadingPanel.setVisibility(View.GONE);
+    }
+
+    public void setupNotesAdapter(final List<? extends NoteContract> notes) {
+        ArrayAdapter<NoteContract> noteAdapter = new ArrayAdapter<NoteContract>(this.getContext(), -1, (List<NoteContract>) notes) {
             @NonNull
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -142,6 +150,13 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
                     LayoutInflater inflater = LayoutInflater.from(this.getContext());
                     view = inflater.inflate(R.layout.single_note, parent, false);
                 }
+
+                ImageView imagePreview = (ImageView) view.findViewById(R.id.note_image_preview);
+                String encodedImage = notes.get(position).getPicture();
+                byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+                Bitmap bm = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+                imagePreview.setImageBitmap(bm);
 
 //                TextView tvTitle = (TextView) view.findViewById(R.id.user_list_title);
 //

@@ -5,9 +5,8 @@ import android.util.Log;
 
 import com.infinote.differentthinking.infinote.data.remote.NoteData;
 import com.infinote.differentthinking.infinote.data.remote.UserData;
-import com.infinote.differentthinking.infinote.models.base.UserContract;
+import com.infinote.differentthinking.infinote.models.Note;
 import com.infinote.differentthinking.infinote.views.list_notes.base.ListNotesContract;
-import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
 
 import java.util.List;
 
@@ -36,15 +35,17 @@ public class ListNotesPresenter implements ListNotesContract.Presenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        new Observer<List<? extends NoteContract>>() {
+                        new Observer<List<Note>>() {
                             @Override
                             public void onSubscribe(Disposable d) {
+
                             }
 
                             @Override
-                            public void onNext(List<? extends NoteContract> notes) {
+                            public void onNext(List<Note> notes) {
                                 view.setupNotesAdapter(notes);
                                 view.notifySuccessful();
+                                view.hideLoadingPanel();
                             }
 
                             @Override

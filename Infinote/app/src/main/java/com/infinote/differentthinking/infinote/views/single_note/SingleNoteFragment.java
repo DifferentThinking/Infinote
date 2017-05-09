@@ -1,4 +1,4 @@
-package com.infinote.differentthinking.infinote.views.note;
+package com.infinote.differentthinking.infinote.views.single_note;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,14 +20,14 @@ import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.Drawer;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
-import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
+import com.infinote.differentthinking.infinote.views.single_note.base.SingleNoteContract;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.io.ByteArrayOutputStream;
 
-public class NoteFragment extends Fragment implements NoteContract.View {
-    private NoteContract.Presenter presenter;
+public class SingleNoteFragment extends Fragment implements SingleNoteContract.View {
+    private SingleNoteContract.Presenter presenter;
     private Context context;
     private InfinoteProgressDialog progressDialog;
 
@@ -35,8 +35,8 @@ public class NoteFragment extends Fragment implements NoteContract.View {
 
     private Drawer drawer ;
 
-    public static NoteFragment newInstance() {
-        return new NoteFragment();
+    public static SingleNoteFragment newInstance() {
+        return new SingleNoteFragment();
     }
 
     @Override
@@ -72,7 +72,7 @@ public class NoteFragment extends Fragment implements NoteContract.View {
     }
 
     @Override
-    public void setPresenter(NoteContract.Presenter presenter) {
+    public void setPresenter(SingleNoteContract.Presenter presenter) {
         this.presenter = presenter;
     }
 
@@ -138,13 +138,10 @@ public class NoteFragment extends Fragment implements NoteContract.View {
             buttonDatas.add(buttonData);
         }
 
-<<<<<<< HEAD
-=======
         final ButtonData test =  ButtonData.buildIconButton(context, R.drawable.ic_action_circle, 0);
         test.setBackgroundColorId(context, R.color.blue);
         buttonDatas.add(test);
 
->>>>>>> origin/master
         button.setButtonDatas(buttonDatas);
         button.setButtonEventListener(new ButtonEventListener() {
             @Override

@@ -1,10 +1,11 @@
 package com.infinote.differentthinking.infinote.models;
 
-import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
+import com.infinote.differentthinking.infinote.models.base.NoteContract;
 
 public class Note implements NoteContract {
     private String id;
-    private byte[] bytes;
+    private String picture;
+    private String username;
 
     public String getId() {
         return id;
@@ -14,11 +15,19 @@ public class Note implements NoteContract {
         this.id = id;
     }
 
-    public byte[] getBytes() {
-        return bytes;
+    public String getPicture() {
+        return this.picture;
     }
 
-    public void setBytes(byte[] bytes) {
-        this.bytes = bytes;
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

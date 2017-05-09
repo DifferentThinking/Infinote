@@ -1,6 +1,7 @@
 package com.infinote.differentthinking.infinote.views.auth.login;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.infinote.differentthinking.infinote.data.remote.UserData;
 import com.infinote.differentthinking.infinote.models.base.UserContract;
@@ -34,6 +35,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                             @Override
                             public void onNext(UserContract value) {
+                                Log.d("HELL", value.getUsername());
                                 view.notifySuccessful();
                                 view.showListNotesActivity();
                             }
