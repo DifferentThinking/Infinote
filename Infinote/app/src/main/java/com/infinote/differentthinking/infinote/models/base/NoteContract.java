@@ -8,4 +8,13 @@ public interface NoteContract {
     String getPicture();
 
     void setPicture(String picture);
+
+    String getUsername();
+
+    void setUsername(String username);
+
+    String getTitle();
+
+    void setTitle(String title);
+
 }

@@ -7,7 +7,7 @@ import java.util.List;
 import io.reactivex.Observable;
 
 public interface NoteDataContract {
-    Observable<Boolean> saveNote(String encodedPicture);
+    Observable<Boolean> saveNote(String encodedPicture, String title);
 
     Observable<List<Note>> getAllNotesForCurrentUser();
 }

@@ -35,10 +35,11 @@ public class NoteData implements NoteDataContract {
     }
 
     @Override
-    public Observable<Boolean> saveNote(String encodedPicture) {
+    public Observable<Boolean> saveNote(String encodedPicture, String title) {
         Map<String, String> noteCredentials = new HashMap<>();
         noteCredentials.put("username", userSession.getUsername());
         noteCredentials.put("picture", encodedPicture);
+        noteCredentials.put("title", title);
 
         return httpRequester
                 .post(apiConstants.imageUrl(userSession.getUsername()), noteCredentials)

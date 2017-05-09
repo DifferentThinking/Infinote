@@ -16,6 +16,6 @@ public interface SingleNoteContract {
     }
 
     interface Presenter {
-        void saveNote(String encodedPicture);
+        void saveNote(String encodedPicture, String title);
     }
 }

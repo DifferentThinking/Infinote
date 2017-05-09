@@ -20,8 +20,8 @@ public class SingleNotePresenter implements SingleNoteContract.Presenter {
     }
 
     @Override
-    public void saveNote(String encodedPicture) {
-        this.noteData.saveNote(encodedPicture)
+    public void saveNote(String encodedPicture, String title) {
+        this.noteData.saveNote(encodedPicture, title)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

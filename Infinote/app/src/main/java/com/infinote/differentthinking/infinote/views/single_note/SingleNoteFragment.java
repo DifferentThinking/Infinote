@@ -1,6 +1,8 @@
 package com.infinote.differentthinking.infinote.views.single_note;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
@@ -16,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.fangxu.allangleexpandablebutton.AllAngleExpandableButton;
@@ -33,6 +36,7 @@ import java.util.List;
 import java.io.ByteArrayOutputStream;
 
 public class SingleNoteFragment extends Fragment implements SingleNoteContract.View {
+    private AlertDialog.Builder alertDialog;
     private SingleNoteContract.Presenter presenter;
     private Context context;
     private InfinoteProgressDialog progressDialog;
@@ -87,14 +91,12 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
         this.createColorsButton(colorsButton);
 
 
+        this.setupAlertDialog();
         this.drawer.setDrawingCacheEnabled(true);
         this.noteSaveButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap bm = drawer.getDrawingCache();
-                byte[] canvasData = getCanvasData(bm);
-                String encodedPicture = Base64.encodeToString(canvasData, Base64.DEFAULT);
-                presenter.saveNote(encodedPicture);
+                alertDialog.show();
             }
         });
 
@@ -264,4 +266,30 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
 //            }
 //        });
 //    }
+
+    private void setupAlertDialog() {
+        this.alertDialog = new AlertDialog.Builder(this.getActivity());
+        alertDialog.setTitle("Save note");
+        alertDialog.setMessage("Please enter title");
+
+        final EditText editText = new EditText(this.getContext());
+        alertDialog.setView(editText);
+
+        alertDialog.setNegativeButton("Save",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Bitmap bm = drawer.getDrawingCache();
+                        byte[] canvasData = getCanvasData(bm);
+                        String encodedPicture = Base64.encodeToString(canvasData, Base64.DEFAULT);
+                        presenter.saveNote(encodedPicture, editText.getText().toString());
+                    }
+                });
+
+        alertDialog.setPositiveButton("Cancel",
+            new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+    }
 }
