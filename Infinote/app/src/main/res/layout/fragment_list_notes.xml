@@ -37,14 +37,11 @@
 
     </LinearLayout>
 
-    <TextView
-        android:text="@string/noNotesText"
+    <ListView
+        android:id="@+id/lv_notes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:textSize="22sp"
-        android:layout_marginTop="20dp"
-        />
+        android:textSize="22sp" />
 
     <RelativeLayout
         android:layout_width="match_parent"

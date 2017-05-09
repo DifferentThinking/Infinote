@@ -22,7 +22,7 @@ public class ApiConstants implements ApiConstantsContract {
         return URL_SIGN_UP;
     }
 
-    public String postImageUrl(String username) {
+    public String imageUrl(String username) {
         String result = API_URL + "/users/" + username + "/notes";
 
         return result;

@@ -1,6 +1,9 @@
 package com.infinote.differentthinking.infinote.views.list_notes.base;
 
 import com.infinote.differentthinking.infinote.base.BaseView;
+import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
+
+import java.util.List;
 
 public interface ListNotesContract {
     interface View extends BaseView<ListNotesContract.Presenter> {
@@ -9,9 +12,17 @@ public interface ListNotesContract {
         void showLoginActivity();
 
         void showNewNoteActivity();
+
+        void setupNotesAdapter(List<? extends NoteContract> notes);
+
+        void notifyError(String errorMessage);
+
+        void notifySuccessful();
     }
 
     interface Presenter {
         boolean isUserLoggedIn();
+
+        void getNotesForCurrentUser();
     }
 }

@@ -5,27 +5,38 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.infinote.differentthinking.infinote.R;
+import com.infinote.differentthinking.infinote.models.Note;
 import com.infinote.differentthinking.infinote.utils.Drawer;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.views.auth.login.LoginActivity;
 import com.infinote.differentthinking.infinote.views.list_notes.base.ListNotesContract;
 import com.infinote.differentthinking.infinote.views.note.NoteActivity;
+import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
 import com.infinote.differentthinking.infinote.views.profile.ProfileActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ListNotesFragment extends Fragment implements ListNotesContract.View {
     private ListNotesContract.Presenter presenter;
     private Context context;
     private InfinoteProgressDialog progressDialog;
+    private ListView listViewNotes;
 
     private Button noteSaveButton;
 
@@ -40,6 +51,7 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list_notes, container, false);
 
+        this.listViewNotes = (ListView) view.findViewById(R.id.lv_notes);
         at.markushi.ui.CircleButton accountButton = (at.markushi.ui.CircleButton) view.findViewById(R.id.account_button);
         FloatingActionButton newNoteButton = (FloatingActionButton) view.findViewById(R.id.fab);
 
@@ -65,6 +77,10 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
                 }
             }
         );
+
+        if (presenter.isUserLoggedIn()) {
+           presenter.getNotesForCurrentUser();
+        }
 
         return view;
     }
@@ -102,6 +118,40 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
     public void showNewNoteActivity() {
         Intent intent = new Intent(this.context, NoteActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void notifySuccessful() {
+        Toast.makeText(getContext(), "Info loaded successfully.", Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    @Override
+    public void notifyError(String errorMessage) {
+        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG)
+                .show();
+    }
+
+    public void setupNotesAdapter(List<? extends NoteContract> notes) {
+        ArrayAdapter<NoteContract> noteAdapter = new ArrayAdapter<NoteContract>(this.getContext(), -1,(List<NoteContract>) notes) {
+            @NonNull
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = convertView;
+                if (view == null) {
+                    LayoutInflater inflater = LayoutInflater.from(this.getContext());
+                    view = inflater.inflate(R.layout.single_note, parent, false);
+                }
+
+//                TextView tvTitle = (TextView) view.findViewById(R.id.user_list_title);
+//
+//                tvTitle.setText(this.getItem(position));
+
+                return view;
+            }
+        };
+
+        this.listViewNotes.setAdapter(noteAdapter);
     }
 }
 

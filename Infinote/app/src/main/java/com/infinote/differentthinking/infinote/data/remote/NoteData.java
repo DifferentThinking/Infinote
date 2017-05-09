@@ -1,18 +1,22 @@
 package com.infinote.differentthinking.infinote.data.remote;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.infinote.differentthinking.infinote.config.ApiConstants;
 import com.infinote.differentthinking.infinote.data.remote.base.NoteDataContract;
 import com.infinote.differentthinking.infinote.models.Note;
+import com.infinote.differentthinking.infinote.models.User;
 import com.infinote.differentthinking.infinote.models.base.HttpResponseContract;
-import com.infinote.differentthinking.infinote.models.base.NoteModelContract;
+import com.infinote.differentthinking.infinote.models.base.UserContract;
 import com.infinote.differentthinking.infinote.utils.GsonParser;
 import com.infinote.differentthinking.infinote.utils.OkHttpRequester;
 import com.infinote.differentthinking.infinote.data.local.UserSession;
+import com.infinote.differentthinking.infinote.views.note.base.NoteContract;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -40,7 +44,7 @@ public class NoteData implements NoteDataContract {
         noteCredentials.put("picture", encodedPicture);
 
         return httpRequester
-                .post(apiConstants.postImageUrl(userSession.getUsername()), noteCredentials)
+                .post(apiConstants.imageUrl(userSession.getUsername()), noteCredentials)
                 .map(new Function<HttpResponseContract, Boolean>() {
                     @Override
                     public Boolean apply(HttpResponseContract iHttpResponse) throws Exception {
@@ -54,6 +58,21 @@ public class NoteData implements NoteDataContract {
                         else {
                             return false;
                         }
+                    }
+                });
+    }
+
+    public Observable<List<? extends NoteContract>> getAllNotesForCurrentUser() {
+        return httpRequester.get(apiConstants.imageUrl(userSession.getUsername()))
+                .map(new Function<HttpResponseContract, List<? extends NoteContract>>() {
+                    @Override
+                    public List<? extends NoteContract> apply(HttpResponseContract iHttpResponse) throws Exception {
+                        if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
+                            throw new Error(iHttpResponse.getMessage());
+                        }
+                        String responseBody = iHttpResponse.getBody().toString();
+                        String noteJsonArray = jsonParser.getDirectMember(responseBody, "result");
+                        return jsonParser.getDirectArray(noteJsonArray, "notes", Note.class);
                     }
                 });
     }
