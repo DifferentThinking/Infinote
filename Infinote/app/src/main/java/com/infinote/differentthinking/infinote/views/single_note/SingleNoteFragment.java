@@ -2,9 +2,11 @@ package com.infinote.differentthinking.infinote.views.single_note;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -30,6 +32,7 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
     private SingleNoteContract.Presenter presenter;
     private Context context;
     private InfinoteProgressDialog progressDialog;
+    private Boolean darkMode = false;
 
     private Button noteSaveButton;
 
@@ -44,12 +47,42 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_note, container, false);
 
-        AllAngleExpandableButton button = (AllAngleExpandableButton) view.findViewById(R.id.button_expandable);
+        AllAngleExpandableButton colorsButton = (AllAngleExpandableButton) view.findViewById(R.id.button_expandable);
+//        AllAngleExpandableButton monoButton = (AllAngleExpandableButton) view.findViewById(R.id.button_monocolor);
+//        monoButton.setImageIcon(R.drawable.ic_action_darkMode);
         this.noteSaveButton = (Button) view.findViewById(R.id.note_save_button);
         this.drawer = (Drawer) view.findViewById(R.id.note_drawer);
 
+        final FloatingActionButton darkModeButton = (FloatingActionButton) view.findViewById(R.id.button_darkmode);
+        final FloatingActionButton monoColorButton = (FloatingActionButton) view.findViewById(R.id.button_monocolor);
 
-        this.doSomething(button);
+        darkModeButton.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
+        darkModeButton.setImageResource(R.drawable.ic_action_darkmode);
+
+        darkModeButton.setOnClickListener(
+                new FloatingActionButton.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        if (isInDarkMode()) {
+                            drawer.setBackgroundColor(Color.WHITE);
+                            drawer.setColor(Color.BLACK);
+                            monoColorButton.setBackgroundTintList(ColorStateList.valueOf(Color.BLACK));
+                            darkMode = false;
+                        }
+                        else {
+                            drawer.setBackgroundColor(Color.BLACK);
+                            drawer.setColor(Color.WHITE);
+                            monoColorButton.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
+                            darkMode = true;
+                        }
+                    }
+                }
+        );
+
+
+        this.createColorsButton(colorsButton);
+
+
         this.drawer.setDrawingCacheEnabled(true);
         this.noteSaveButton.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -117,7 +150,11 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
         startActivity(intent);
     }
 
-    private void doSomething(AllAngleExpandableButton button) {
+    public Boolean isInDarkMode() {
+        return darkMode;
+    }
+
+    private void createColorsButton(AllAngleExpandableButton button) {
         final List<ButtonData> buttonDatas = new ArrayList<>();
 //        int drawable = R.drawable.ic_action_red;
 //        ButtonData buttonData = ButtonData.buildIconButton(context, drawable[i], 0);
@@ -141,6 +178,9 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
         final ButtonData test =  ButtonData.buildIconButton(context, R.drawable.ic_action_circle, 0);
         test.setBackgroundColorId(context, R.color.blue);
         buttonDatas.add(test);
+//        final ButtonData test =  ButtonData.buildIconButton(context, R.drawable.ic_action_circle, 0);
+//        test.setBackgroundColorId(context, R.color.blue);
+//        buttonDatas.add(test);
 
         button.setButtonDatas(buttonDatas);
         button.setButtonEventListener(new ButtonEventListener() {
@@ -183,4 +223,34 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
             }
         });
     }
+
+//    private void createMonoButton(final at.markushi.ui.CircleButton button) {
+//        final List<ButtonData> buttonDatas = new ArrayList<>();
+//        final ButtonData mainButton = ButtonData.buildTextButton("");
+//        mainButton.setBackgroundColorId(context, R.color.black);
+//        buttonDatas.add(mainButton);
+//
+//        button.setButtonDatas(buttonDatas);
+//        button.setButtonEventListener(new ButtonEventListener() {
+//            @Override
+//            public void onButtonClicked(int index) {
+//                if (isInDarkMode()) {
+//                    mainButton.setBackgroundColorId(context, R.color.white);
+//                    buttonDatas.add(mainButton);
+//                    button.setButtonDatas(buttonDatas);
+//                    drawer.setColor(Color.WHITE);
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onExpand() {
+//            }
+//
+//            @Override
+//            public void onCollapse() {
+//
+//            }
+//        });
+//    }
 }

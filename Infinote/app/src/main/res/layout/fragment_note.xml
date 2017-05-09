@@ -32,6 +32,23 @@
             app:aebMaskBackgroundColor="@color/transparent"
             app:aebSubButtonSizeDp="30dp" />
 
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/button_monocolor"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/button_darkmode"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_action_darkmode" />
+
     </LinearLayout>
 
     <com.infinote.differentthinking.infinote.utils.Drawer
