@@ -75,6 +75,10 @@ public class Drawer extends View implements DrawerContract {
         mPaint.setColor(color);
     }
 
+    public int getColor() {
+        return mPaint.getColor();
+    }
+
     private void upTouch() {
         mPath.lineTo(mX, mY);
     }

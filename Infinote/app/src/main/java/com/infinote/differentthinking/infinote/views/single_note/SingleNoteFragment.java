@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,7 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
     private Boolean darkMode = false;
 
     private Button noteSaveButton;
+    private Button monoColorButton;
 
     private Drawer drawer ;
 
@@ -62,10 +64,24 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
         this.drawer = (Drawer) view.findViewById(R.id.note_drawer);
 
         final FloatingActionButton darkModeButton = (FloatingActionButton) view.findViewById(R.id.button_darkmode);
-        final FloatingActionButton monoColorButton = (FloatingActionButton) view.findViewById(R.id.button_monocolor);
+        final Button monoColorButton = (Button) view.findViewById(R.id.button_monocolor);
 
         darkModeButton.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
-        darkModeButton.setImageResource(R.drawable.ic_action_darkmode);
+//        darkModeButton.setImageResource(R.drawable.ic_action_darkmode);
+        darkModeButton.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_darkmode));
+
+        monoColorButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (isInDarkMode()) {
+                    monoColorButton.setBackgroundResource(R.drawable.circlebuttonwhite);
+                    drawer.setColor(Color.WHITE);
+                }
+                else {
+                    monoColorButton.setBackgroundResource(R.drawable.circlebuttonblack);
+                    drawer.setColor(Color.BLACK);
+                }
+            }
+        });
 
 
         darkModeButton.setOnClickListener(
@@ -74,14 +90,21 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
                     public void onClick(View v){
                         if (isInDarkMode()) {
                             drawer.setBackgroundColor(Color.WHITE);
-                            drawer.setColor(Color.BLACK);
-                            monoColorButton.setBackgroundTintList(ColorStateList.valueOf(Color.BLACK));
+                            if (drawer.getColor() == Color.WHITE) {
+                                drawer.setColor(Color.BLACK);
+                                monoColorButton.setBackgroundResource(R.drawable.circlebuttonblack);
+                            }
+
+                            darkModeButton.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_darkmode));
                             darkMode = false;
                         }
                         else {
                             drawer.setBackgroundColor(Color.BLACK);
-                            drawer.setColor(Color.WHITE);
-                            monoColorButton.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
+                            if (drawer.getColor() == Color.BLACK) {
+                                drawer.setColor(Color.WHITE);
+                                monoColorButton.setBackgroundResource(R.drawable.circlebuttonwhite);
+                            }
+                            darkModeButton.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_darkmode));
                             darkMode = true;
                         }
                     }
@@ -201,6 +224,8 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
             public void onButtonClicked(int index) {
                 Toast.makeText(getActivity(), "clicked index: " + index,
                         Toast.LENGTH_LONG).show();
+
+                monoColorButton.setBackgroundResource(R.drawable.circlebuttontransparent);
 
                 switch (index) {
                     case 1:  drawer.setColor(Color.BLACK);
