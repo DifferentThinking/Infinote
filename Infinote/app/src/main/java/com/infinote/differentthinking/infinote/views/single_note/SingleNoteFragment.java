@@ -58,8 +58,7 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
         View view = inflater.inflate(R.layout.fragment_note, container, false);
 
         AllAngleExpandableButton colorsButton = (AllAngleExpandableButton) view.findViewById(R.id.button_expandable);
-//        AllAngleExpandableButton monoButton = (AllAngleExpandableButton) view.findViewById(R.id.button_monocolor);
-//        monoButton.setImageIcon(R.drawable.ic_action_darkMode);
+
         this.noteSaveButton = (Button) view.findViewById(R.id.note_save_button);
         this.drawer = (Drawer) view.findViewById(R.id.note_drawer);
 
@@ -67,7 +66,6 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
         final Button monoColorButton = (Button) view.findViewById(R.id.button_monocolor);
 
         darkModeButton.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
-//        darkModeButton.setImageResource(R.drawable.ic_action_darkmode);
         darkModeButton.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_darkmode));
 
         monoColorButton.setOnClickListener(new View.OnClickListener() {
@@ -192,8 +190,6 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
 
     private void createColorsButton(AllAngleExpandableButton button) {
         final List<ButtonData> buttonDatas = new ArrayList<>();
-//        int drawable = R.drawable.ic_action_red;
-//        ButtonData buttonData = ButtonData.buildIconButton(context, drawable[i], 0);
         ButtonData mainButton = ButtonData.buildIconButton(context, R.drawable.ic_action_pallette, 0);
         buttonDatas.add(mainButton);
         int[] colors = {R.color.red,
@@ -205,6 +201,7 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
                        R.color.green,
                        R.color.light_green,
                        R.color.pink};
+
         for (int i = 0; i < colors.length; i++) {
             ButtonData buttonData =  ButtonData.buildTextButton("");
             buttonData.setBackgroundColorId(context, colors[i]);
@@ -214,9 +211,6 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
         final ButtonData test =  ButtonData.buildIconButton(context, R.drawable.ic_action_circle, 0);
         test.setBackgroundColorId(context, R.color.blue);
         buttonDatas.add(test);
-//        final ButtonData test =  ButtonData.buildIconButton(context, R.drawable.ic_action_circle, 0);
-//        test.setBackgroundColorId(context, R.color.blue);
-//        buttonDatas.add(test);
 
         button.setButtonDatas(buttonDatas);
         button.setButtonEventListener(new ButtonEventListener() {
@@ -225,7 +219,7 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
                 Toast.makeText(getActivity(), "clicked index: " + index,
                         Toast.LENGTH_LONG).show();
 
-                monoColorButton.setBackgroundResource(R.drawable.circlebuttontransparent);
+//                monoColorButton.setBackgroundResource(R.drawable.circlebuttontransparent);
 
                 switch (index) {
                     case 1:  drawer.setColor(Color.BLACK);
@@ -261,36 +255,6 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
             }
         });
     }
-
-//    private void createMonoButton(final at.markushi.ui.CircleButton button) {
-//        final List<ButtonData> buttonDatas = new ArrayList<>();
-//        final ButtonData mainButton = ButtonData.buildTextButton("");
-//        mainButton.setBackgroundColorId(context, R.color.black);
-//        buttonDatas.add(mainButton);
-//
-//        button.setButtonDatas(buttonDatas);
-//        button.setButtonEventListener(new ButtonEventListener() {
-//            @Override
-//            public void onButtonClicked(int index) {
-//                if (isInDarkMode()) {
-//                    mainButton.setBackgroundColorId(context, R.color.white);
-//                    buttonDatas.add(mainButton);
-//                    button.setButtonDatas(buttonDatas);
-//                    drawer.setColor(Color.WHITE);
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onExpand() {
-//            }
-//
-//            @Override
-//            public void onCollapse() {
-//
-//            }
-//        });
-//    }
 
     private void setupAlertDialog() {
         this.alertDialog = new AlertDialog.Builder(this.getActivity());

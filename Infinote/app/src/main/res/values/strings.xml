@@ -3,10 +3,11 @@
     <string name="newButtonText">New note</string>
     <string name="accountButtonText">Account</string>
     <string name="noNotesText">No notes yet</string>
-    <string name="login_form_title_text">LOGIN FORM</string>
-    <string name="forgot_password_text">Forgot your password?</string>
-    <string name="no_account_text">No account yet? Create one</string>
-    <string name="login_btn_text">Login</string>
+    <string name="welcome_text">Welcome</string>
+    <string name="forgot_password_text">Forgot password?</string>
+    <string name="no_account_text">Don\'t have an account?</string>
+    <string name="signup_text">Sign up</string>
+    <string name="signin_btn_text">Sign in</string>
     <string name="password_example_text">Password</string>
     <string name="email_example_text">Email</string>
     <string name="register_btn_text">REGISTER</string>

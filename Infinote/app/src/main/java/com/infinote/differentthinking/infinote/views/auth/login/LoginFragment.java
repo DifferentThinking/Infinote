@@ -2,8 +2,10 @@ package com.infinote.differentthinking.infinote.views.auth.login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v8.renderscript.Type;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dd.CircularProgressButton;
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
@@ -26,6 +29,9 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     private EditText passwordEditText;
     private Button loginBtn;
 
+    private TextView welcomeText;
+    private Typeface typeFace;
+
     private LoginContract.Presenter presenter;
     private InfinoteProgressDialog progressDialog;
     private Context context;
@@ -39,13 +45,31 @@ public class LoginFragment extends Fragment implements LoginContract.View {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        this.createAccountTextView = (TextView) view.findViewById(R.id.tv_no_account);
-        this.resetPasswordTextView = (TextView) view.findViewById(R.id.tv_reset_password);
+        typeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/Infinity.ttf");
+        welcomeText = (TextView) view.findViewById(R.id.welcome_text);
+        welcomeText.setTypeface(typeFace);
+
+        this.createAccountTextView = (TextView) view.findViewById(R.id.tv_signup);
+        this.resetPasswordTextView = (TextView) view.findViewById(R.id.tv_forgot_password);
 
         this.emailEditText = (EditText) view.findViewById(R.id.et_email);
         this.passwordEditText = (EditText) view.findViewById(R.id.et_password);
 
-        this.loginBtn = (Button) view.findViewById(R.id.btn_login);
+        final CircularProgressButton circularButton1 = (CircularProgressButton) view.findViewById(R.id.btn_signin);
+        circularButton1.setIndeterminateProgressMode(true);
+        circularButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (circularButton1.getProgress() == 0) {
+//                    circularButton1.setProgress(50);
+                    presenter.loginUser(emailEditText.getText().toString(), passwordEditText.getText().toString());
+                } else if (circularButton1.getProgress() == 100) {
+                    circularButton1.setProgress(0);
+                } else {
+                    circularButton1.setProgress(100);
+                }
+            }
+        });
 
         this.createAccountTextView.setOnClickListener(
             new Button.OnClickListener(){
@@ -64,13 +88,6 @@ public class LoginFragment extends Fragment implements LoginContract.View {
                     }
                 }
         );
-
-        this.loginBtn.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.loginUser(emailEditText.getText().toString(), passwordEditText.getText().toString());
-            }
-        });
 
         return view;
     }
