@@ -48,5 +48,6 @@ dependencies {
     compile 'com.github.markushi:circlebutton:1.1'
     compile 'com.github.uin3566:AllAngleExpandableButton:v1.2.0'
     compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
     testCompile 'junit:junit:4.12'
 }
