@@ -2,6 +2,7 @@ package com.infinote.differentthinking.infinote.views.auth.register;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,8 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dd.CircularProgressButton;
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
+import com.infinote.differentthinking.infinote.views.auth.login.LoginActivity;
 import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.auth.register.base.RegisterContract;
 
@@ -24,6 +27,9 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     private EditText passwordEditText;
     private EditText firstnameEditText;
     private EditText lastnameEditText;
+
+    private TextView signUpText;
+    private Typeface typeFace;
 
     private RegisterContract.Presenter presenter;
     private InfinoteProgressDialog progressDialog;
@@ -38,30 +44,43 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
-        this.alreadyHaveAccountView = (TextView) view.findViewById(R.id.tv_already_has_account);
+        this.alreadyHaveAccountView = (TextView) view.findViewById(R.id.tv_signin);
 
         this.emailEditText = (EditText) view.findViewById(R.id.et_email);
         this.passwordEditText = (EditText) view.findViewById(R.id.et_password);
         this.firstnameEditText = (EditText) view.findViewById(R.id.et_first_name);
         this.lastnameEditText = (EditText) view.findViewById(R.id.et_last_name);
 
-        Button registerBtn = (Button) view.findViewById(R.id.btn_register);
+        typeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/SIMPLIFICA.ttf");
+        signUpText = (TextView) view.findViewById(R.id.tv_create_acc);
+        signUpText.setTypeface(typeFace);
+
+        final CircularProgressButton circularButton1 = (CircularProgressButton) view.findViewById(R.id.btn_signup);
+        circularButton1.setIndeterminateProgressMode(true);
+        circularButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (circularButton1.getProgress() == 0) {
+//                    circularButton1.setProgress(50);
+                    presenter.registerUser(emailEditText.getText().toString(), passwordEditText.getText().toString());
+                } else if (circularButton1.getProgress() == 100) {
+                    circularButton1.setProgress(0);
+                } else {
+                    circularButton1.setProgress(100);
+                }
+            }
+        });
 
         alreadyHaveAccountView.setOnClickListener(
                 new Button.OnClickListener(){
                     @Override
                     public void onClick(View v){
-                        presenter.onHasAccountClicked();
+//                        presenter.onHasAccountClicked();
+                        Intent intent = new Intent(getContext(), LoginActivity.class);
+                        startActivity(intent);
                     }
                 }
         );
-
-        registerBtn.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.registerUser(emailEditText.getText().toString(), passwordEditText.getText().toString());
-            }
-        });
 
         return view;
     }
