@@ -24,6 +24,10 @@ public interface ListNotesContract {
         void hideLoadingPanel();
 
         void showNewNoteActivityWithImage(byte[] encodedImage);
+
+        void showDialogForDeleteingNote();
+
+        void dismissDialog();
     }
 
     interface Presenter {

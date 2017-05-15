@@ -44,7 +44,6 @@ public class ListNotesPresenter implements ListNotesContract.Presenter {
                             @Override
                             public void onNext(List<Note> notes) {
                                 view.setupNotesAdapter(notes);
-                                view.notifySuccessful();
                                 view.hideLoadingPanel();
                             }
 
@@ -67,22 +66,23 @@ public class ListNotesPresenter implements ListNotesContract.Presenter {
                         new Observer<Boolean>() {
                             @Override
                             public void onSubscribe(Disposable d) {
-
+                                view.showDialogForDeleteingNote();
                             }
 
                             @Override
                             public void onNext(Boolean result) {
                                 view.notifySuccessful();
+                                view.dismissDialog();
                             }
 
                             @Override
                             public void onError(Throwable e) {
-                                e.printStackTrace();
                                 view.notifyError("Error deleting note!");
                             }
 
                             @Override
                             public void onComplete() {
+                                view.dismissDialog();
                             }
                         });
     }

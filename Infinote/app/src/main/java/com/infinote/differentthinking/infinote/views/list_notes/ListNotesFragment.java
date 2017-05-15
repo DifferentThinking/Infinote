@@ -135,8 +135,18 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
     }
 
     @Override
+    public void showDialogForDeleteingNote() {
+        this.progressDialog.showProgress("Deleting note...");
+    }
+
+    @Override
+    public void dismissDialog() {
+        this.progressDialog.dismissProgress();
+    }
+
+    @Override
     public void notifySuccessful() {
-        Toast.makeText(getContext(), "Info loaded successfully.", Toast.LENGTH_SHORT)
+        Toast.makeText(getContext(), "Note deleted", Toast.LENGTH_SHORT)
                 .show();
     }
 
