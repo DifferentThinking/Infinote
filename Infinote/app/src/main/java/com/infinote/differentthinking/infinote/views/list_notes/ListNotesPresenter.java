@@ -2,10 +2,12 @@ package com.infinote.differentthinking.infinote.views.list_notes;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 import com.infinote.differentthinking.infinote.data.remote.NoteData;
 import com.infinote.differentthinking.infinote.data.remote.UserData;
 import com.infinote.differentthinking.infinote.models.Note;
+import com.infinote.differentthinking.infinote.models.base.NoteContract;
 import com.infinote.differentthinking.infinote.views.list_notes.base.ListNotesContract;
 
 import java.util.List;

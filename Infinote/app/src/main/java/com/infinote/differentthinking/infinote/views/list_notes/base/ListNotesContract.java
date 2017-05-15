@@ -1,6 +1,7 @@
 package com.infinote.differentthinking.infinote.views.list_notes.base;
 
 import android.graphics.Bitmap;
+import android.widget.ArrayAdapter;
 
 import com.infinote.differentthinking.infinote.base.BaseView;
 import com.infinote.differentthinking.infinote.models.base.NoteContract;
@@ -28,6 +29,8 @@ public interface ListNotesContract {
         void showDialogForDeleteingNote();
 
         void dismissDialog();
+
+        ArrayAdapter<NoteContract> getNoteAdapter();
     }
 
     interface Presenter {

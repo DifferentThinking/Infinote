@@ -17,8 +17,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,13 +40,12 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
     private ListNotesContract.Presenter presenter;
     private Context context;
     private InfinoteProgressDialog progressDialog;
+    ArrayAdapter<NoteContract> noteAdapter;
 
     private ListView listViewNotes;
+    at.markushi.ui.CircleButton accountButton;
+    FloatingActionButton newNoteButton;
     private ProgressBar loadingPanel;
-
-    private Button noteSaveButton;
-
-    private Drawer drawer ;
 
     public static ListNotesFragment newInstance() {
         return new ListNotesFragment();
@@ -57,8 +58,8 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
 
         this.listViewNotes = (ListView) view.findViewById(R.id.lv_notes);
         this.loadingPanel = (ProgressBar) view.findViewById(R.id.loading_panel);
-        at.markushi.ui.CircleButton accountButton = (at.markushi.ui.CircleButton) view.findViewById(R.id.account_button);
-        FloatingActionButton newNoteButton = (FloatingActionButton) view.findViewById(R.id.fab);
+        this.accountButton = (at.markushi.ui.CircleButton) view.findViewById(R.id.account_button);
+        this.newNoteButton = (FloatingActionButton) view.findViewById(R.id.new_note_button);
 
         newNoteButton.setOnClickListener(
             new FloatingActionButton.OnClickListener(){
@@ -95,6 +96,11 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
         super.onAttach(context);
 
         this.context = context;
+    }
+
+    @Override
+    public ArrayAdapter<NoteContract> getNoteAdapter() {
+        return this.noteAdapter;
     }
 
     @Override
@@ -162,7 +168,7 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
     }
 
     public void setupNotesAdapter(final List<? extends NoteContract> notes) {
-        ArrayAdapter<NoteContract> noteAdapter = new ArrayAdapter<NoteContract>(this.getContext(), -1, (List<NoteContract>) notes) {
+        this.noteAdapter = new ArrayAdapter<NoteContract>(this.getContext(), -1, (List<NoteContract>) notes) {
             @NonNull
             @Override
             public View getView(final int position, View convertView, ViewGroup parent) {
@@ -174,7 +180,7 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
 
                 ImageView imagePreview = (ImageView) view.findViewById(R.id.note_image_preview);
                 TextView noteTitle = (TextView) view.findViewById(R.id.tv_note_title);
-                Button noteDeleteButton = (Button) view.findViewById(R.id.note_delete_button);
+                final Button noteDeleteButton = (Button) view.findViewById(R.id.note_delete_button);
 
                 String encodedImage = notes.get(position).getPicture();
                 final byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
@@ -192,6 +198,8 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
                     @Override
                     public void onClick(View v) {
                         presenter.deleteNoteById(notes.get(position).get_id());
+                        noteAdapter.remove(noteAdapter.getItem(position));
+                        noteAdapter.notifyDataSetChanged();
                     }
                 });
 

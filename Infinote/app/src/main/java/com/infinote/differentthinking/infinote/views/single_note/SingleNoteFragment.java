@@ -272,7 +272,7 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
                         String encodedPicture = Base64.encodeToString(canvasData, Base64.DEFAULT);
 
                         String title = editText.getText().toString();
-                        if (title == "" || title == null) {
+                        if (title == "" || title == null || title.length() == 0) {
                            title = "no title";
                         }
 
