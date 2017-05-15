@@ -1,9 +1,9 @@
 package com.infinote.differentthinking.infinote.models.base;
 
 public interface NoteContract {
-    String getId();
+    String get_id();
 
-    void setId(String id);
+    void set_id(String id);
 
     String getPicture();
 

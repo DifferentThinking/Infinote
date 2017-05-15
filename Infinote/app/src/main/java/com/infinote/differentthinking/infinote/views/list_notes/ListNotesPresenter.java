@@ -18,7 +18,7 @@ import io.reactivex.schedulers.Schedulers;
 public class ListNotesPresenter implements ListNotesContract.Presenter {
     private UserData userData;
     private NoteData noteData;
-    ListNotesContract.View view;
+    private ListNotesContract.View view;
 
     public ListNotesPresenter(ListNotesContract.View view, Context context) {
         this.view = view;
@@ -51,6 +51,34 @@ public class ListNotesPresenter implements ListNotesContract.Presenter {
                             @Override
                             public void onError(Throwable e) {
                                 view.notifyError("Error loading notes!");
+                            }
+
+                            @Override
+                            public void onComplete() {
+                            }
+                        });
+    }
+
+    public void deleteNoteById(String id) {
+        this.noteData.deleteNoteById(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        new Observer<Boolean>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onNext(Boolean result) {
+                                view.notifySuccessful();
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                e.printStackTrace();
+                                view.notifyError("Error deleting note!");
                             }
 
                             @Override

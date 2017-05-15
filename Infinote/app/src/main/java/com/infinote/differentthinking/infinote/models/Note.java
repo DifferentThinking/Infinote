@@ -3,19 +3,19 @@ package com.infinote.differentthinking.infinote.models;
 import com.infinote.differentthinking.infinote.models.base.NoteContract;
 
 public class Note implements NoteContract {
-    private String id;
+    private String _id;
     private String picture;
     private String username;
     private String title;
 
     @Override
-    public String getId() {
-        return id;
+    public String get_id() {
+        return _id;
     }
 
     @Override
-    public void setId(String id) {
-        this.id = id;
+    public void set_id(String id) {
+        this._id = id;
     }
 
     @Override

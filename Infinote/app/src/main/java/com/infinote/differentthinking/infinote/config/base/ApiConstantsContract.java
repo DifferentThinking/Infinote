@@ -5,7 +5,12 @@ public interface ApiConstantsContract {
 
     String signUpUrl();
 
+    String imageUrl(String username);
+
+    String deleteNoteUrl();
+
     int responseSuccessCode();
 
     int responseErrorCode();
+
 }

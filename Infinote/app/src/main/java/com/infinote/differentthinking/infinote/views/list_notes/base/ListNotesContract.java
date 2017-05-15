@@ -30,5 +30,7 @@ public interface ListNotesContract {
         boolean isUserLoggedIn();
 
         void getNotesForCurrentUser();
+
+        void deleteNoteById(String id);
     }
 }

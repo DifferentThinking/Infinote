@@ -38,6 +38,7 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
     private ListNotesContract.Presenter presenter;
     private Context context;
     private InfinoteProgressDialog progressDialog;
+
     private ListView listViewNotes;
     private ProgressBar loadingPanel;
 
@@ -154,7 +155,7 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
         ArrayAdapter<NoteContract> noteAdapter = new ArrayAdapter<NoteContract>(this.getContext(), -1, (List<NoteContract>) notes) {
             @NonNull
             @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
+            public View getView(final int position, View convertView, ViewGroup parent) {
                 View view = convertView;
                 if (view == null) {
                     LayoutInflater inflater = LayoutInflater.from(this.getContext());
@@ -164,17 +165,23 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
                 ImageView imagePreview = (ImageView) view.findViewById(R.id.note_image_preview);
                 TextView noteTitle = (TextView) view.findViewById(R.id.tv_note_title);
                 Button noteDeleteButton = (Button) view.findViewById(R.id.note_delete_button);
-                Button noteEditButton = (Button) view.findViewById(R.id.note_edit_button);
 
                 String encodedImage = notes.get(position).getPicture();
                 final byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
                 Bitmap bm = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                 imagePreview.setImageBitmap(bm);
 
-                noteEditButton.setOnClickListener(new Button.OnClickListener() {
+                view.setOnClickListener(new Button.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         showNewNoteActivityWithImage(decodedString);
+                    }
+                });
+
+                noteDeleteButton.setOnClickListener(new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        presenter.deleteNoteById(notes.get(position).get_id());
                     }
                 });
 

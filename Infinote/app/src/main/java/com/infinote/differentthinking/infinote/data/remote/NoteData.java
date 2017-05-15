@@ -74,4 +74,27 @@ public class NoteData implements NoteDataContract {
                     }
                 });
     }
+
+    public Observable<Boolean> deleteNoteById(String id) {
+        Map<String, String> noteCredentials = new HashMap<>();
+        noteCredentials.put("id", id);
+
+        return httpRequester
+                .post(apiConstants.deleteNoteUrl(), noteCredentials)
+                .map(new Function<HttpResponseContract, Boolean>() {
+                    @Override
+                    public Boolean apply(HttpResponseContract iHttpResponse) throws Exception {
+                        if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
+                            throw new Error(iHttpResponse.getMessage());
+                        }
+                        String responseBody = iHttpResponse.getBody().toString();
+                        if (responseBody.contains("OK")) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                });
+    }
 }

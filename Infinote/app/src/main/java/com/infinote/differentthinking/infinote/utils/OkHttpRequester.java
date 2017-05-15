@@ -113,10 +113,8 @@ public class OkHttpRequester implements OkHttpRequesterContract {
             HttpResponseContract responseParsed = responseFactory.createResponse(
                     response.headers().toMultimap(), response.body().string(),
                     response.message(), response.code());
-            Log.d("HERE: ", response.message());
             return Observable.just(responseParsed);
         } catch (IOException e) {
-            Log.d("HERE: ", e.getMessage());
             return Observable.error(e);
         }
     }

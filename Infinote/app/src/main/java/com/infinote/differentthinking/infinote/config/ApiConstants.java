@@ -22,10 +22,16 @@ public class ApiConstants implements ApiConstantsContract {
         return URL_SIGN_UP;
     }
 
+    @Override
     public String imageUrl(String username) {
         String result = API_URL + "/users/" + username + "/notes";
 
         return result;
+    }
+
+    @Override
+    public String deleteNoteUrl() {
+        return API_URL + "/users/notes/delete";
     }
 
     @Override
