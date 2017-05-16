@@ -35,28 +35,30 @@ public class ProfilePresenter implements ProfileContract.Presenter {
     @Override
     public void getInfoForCurrentUser() {
         this.userData.getInfoForCurrentUser()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        new Observer<UserContract>() {
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                new Observer<UserContract>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        view.showDialogForLoading();
+                    }
 
-                            @Override
-                            public void onNext(UserContract user) {
-                                view.setupProfile(user);
-                            }
+                    @Override
+                    public void onNext(UserContract user) {
+                        view.setupProfile(user);
+                        view.dismissDialog();
+                    }
 
-                            @Override
-                            public void onError(Throwable e) {
-                                e.printStackTrace();
-                            }
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
 
-                            @Override
-                            public void onComplete() {
-
-                            }
-                        });
+                    @Override
+                    public void onComplete() {
+                        view.dismissDialog();
+                    }
+                });
     }
 }

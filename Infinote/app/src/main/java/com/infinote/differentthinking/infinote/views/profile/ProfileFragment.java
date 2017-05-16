@@ -93,4 +93,14 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         this.firstnameTextView.setText(user.getFirstname());
         this.lastnameTextView.setText(user.getLastname());
     }
+
+    @Override
+    public void showDialogForLoading() {
+        this.progressDialog.showProgress("Loading...");
+    }
+
+    @Override
+    public void dismissDialog() {
+        this.progressDialog.dismissProgress();
+    }
 }

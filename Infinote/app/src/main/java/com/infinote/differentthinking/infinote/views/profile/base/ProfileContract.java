@@ -10,6 +10,10 @@ public interface ProfileContract {
         void showListNotesActivity();
 
         void setupProfile(UserContract user);
+
+        void showDialogForLoading();
+
+        void dismissDialog();
     }
 
     interface Presenter {
