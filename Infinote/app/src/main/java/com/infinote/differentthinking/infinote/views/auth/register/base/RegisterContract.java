@@ -11,13 +11,15 @@ public interface RegisterContract {
 
         void showListNotesActivity();
 
+        void showLoginActivity();
+
         void notifySuccessful();
 
         void notifyError(String errorMessage);
     }
 
     interface Presenter{
-        void registerUser(String email, String password);
+        void registerUser(String username, String email, String firstname, String lastname, String password);
 
         void onHasAccountClicked();
     }

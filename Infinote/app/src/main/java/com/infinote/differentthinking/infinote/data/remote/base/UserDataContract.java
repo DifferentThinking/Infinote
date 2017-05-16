@@ -8,7 +8,7 @@ public interface UserDataContract {
 
     Observable<UserContract> signIn(String username, String password);
 
-    Observable<UserContract> signUp(String username, String password);
+    Observable<UserContract> signUp(String username, String email, String firstname, String lastname, String password);
 
     void logoutUser();
 

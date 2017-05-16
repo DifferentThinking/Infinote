@@ -19,10 +19,9 @@ public class RegisterPresenter implements RegisterContract.Presenter {
         this.view = view;
         userData = new UserData(context);
     }
-
     @Override
-    public void registerUser(String email, String password) {
-        userData.signUp(email, password)
+    public void registerUser(String username, String email, String firstname, String lastname, String password) {
+        userData.signUp(username, email, firstname, lastname, password)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -53,6 +52,6 @@ public class RegisterPresenter implements RegisterContract.Presenter {
 
     @Override
     public void onHasAccountClicked() {
-        this.view.showListNotesActivity();
+        this.view.showLoginActivity();
     }
 }

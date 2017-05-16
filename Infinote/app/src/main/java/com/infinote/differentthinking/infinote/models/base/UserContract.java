@@ -8,4 +8,16 @@ public interface UserContract {
     String getUsername();
 
     void setUsername(String username);
+
+    String getLastname();
+
+    void setLastname(String lastname);
+
+    String getFirstname();
+
+    void setFirstname(String firstname);
+
+    String getEmail();
+
+    void setEmail(String email);
 }

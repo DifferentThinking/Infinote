@@ -1,6 +1,7 @@
 package com.infinote.differentthinking.infinote.data.remote;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.infinote.differentthinking.infinote.config.ApiConstants;
 import com.infinote.differentthinking.infinote.data.remote.base.UserDataContract;
@@ -62,11 +63,15 @@ public class UserData implements UserDataContract {
                 });
     }
 
+    //String username, String email, String firstname, String lastname, String password
     @Override
-    public Observable<UserContract> signUp(String username, String password) {
+    public Observable<UserContract> signUp(String username, String email, String firstname, String lastname, String password) {
         Map<String, String> userCredentials = new HashMap<>();
         String passHash = hashProvider.hashPassword(password);
         userCredentials.put("username", username.toLowerCase());
+        userCredentials.put("email", email);
+        userCredentials.put("firstname", firstname);
+        userCredentials.put("lastname", lastname);
         userCredentials.put("passHash", passHash);
 
         return httpRequester
@@ -79,7 +84,27 @@ public class UserData implements UserDataContract {
                         }
 
                         String responseBody = iHttpResponse.getBody().toString();
+
                         String userJson = jsonParser.getDirectMember(responseBody, "result");
+                        UserContract resultUser = jsonParser.fromJson(userJson, userModelType);
+
+                        return resultUser;
+                    }
+                });
+    }
+
+    public Observable<UserContract> getInfoForCurrentUser() {
+        return httpRequester
+                .get(apiConstants.singleUserUrl(userSession.getUsername()))
+                .map(new Function<HttpResponseContract, UserContract>() {
+                    @Override
+                    public UserContract apply(HttpResponseContract iHttpResponse) throws Exception {
+                        if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
+                            throw new Error(iHttpResponse.getMessage());
+                        }
+                        String responseBody = iHttpResponse.getBody().toString();
+                        String userJson = jsonParser.getDirectMember(responseBody, "result");
+                        Log.d("HALO", userJson) ;
                         UserContract resultUser = jsonParser.fromJson(userJson, userModelType);
 
                         return resultUser;

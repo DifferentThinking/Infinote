@@ -62,30 +62,30 @@ public class ListNotesPresenter implements ListNotesContract.Presenter {
 
     public void deleteNoteById(String id) {
         this.noteData.deleteNoteById(id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        new Observer<Boolean>() {
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                                view.showDialogForDeleteingNote();
-                            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                new Observer<Boolean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        view.showDialogForDeleteingNote();
+                    }
 
-                            @Override
-                            public void onNext(Boolean result) {
-                                view.notifySuccessful();
-                                view.dismissDialog();
-                            }
+                    @Override
+                    public void onNext(Boolean result) {
+                        view.notifySuccessful();
+                        view.dismissDialog();
+                    }
 
-                            @Override
-                            public void onError(Throwable e) {
-                                view.notifyError("Error deleting note!");
-                            }
+                    @Override
+                    public void onError(Throwable e) {
+                        view.notifyError("Error deleting note!");
+                    }
 
-                            @Override
-                            public void onComplete() {
-                                view.dismissDialog();
-                            }
-                        });
+                    @Override
+                    public void onComplete() {
+                        view.dismissDialog();
+                    }
+                });
     }
 }

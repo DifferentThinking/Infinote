@@ -42,7 +42,7 @@ public class NoteData implements NoteDataContract {
         noteCredentials.put("title", title);
 
         return httpRequester
-                .post(apiConstants.imageUrl(userSession.getUsername()), noteCredentials)
+                .post(apiConstants.notesForCurrentUserUrl(userSession.getUsername()), noteCredentials)
                 .map(new Function<HttpResponseContract, Boolean>() {
                     @Override
                     public Boolean apply(HttpResponseContract iHttpResponse) throws Exception {
@@ -61,7 +61,8 @@ public class NoteData implements NoteDataContract {
     }
 
     public Observable<List<Note>> getAllNotesForCurrentUser() {
-        return httpRequester.get(apiConstants.imageUrl(userSession.getUsername()))
+        return httpRequester
+                .get(apiConstants.notesForCurrentUserUrl(userSession.getUsername()))
                 .map(new Function<HttpResponseContract, List<Note>>() {
                     @Override
                     public List<Note> apply(HttpResponseContract iHttpResponse) throws Exception {

@@ -27,6 +27,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     private EditText passwordEditText;
     private EditText firstnameEditText;
     private EditText lastnameEditText;
+    private EditText usernameEditText;
 
     private TextView signUpText;
     private Typeface typeFace;
@@ -50,6 +51,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
         this.passwordEditText = (EditText) view.findViewById(R.id.et_password);
         this.firstnameEditText = (EditText) view.findViewById(R.id.et_first_name);
         this.lastnameEditText = (EditText) view.findViewById(R.id.et_last_name);
+        this.usernameEditText = (EditText) view.findViewById(R.id.et_username);
 
         typeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/SIMPLIFICA.ttf");
         signUpText = (TextView) view.findViewById(R.id.tv_create_acc);
@@ -60,14 +62,20 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
         circularButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (circularButton1.getProgress() == 0) {
+                String usernameTextField = usernameEditText.getText().toString();
+                String emailTextField = emailEditText.getText().toString();
+                String firstnameTextField = firstnameEditText.getText().toString();
+                String lastnameTextField = lastnameEditText.getText().toString();
+                String passwordTextField = passwordEditText.getText().toString();
+
+                presenter.registerUser(usernameTextField, emailTextField, firstnameTextField, lastnameTextField, passwordTextField);
+//                if (circularButton1.getProgress() == 0) {
 //                    circularButton1.setProgress(50);
-                    presenter.registerUser(emailEditText.getText().toString(), passwordEditText.getText().toString());
-                } else if (circularButton1.getProgress() == 100) {
-                    circularButton1.setProgress(0);
-                } else {
-                    circularButton1.setProgress(100);
-                }
+//                } else if (circularButton1.getProgress() == 100) {
+//                    circularButton1.setProgress(0);
+//                } else {
+//                    circularButton1.setProgress(100);
+//                }
             }
         });
 
@@ -75,9 +83,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
                 new Button.OnClickListener(){
                     @Override
                     public void onClick(View v){
-//                        presenter.onHasAccountClicked();
-                        Intent intent = new Intent(getContext(), LoginActivity.class);
-                        startActivity(intent);
+                        presenter.onHasAccountClicked();
                     }
                 }
         );
@@ -105,6 +111,12 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     @Override
     public void showListNotesActivity() {
         Intent intent = new Intent(this.context, ListNotesActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showLoginActivity() {
+        Intent intent = new Intent(getContext(), LoginActivity.class);
         startActivity(intent);
     }
 

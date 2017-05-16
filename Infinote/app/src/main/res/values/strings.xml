@@ -10,6 +10,7 @@
     <string name="signin_btn_text">Sign in</string>
     <string name="password_example_text">Password</string>
     <string name="email_example_text">Email</string>
+    <string name="username_example_text">Username</string>
     <string name="register_btn_text">REGISTER</string>
     <string name="register_form_title_text">REGISTER FORM</string>
     <string name="account">Already have an account?</string>

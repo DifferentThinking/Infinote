@@ -35,7 +35,7 @@
             android:background="@drawable/edittext_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email_example_text"
+            android:hint="@string/username_example_text"
             android:textColorHint="@color/iron"
             android:textColor="@color/black"
             android:inputType="textEmailAddress"

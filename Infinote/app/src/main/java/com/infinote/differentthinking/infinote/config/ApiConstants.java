@@ -23,7 +23,7 @@ public class ApiConstants implements ApiConstantsContract {
     }
 
     @Override
-    public String imageUrl(String username) {
+    public String notesForCurrentUserUrl(String username) {
         String result = API_URL + "/users/" + username + "/notes";
 
         return result;
@@ -32,6 +32,11 @@ public class ApiConstants implements ApiConstantsContract {
     @Override
     public String deleteNoteUrl() {
         return API_URL + "/users/notes/delete";
+    }
+
+    @Override
+    public String singleUserUrl(String username) {
+        return API_URL + "/users/" + username;
     }
 
     @Override
