@@ -75,6 +75,8 @@ public class ListNotesPresenter implements ListNotesContract.Presenter {
 
     public void deleteNoteById(String id) {
         this.noteData.deleteNoteById(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 new Observer<Boolean>() {
                     @Override
@@ -90,12 +92,14 @@ public class ListNotesPresenter implements ListNotesContract.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
+                        e.printStackTrace();
                         view.notifyError("Error deleting note!");
                         view.dismissDialog();
                     }
 
                     @Override
                     public void onComplete() {
+
                         view.dismissDialog();
                     }
                 });
@@ -110,27 +114,26 @@ public class ListNotesPresenter implements ListNotesContract.Presenter {
     @Override
     public void saveNoteFromLocalStorage(String encodedPicture, String title) {
         this.noteData.saveNote(encodedPicture, title)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        new Observer<Boolean>() {
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                new Observer<Boolean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
 
-                            @Override
-                            public void onNext(Boolean value) {
-                            }
+                    @Override
+                    public void onNext(Boolean value) {
+                    }
 
-                            @Override
-                            public void onError(Throwable e) {
-                                view.notifyError("Error saving.");
-                            }
+                    @Override
+                    public void onError(Throwable e) {
+                        view.notifyError("Error saving.");
+                    }
 
-                            @Override
-                            public void onComplete() {
-
-                            }
-                        });
+                    @Override
+                    public void onComplete() {
+                    }
+                });
     }
 }
