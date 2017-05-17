@@ -2,7 +2,9 @@ package com.infinote.differentthinking.infinote.models;
 
 import com.infinote.differentthinking.infinote.models.base.NoteContract;
 
-public class Note implements NoteContract {
+import java.io.Serializable;
+
+public class Note implements NoteContract, Serializable {
     private String _id;
     private String picture;
     private String username;

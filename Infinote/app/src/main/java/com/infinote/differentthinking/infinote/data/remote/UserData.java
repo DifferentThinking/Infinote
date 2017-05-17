@@ -104,7 +104,6 @@ public class UserData implements UserDataContract {
                         }
                         String responseBody = iHttpResponse.getBody().toString();
                         String userJson = jsonParser.getDirectMember(responseBody, "result");
-                        Log.d("HALO", userJson) ;
                         UserContract resultUser = jsonParser.fromJson(userJson, userModelType);
 
                         return resultUser;

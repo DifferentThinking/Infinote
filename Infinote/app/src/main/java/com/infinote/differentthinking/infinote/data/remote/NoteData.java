@@ -7,14 +7,17 @@ import com.infinote.differentthinking.infinote.config.ApiConstants;
 import com.infinote.differentthinking.infinote.data.remote.base.NoteDataContract;
 import com.infinote.differentthinking.infinote.models.Note;
 import com.infinote.differentthinking.infinote.models.base.HttpResponseContract;
+import com.infinote.differentthinking.infinote.models.base.NoteContract;
 import com.infinote.differentthinking.infinote.utils.GsonParser;
 import com.infinote.differentthinking.infinote.utils.OkHttpRequester;
 import com.infinote.differentthinking.infinote.data.local.UserSession;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
@@ -42,22 +45,22 @@ public class NoteData implements NoteDataContract {
         noteCredentials.put("title", title);
 
         return httpRequester
-                .post(apiConstants.notesForCurrentUserUrl(userSession.getUsername()), noteCredentials)
-                .map(new Function<HttpResponseContract, Boolean>() {
-                    @Override
-                    public Boolean apply(HttpResponseContract iHttpResponse) throws Exception {
-                        if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
-                            throw new Error(iHttpResponse.getMessage());
-                        }
-                        String responseBody = iHttpResponse.getBody().toString();
-                        if (responseBody.contains("OK")) {
-                           return true;
-                        }
-                        else {
-                            return false;
-                        }
-                    }
-                });
+            .post(apiConstants.notesForCurrentUserUrl(userSession.getUsername()), noteCredentials)
+            .map(new Function<HttpResponseContract, Boolean>() {
+                @Override
+                public Boolean apply(HttpResponseContract iHttpResponse) throws Exception {
+                if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
+                    throw new Error(iHttpResponse.getMessage());
+                }
+                String responseBody = iHttpResponse.getBody().toString();
+                if (responseBody.contains("OK")) {
+                   return true;
+                }
+                else {
+                    return false;
+                }
+                }
+            });
     }
 
     public Observable<List<Note>> getAllNotesForCurrentUser() {
@@ -97,5 +100,28 @@ public class NoteData implements NoteDataContract {
                         }
                     }
                 });
+    }
+
+    public void saveNoteLocally(String encodedPicture, String title) {
+        try{
+            this.userSession.addNote(encodedPicture, title);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<NoteContract> getNotesLocally() {
+        try{
+            return this.userSession.getNotes();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void clearLocalNotes() {
+        this.userSession.clearNotes();
     }
 }

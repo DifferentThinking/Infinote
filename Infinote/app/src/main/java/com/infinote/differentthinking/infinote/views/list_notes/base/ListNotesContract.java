@@ -7,6 +7,7 @@ import com.infinote.differentthinking.infinote.base.BaseView;
 import com.infinote.differentthinking.infinote.models.base.NoteContract;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ListNotesContract {
     interface View extends BaseView<ListNotesContract.Presenter> {
@@ -39,5 +40,9 @@ public interface ListNotesContract {
         void getNotesForCurrentUser();
 
         void deleteNoteById(String id);
+
+        void getNotesLocally();
+
+        void saveNoteFromLocalStorage(String encodedPicture, String title);
     }
 }

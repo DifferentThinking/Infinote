@@ -10,6 +10,8 @@ public interface UserDataContract {
 
     Observable<UserContract> signUp(String username, String email, String firstname, String lastname, String password);
 
+    Observable<UserContract> getInfoForCurrentUser();
+
     void logoutUser();
 
     boolean isLoggedIn();

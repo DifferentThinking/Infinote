@@ -15,6 +15,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -264,7 +265,7 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
         final EditText editText = new EditText(this.getContext());
         alertDialog.setView(editText);
 
-        alertDialog.setNegativeButton("Save",
+        alertDialog.setPositiveButton("Save",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Bitmap bm = drawer.getDrawingCache();
@@ -272,15 +273,22 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
                         String encodedPicture = Base64.encodeToString(canvasData, Base64.DEFAULT);
 
                         String title = editText.getText().toString();
-                        if (title == "" || title == null || title.length() == 0) {
+                        if (title.equals("") || title.length() == 0) {
                            title = "no title";
                         }
 
-                        presenter.saveNote(encodedPicture, title);
+                        if (presenter.isUserLoggedIn()) {
+                            Log.d("ASDFIADFOIASMKDO", "4");
+                            presenter.saveNote(encodedPicture, title);
+                        }
+                        else {
+                            Log.d("ASDFIADFOIASMKDO", "3");
+                            presenter.saveNoteLocally(encodedPicture, title);
+                        }
                     }
                 });
 
-        alertDialog.setPositiveButton("Cancel",
+        alertDialog.setNegativeButton("Cancel",
             new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();

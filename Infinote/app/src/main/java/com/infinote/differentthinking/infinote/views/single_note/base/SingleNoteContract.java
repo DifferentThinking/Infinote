@@ -17,5 +17,9 @@ public interface SingleNoteContract {
 
     interface Presenter {
         void saveNote(String encodedPicture, String title);
+
+        boolean isUserLoggedIn();
+
+        void saveNoteLocally(String encodedPicture, String title);
     }
 }

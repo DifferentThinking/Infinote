@@ -6,11 +6,16 @@ import android.widget.ArrayAdapter;
 
 import com.infinote.differentthinking.infinote.data.remote.NoteData;
 import com.infinote.differentthinking.infinote.data.remote.UserData;
+import com.infinote.differentthinking.infinote.data.remote.base.NoteDataContract;
+import com.infinote.differentthinking.infinote.data.remote.base.UserDataContract;
 import com.infinote.differentthinking.infinote.models.Note;
 import com.infinote.differentthinking.infinote.models.base.NoteContract;
 import com.infinote.differentthinking.infinote.views.list_notes.base.ListNotesContract;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -18,8 +23,8 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class ListNotesPresenter implements ListNotesContract.Presenter {
-    private UserData userData;
-    private NoteData noteData;
+    private UserDataContract userData;
+    private NoteDataContract noteData;
     private ListNotesContract.View view;
 
     public ListNotesPresenter(ListNotesContract.View view, Context context) {
@@ -33,6 +38,14 @@ public class ListNotesPresenter implements ListNotesContract.Presenter {
     }
 
     public void getNotesForCurrentUser() {
+        ArrayList<NoteContract> localNotes = noteData.getNotesLocally();
+
+        for (NoteContract note: localNotes) {
+            this.saveNoteFromLocalStorage(note.getPicture(), note.getTitle());
+        }
+
+        noteData.clearLocalNotes();
+
         this.noteData.getAllNotesForCurrentUser()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -62,8 +75,6 @@ public class ListNotesPresenter implements ListNotesContract.Presenter {
 
     public void deleteNoteById(String id) {
         this.noteData.deleteNoteById(id)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 new Observer<Boolean>() {
                     @Override
@@ -80,6 +91,7 @@ public class ListNotesPresenter implements ListNotesContract.Presenter {
                     @Override
                     public void onError(Throwable e) {
                         view.notifyError("Error deleting note!");
+                        view.dismissDialog();
                     }
 
                     @Override
@@ -87,5 +99,38 @@ public class ListNotesPresenter implements ListNotesContract.Presenter {
                         view.dismissDialog();
                     }
                 });
+    }
+
+    public void getNotesLocally() {
+        List<NoteContract> notesForAdapter = this.noteData.getNotesLocally();
+        view.setupNotesAdapter(notesForAdapter);
+        view.hideLoadingPanel();
+    }
+
+    @Override
+    public void saveNoteFromLocalStorage(String encodedPicture, String title) {
+        this.noteData.saveNote(encodedPicture, title)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        new Observer<Boolean>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+                            }
+
+                            @Override
+                            public void onNext(Boolean value) {
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                view.notifyError("Error saving.");
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
     }
 }

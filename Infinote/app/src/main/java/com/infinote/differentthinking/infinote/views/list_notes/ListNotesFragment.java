@@ -88,8 +88,7 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
            presenter.getNotesForCurrentUser();
         }
         else {
-            this.hideLoadingPanel();
-            this.notifyError("You don't have any notes.");
+            presenter.getNotesLocally();
         }
 
         return view;

@@ -35,7 +35,6 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                             @Override
                             public void onNext(UserContract value) {
-                                Log.d("HELL", value.getUsername());
                                 view.notifySuccessful();
                                 view.showListNotesActivity();
                             }

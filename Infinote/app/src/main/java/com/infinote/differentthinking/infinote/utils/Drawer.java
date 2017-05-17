@@ -33,10 +33,12 @@ public class Drawer extends View implements DrawerContract {
         mPath = new Path();
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        mPaint.setColor(Color.BLACK);
+        mPaint.setDither(true);
+        mPaint.setColor(0xFFFF0000);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeJoin(Paint.Join.ROUND);
-        mPaint.setStrokeWidth(35f);
+        mPaint.setStrokeCap(Paint.Cap.ROUND);
+        mPaint.setStrokeWidth(3);
     }
 
     @Override
