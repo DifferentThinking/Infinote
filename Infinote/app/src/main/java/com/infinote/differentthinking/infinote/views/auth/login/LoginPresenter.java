@@ -22,8 +22,12 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     @Override
-    public void loginUser(String email, String password) {
-        userData.signIn(email, password)
+    public void loginUser(String username, String password) {
+        if (!validateLoginUser(username, password)) {
+            return;
+        }
+
+        userData.signIn(username, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -60,5 +64,15 @@ public class LoginPresenter implements LoginContract.Presenter {
     @Override
     public void onFogotPasswordClicked() {
 
+    }
+
+    private boolean validateLoginUser(String username, String password) {
+        if (username.length() > 3 && password.length() > 3) {
+            return true;
+        }
+        else {
+            view.notifyError("Username and password must be longer than 3 symbols");
+            return false;
+        }
     }
 }

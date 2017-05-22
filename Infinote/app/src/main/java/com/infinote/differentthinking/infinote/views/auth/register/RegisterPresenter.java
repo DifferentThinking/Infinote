@@ -21,6 +21,15 @@ public class RegisterPresenter implements RegisterContract.Presenter {
     }
     @Override
     public void registerUser(String username, String email, String firstname, String lastname, String password) {
+
+        if (!validateEmail(email)) {
+            return;
+        }
+
+        if (!validateUsernameAndPassword(username, password)) {
+            return;
+        }
+
         userData.signUp(username, email, firstname, lastname, password)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -39,7 +48,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        view.notifyError("Error registering");
+                        view.notifyError("Error ocurred when registering. Please try again later.");
                         view.dismissDialog();
                     }
 
@@ -53,5 +62,27 @@ public class RegisterPresenter implements RegisterContract.Presenter {
     @Override
     public void onHasAccountClicked() {
         this.view.showLoginActivity();
+    }
+
+    private boolean validateEmail(String email) {
+        if (email.contains("@") && email.length() > 4) {
+            return true;
+
+        }
+        else {
+            view.notifyError("Invalid email address.");
+            return false;
+        }
+
+    }
+
+    private boolean validateUsernameAndPassword(String username, String password) {
+        if (username.length() >= 4 || password.length() >= 4) {
+            return true;
+        }
+        else {
+            view.notifyError("Username and password must be longer than 3 symbols");
+            return false;
+        }
     }
 }
