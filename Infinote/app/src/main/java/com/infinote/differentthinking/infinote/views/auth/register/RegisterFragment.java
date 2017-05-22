@@ -28,6 +28,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     private EditText firstnameEditText;
     private EditText lastnameEditText;
     private EditText usernameEditText;
+    private CircularProgressButton circularButton;
 
     private TextView signUpText;
     private Typeface typeFace;
@@ -57,9 +58,9 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
         signUpText = (TextView) view.findViewById(R.id.tv_create_acc);
         signUpText.setTypeface(typeFace);
 
-        final CircularProgressButton circularButton1 = (CircularProgressButton) view.findViewById(R.id.btn_signup);
-        circularButton1.setIndeterminateProgressMode(true);
-        circularButton1.setOnClickListener(new View.OnClickListener() {
+        this.circularButton = (CircularProgressButton) view.findViewById(R.id.btn_signup);
+        circularButton.setIndeterminateProgressMode(true);
+        circularButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String usernameTextField = usernameEditText.getText().toString();
@@ -69,13 +70,6 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
                 String passwordTextField = passwordEditText.getText().toString();
 
                 presenter.registerUser(usernameTextField, emailTextField, firstnameTextField, lastnameTextField, passwordTextField);
-//                if (circularButton1.getProgress() == 0) {
-//                    circularButton1.setProgress(50);
-//                } else if (circularButton1.getProgress() == 100) {
-//                    circularButton1.setProgress(0);
-//                } else {
-//                    circularButton1.setProgress(100);
-//                }
             }
         });
 
@@ -141,4 +135,19 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG)
                 .show();
     }
- }
+
+    @Override
+    public void setProgressButttonTo100() {
+        circularButton.setProgress(100);
+    }
+
+    @Override
+    public void setProgressButttonTo50() {
+        circularButton.setProgress(50);
+    }
+
+    @Override
+    public void setProgressButttonTo0() {
+        circularButton.setProgress(0);
+    }
+}

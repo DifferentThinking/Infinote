@@ -16,6 +16,12 @@ public interface RegisterContract {
         void notifySuccessful();
 
         void notifyError(String errorMessage);
+
+        void setProgressButttonTo100();
+
+        void setProgressButttonTo50();
+
+        void setProgressButttonTo0();
     }
 
     interface Presenter{
