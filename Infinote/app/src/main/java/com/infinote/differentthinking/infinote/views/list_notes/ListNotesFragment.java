@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -43,9 +45,15 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
     ArrayAdapter<NoteContract> noteAdapter;
 
     private ListView listViewNotes;
-    at.markushi.ui.CircleButton accountButton;
-    FloatingActionButton newNoteButton;
+    private at.markushi.ui.CircleButton accountButton;
+    private de.hdodenhof.circleimageview.CircleImageView imagePreview;
+    private FloatingActionButton newNoteButton;
     private ProgressBar loadingPanel;
+
+    private TextView infinotesText;
+
+    private Typeface infinotesTypeFace;
+    private Typeface noteTextTypeFace;
 
     public static ListNotesFragment newInstance() {
         return new ListNotesFragment();
@@ -60,6 +68,11 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
         this.loadingPanel = (ProgressBar) view.findViewById(R.id.loading_panel);
         this.accountButton = (at.markushi.ui.CircleButton) view.findViewById(R.id.account_button);
         this.newNoteButton = (FloatingActionButton) view.findViewById(R.id.new_note_button);
+        this.infinotesText = (TextView) view.findViewById(R.id.infinotes_text);
+
+        this.infinotesTypeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/ChampagneBold.ttf");
+
+        this.infinotesText.setTypeface(infinotesTypeFace);
 
         newNoteButton.setOnClickListener(
             new FloatingActionButton.OnClickListener(){
@@ -181,9 +194,12 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
                     view = inflater.inflate(R.layout.single_note, parent, false);
                 }
 
-                ImageView imagePreview = (ImageView) view.findViewById(R.id.note_image_preview);
+                imagePreview = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.note_image_preview);
                 TextView noteTitle = (TextView) view.findViewById(R.id.tv_note_title);
-                final Button noteDeleteButton = (Button) view.findViewById(R.id.note_delete_button);
+                final ImageButton deleteNoteButton = (ImageButton) view.findViewById(R.id.note_delete_button);
+                noteTextTypeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/Champagne.ttf");
+
+                noteTitle.setTypeface(noteTextTypeFace);
 
                 String encodedImage = notes.get(position).getPicture();
                 final byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
@@ -197,7 +213,7 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
                     }
                 });
 
-                noteDeleteButton.setOnClickListener(new Button.OnClickListener() {
+                deleteNoteButton.setOnClickListener(new Button.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         presenter.deleteNoteById(notes.get(position).get_id());

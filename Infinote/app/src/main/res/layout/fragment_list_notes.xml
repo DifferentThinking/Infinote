@@ -10,32 +10,29 @@
     android:orientation="vertical"
     tools:context="com.infinote.differentthinking.infinote.views.list_notes.ListNotesFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:layout_height="60dp">
 
         <at.markushi.ui.CircleButton
             android:id="@+id/account_button"
-            android:layout_width="50dip"
-            android:layout_height="50dip"
-            android:layout_gravity="center_vertical"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:src="@drawable/ic_action_account"
             app:cb_color="#3796e5"/>
 
         <TextView
             android:id="@+id/infinotes_text"
-            android:layout_width="240dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:fontFamily="serif-monospace"
+            android:layout_centerInParent="true"
             android:text="Infinotes"
             android:textAlignment="center"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textSize="30dp" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <ProgressBar
         android:id="@+id/loading_panel"

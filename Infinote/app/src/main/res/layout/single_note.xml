@@ -4,33 +4,40 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/note_layout" >
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/note_image_preview"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:contentDescription="note preview"/>
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:civ_border_width="1dp"
+            android:layout_marginLeft="5dp"
+            app:civ_border_color="@color/iron"
+            />
 
         <TextView
             android:id="@+id/tv_note_title"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="no title"
-            android:textSize="20sp"
-            android:gravity="center"/>
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textSize="25dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"/>
     </LinearLayout>
 
-    <Button
+    <ImageButton
         android:id="@+id/note_delete_button"
-        android:layout_width="wrap_content"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@mipmap/delete_icon"
+        android:background="@null"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="15dp"
-        android:layout_height="50dp"
-        android:text="Delete" />
+        android:layout_centerVertical="true"
+        android:layout_marginRight="15dp"/>
 
 </RelativeLayout>

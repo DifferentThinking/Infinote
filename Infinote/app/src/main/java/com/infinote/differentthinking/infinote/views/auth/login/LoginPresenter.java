@@ -34,7 +34,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                         new Observer<UserContract>() {
                             @Override
                             public void onSubscribe(Disposable d) {
-                                view.showDialogForLoading();
+                                view.signalLoading();
                             }
 
                             @Override

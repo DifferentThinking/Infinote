@@ -16,6 +16,8 @@ public interface LoginContract {
         void notifyError(String errorMessage);
 
         void showRegisterActivty();
+
+        void signalLoading();
     }
 
     interface Presenter {

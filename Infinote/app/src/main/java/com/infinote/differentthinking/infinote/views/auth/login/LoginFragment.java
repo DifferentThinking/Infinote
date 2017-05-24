@@ -126,6 +126,11 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     }
 
     @Override
+    public void signalLoading() {
+        loginButton.setProgress(50);
+    }
+
+    @Override
     public void setPresenter(LoginContract.Presenter presenter) {
         this.presenter = presenter;
     }
