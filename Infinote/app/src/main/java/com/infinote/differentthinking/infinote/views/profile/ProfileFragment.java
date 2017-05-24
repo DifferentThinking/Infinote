@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dd.CircularProgressButton;
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.models.base.UserContract;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
@@ -24,12 +25,12 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     private Context context;
     private InfinoteProgressDialog progressDialog;
 
-    private Button logoutButton;
     private TextView usernameTextView;
     private TextView emailTextView;
     private TextView fullNameTextView;
     private Typeface usernameTypeFace;
     private Typeface detailsTypeFace;
+    private CircularProgressButton logoutButton;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -43,20 +44,28 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         this.usernameTypeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/ChampagneBold.ttf");
         this.detailsTypeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/Champagne.ttf");
 
-        this.logoutButton = (Button) view.findViewById(R.id.logout_button);
         this.usernameTextView = (TextView) view.findViewById(R.id.tv_profile_username);
         this.emailTextView = (TextView) view.findViewById(R.id.tv_profile_email);
         this.fullNameTextView = (TextView) view.findViewById(R.id.tv_profile_fullname);
+        this.logoutButton = (CircularProgressButton) view.findViewById(R.id.logout_button);
 
         this.usernameTextView.setTypeface(usernameTypeFace);
         this.fullNameTextView.setTypeface(detailsTypeFace);
         this.emailTextView.setTypeface(detailsTypeFace);
 
-        this.logoutButton.setOnClickListener(new Button.OnClickListener() {
+        this.logoutButton.setIndeterminateProgressMode(true);
+        this.logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.logoutUser();
-                showListNotesActivity();
+                if (logoutButton.getProgress() == 0) {
+                    logoutButton.setProgress(50);
+                    presenter.logoutUser();
+                    showListNotesActivity();
+                } else if (logoutButton.getProgress() == 100) {
+                    logoutButton.setProgress(0);
+                } else {
+                    logoutButton.setProgress(100);
+                }
             }
         });
 
