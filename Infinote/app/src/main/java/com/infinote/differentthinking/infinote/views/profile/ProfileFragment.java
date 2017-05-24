@@ -3,6 +3,7 @@ package com.infinote.differentthinking.infinote.views.profile;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,9 +30,14 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     private TextView usernameTextView;
     private TextView emailTextView;
     private TextView fullNameTextView;
+
     private Typeface usernameTypeFace;
     private Typeface detailsTypeFace;
+
     private CircularProgressButton logoutButton;
+
+    private ImageButton settings;
+
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -48,6 +55,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         this.emailTextView = (TextView) view.findViewById(R.id.tv_profile_email);
         this.fullNameTextView = (TextView) view.findViewById(R.id.tv_profile_fullname);
         this.logoutButton = (CircularProgressButton) view.findViewById(R.id.logout_button);
+        this.settings = (ImageButton) view.findViewById(R.id.settings);
 
         this.usernameTextView.setTypeface(usernameTypeFace);
         this.fullNameTextView.setTypeface(detailsTypeFace);
@@ -66,6 +74,13 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
                 } else {
                     logoutButton.setProgress(100);
                 }
+            }
+        });
+
+        this.settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 

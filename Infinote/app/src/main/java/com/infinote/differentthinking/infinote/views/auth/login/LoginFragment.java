@@ -69,7 +69,6 @@ public class LoginFragment extends Fragment implements LoginContract.View {
         this.emailEditText = (EditText) view.findViewById(R.id.et_email);
         this.passwordEditText = (EditText) view.findViewById(R.id.et_password);
 
-
         this.loginButton = (CircularProgressButton) view.findViewById(R.id.btn_signin);
         this.loginButton.setIndeterminateProgressMode(true);
         this.loginButton.setOnClickListener(new View.OnClickListener() {
