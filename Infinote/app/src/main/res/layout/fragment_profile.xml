@@ -10,20 +10,37 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
-        android:layout_width="175dp"
-        android:layout_height="175dp"
-        android:src="@mipmap/profile"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        app:civ_border_width="2dp"
-        app:civ_border_color="#FF000000"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="175dp"
+                android:layout_height="175dp"
+                android:src="@mipmap/profile"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#000000"/>
+
+            <ImageButton
+                android:id="@+id/previous"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/gear_icon"
+                android:background="@null"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true">
+
+            </ImageButton>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tv_profile_username"
                 android:textSize="40dp"
@@ -66,6 +83,5 @@
             app:cpb_textIdle="Sign out"
             app:cpb_cornerRadius="48dp"/>
     </RelativeLayout>
-
 
 </FrameLayout>
