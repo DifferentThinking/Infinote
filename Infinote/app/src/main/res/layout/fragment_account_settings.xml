@@ -7,9 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -25,8 +23,6 @@
                 app:civ_border_width="2dp"
                 app:civ_border_color="#000000"/>
 
-
-
             <ImageButton
                 android:id="@+id/done_button"
                 android:layout_width="40dp"
@@ -36,7 +32,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true">
             </ImageButton>
-
 
         </RelativeLayout>
 
@@ -48,7 +43,7 @@
             android:textSize="20dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:textColor="#696969">
+            android:textColor="#696969"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,8 +64,8 @@
                 android:textColorHint="@color/iron"
                 android:textColor="@color/black"
                 android:inputType="textEmailAddress"
-                android:drawableLeft="@mipmap/name_icon"
-                />
+                android:drawableLeft="@mipmap/name_icon" />
+
             <EditText
                 android:id="@+id/et_edit_lastname"
                 android:background="@drawable/edittext_style"
@@ -80,8 +75,7 @@
                 android:textColorHint="@color/iron"
                 android:textColor="@color/black"
                 android:inputType="textEmailAddress"
-                android:drawableLeft="@mipmap/name_icon"
-                />
+                android:drawableLeft="@mipmap/name_icon" />
 
             <TextView
                 android:id="@+id/tv_change_password"
@@ -90,9 +84,7 @@
                 android:text="Change password"
                 android:textSize="20dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="110dp"
-                android:textColor="#696969">
+                android:layout_marginTop="110dp" />
         </LinearLayout>
-        
     </LinearLayout>
 </RelativeLayout>

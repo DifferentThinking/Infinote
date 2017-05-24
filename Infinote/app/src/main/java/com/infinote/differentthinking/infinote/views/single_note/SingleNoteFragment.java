@@ -274,7 +274,7 @@ public class SingleNoteFragment extends Fragment implements SingleNoteContract.V
 
                         String title = editText.getText().toString();
                         if (title.equals("") || title.length() == 0) {
-                           title = "no title";
+                           title = "No Title";
                         }
 
                         if (presenter.isUserLoggedIn()) {
