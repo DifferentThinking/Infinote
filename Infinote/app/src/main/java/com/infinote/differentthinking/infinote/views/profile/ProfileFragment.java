@@ -2,6 +2,7 @@ package com.infinote.differentthinking.infinote.views.profile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     private TextView emailTextView;
     private TextView firstnameTextView;
     private TextView lastnameTextView;
+    private Typeface typeFace;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -38,11 +40,15 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        this.typeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/Champagne.ttf");
+
         this.logoutButton = (Button) view.findViewById(R.id.logout_button);
         this.usernameTextView = (TextView) view.findViewById(R.id.tv_profile_username);
         this.emailTextView = (TextView) view.findViewById(R.id.tv_profile_email);
         this.firstnameTextView = (TextView) view.findViewById(R.id.tv_profile_firstname);
         this.lastnameTextView = (TextView) view.findViewById(R.id.tv_profile_lastname);
+
+        this.usernameTextView.setTypeface(typeFace);
 
         this.logoutButton.setOnClickListener(new Button.OnClickListener() {
             @Override
