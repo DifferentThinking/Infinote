@@ -8,11 +8,12 @@
     android:id="@+id/note_layout" >
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_width="match_parent"
+        android:layout_height="50dp" >
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/note_image_preview"
+            android:layout_gravity="center_vertical"
             android:layout_width="40dp"
             android:layout_height="40dp"
             app:civ_border_width="1dp"
@@ -28,6 +29,7 @@
             android:textSize="25dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"/>
+
     </LinearLayout>
 
     <ImageButton
@@ -39,5 +41,24 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="15dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last modified:"
+            android:layout_gravity="bottom"/>.
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today, 17:02"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="8dp"/>
+    </LinearLayout>
 
 </RelativeLayout>
