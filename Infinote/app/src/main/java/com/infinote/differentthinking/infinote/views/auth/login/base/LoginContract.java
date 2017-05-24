@@ -21,8 +21,10 @@ public interface LoginContract {
     interface Presenter {
         void loginUser(String email, String password);
 
+        boolean validateLoginUser(String username, String password);
+
         void onCreateAccountClicked();
 
-        void onFogotPasswordClicked();
+        void onForgotPasswordClicked();
     }
 }

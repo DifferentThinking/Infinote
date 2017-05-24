@@ -2,8 +2,11 @@ package com.infinote.differentthinking.infinote.views.auth.login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v8.renderscript.Type;
 import android.view.LayoutInflater;
@@ -27,10 +30,12 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     private TextView resetPasswordTextView;
     private EditText emailEditText;
     private EditText passwordEditText;
-    private Button loginBtn;
+    private CircularProgressButton loginButton;
 
     private TextView welcomeText;
     private Typeface typeFace;
+
+    private CountDownTimer timer;
 
     private LoginContract.Presenter presenter;
     private InfinoteProgressDialog progressDialog;
@@ -45,6 +50,15 @@ public class LoginFragment extends Fragment implements LoginContract.View {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
+        this.timer = new CountDownTimer(5000, 1000) {
+            public void onFinish() {
+                loginButton.setProgress(0);
+            }
+            public void onTick(long millisUntilFinished) {
+
+            }
+        };
+
         typeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/Infinity.ttf");
         welcomeText = (TextView) view.findViewById(R.id.welcome_text);
         welcomeText.setTypeface(typeFace);
@@ -55,18 +69,25 @@ public class LoginFragment extends Fragment implements LoginContract.View {
         this.emailEditText = (EditText) view.findViewById(R.id.et_email);
         this.passwordEditText = (EditText) view.findViewById(R.id.et_password);
 
-        final CircularProgressButton circularButton1 = (CircularProgressButton) view.findViewById(R.id.btn_signin);
-        circularButton1.setIndeterminateProgressMode(true);
-        circularButton1.setOnClickListener(new View.OnClickListener() {
+
+        this.loginButton = (CircularProgressButton) view.findViewById(R.id.btn_signin);
+        this.loginButton.setIndeterminateProgressMode(true);
+        this.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (circularButton1.getProgress() == 0) {
-//                    circularButton1.setProgress(50);
+                if (loginButton.getProgress() == 0) {
+                    loginButton.setProgress(50);
+                    if (!presenter.validateLoginUser(emailEditText.getText().toString(), passwordEditText.getText().toString())) {
+                        loginButton.setErrorText("Too short");
+                        loginButton.setProgress(-1);
+                        timer.start();
+                        return;
+                    }
                     presenter.loginUser(emailEditText.getText().toString(), passwordEditText.getText().toString());
-                } else if (circularButton1.getProgress() == 100) {
-                    circularButton1.setProgress(0);
+                } else if (loginButton.getProgress() == 100) {
+                    loginButton.setProgress(0);
                 } else {
-                    circularButton1.setProgress(100);
+                    loginButton.setProgress(100);
                 }
             }
         });

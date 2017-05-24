@@ -62,16 +62,16 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     @Override
-    public void onFogotPasswordClicked() {
+    public void onForgotPasswordClicked() {
 
     }
 
-    private boolean validateLoginUser(String username, String password) {
+    @Override
+    public boolean validateLoginUser(String username, String password) {
         if (username.length() > 3 && password.length() > 3) {
             return true;
         }
         else {
-            view.notifyError("Username and password must be longer than 3 symbols");
             return false;
         }
     }
