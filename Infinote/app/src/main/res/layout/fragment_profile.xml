@@ -14,7 +14,7 @@
         android:id="@+id/profile_image"
         android:layout_width="175dp"
         android:layout_height="175dp"
-        android:src="@mipmap/mitovcropped"
+        android:src="@mipmap/profile"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         app:civ_border_width="2dp"
