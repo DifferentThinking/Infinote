@@ -27,9 +27,9 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     private Button logoutButton;
     private TextView usernameTextView;
     private TextView emailTextView;
-    private TextView firstnameTextView;
-    private TextView lastnameTextView;
-    private Typeface typeFace;
+    private TextView fullNameTextView;
+    private Typeface usernameTypeFace;
+    private Typeface detailsTypeFace;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -40,15 +40,17 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        this.typeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/Champagne.ttf");
+        this.usernameTypeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/ChampagneBold.ttf");
+        this.detailsTypeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/Champagne.ttf");
 
         this.logoutButton = (Button) view.findViewById(R.id.logout_button);
         this.usernameTextView = (TextView) view.findViewById(R.id.tv_profile_username);
         this.emailTextView = (TextView) view.findViewById(R.id.tv_profile_email);
-        this.firstnameTextView = (TextView) view.findViewById(R.id.tv_profile_firstname);
-        this.lastnameTextView = (TextView) view.findViewById(R.id.tv_profile_lastname);
+        this.fullNameTextView = (TextView) view.findViewById(R.id.tv_profile_fullname);
 
-        this.usernameTextView.setTypeface(typeFace);
+        this.usernameTextView.setTypeface(usernameTypeFace);
+        this.fullNameTextView.setTypeface(detailsTypeFace);
+        this.emailTextView.setTypeface(detailsTypeFace);
 
         this.logoutButton.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -94,10 +96,10 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
 
     @Override
     public void setupProfile(UserContract user) {
+        String fullName = user.getFirstname() + " " + user.getLastname();
         this.usernameTextView.setText(user.getUsername());
         this.emailTextView.setText(user.getEmail());
-        this.firstnameTextView.setText(user.getFirstname());
-        this.lastnameTextView.setText(user.getLastname());
+        this.fullNameTextView.setText(fullName);
     }
 
     @Override
