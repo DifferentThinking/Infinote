@@ -79,7 +79,7 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
             new FloatingActionButton.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                showDrawerActivity();
+                    showDrawerActivity();
                 }
             }
         );
@@ -155,7 +155,7 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
 
     @Override
     public void showNewNoteActivityWithImage(byte[] encodedImage) {
-        Intent intent = new Intent(this.context, SingleNoteActivity.class);
+        Intent intent = new Intent(this.context, DrawingActivity.class);
 
         intent.putExtra("ENCODED_IMAGE", encodedImage);
 

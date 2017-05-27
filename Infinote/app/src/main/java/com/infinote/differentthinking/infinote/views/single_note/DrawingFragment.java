@@ -125,8 +125,10 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         byte[] decodedString = this.getActivity().getIntent().getByteArrayExtra("ENCODED_IMAGE");
         if (decodedString != null) {
             Bitmap bm = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            Drawable drawable = new BitmapDrawable(getResources(), bm);
-            this.canvas.setBackground(drawable);
+//            Drawable drawable = new BitmapDrawable(getResources(), bm);
+//            this.canvas.setBackground(drawable);
+//            this.canvas.set
+            this.canvas.drawBitmap(bm);
         }
 
         return view;
