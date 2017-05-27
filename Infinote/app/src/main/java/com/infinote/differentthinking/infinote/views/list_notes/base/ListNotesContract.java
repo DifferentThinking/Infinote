@@ -15,8 +15,6 @@ public interface ListNotesContract {
 
         void showLoginActivity();
 
-        void showNewNoteActivity();
-
         void setupNotesAdapter(List<? extends NoteContract> notes);
 
         void notifyError(String errorMessage);

@@ -11,29 +11,23 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.models.base.NoteContract;
-import com.infinote.differentthinking.infinote.utils.Drawer;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.views.auth.login.LoginActivity;
 import com.infinote.differentthinking.infinote.views.list_notes.base.ListNotesContract;
 import com.infinote.differentthinking.infinote.views.single_note.DrawingActivity;
-import com.infinote.differentthinking.infinote.views.single_note.SingleNoteActivity;
 import com.infinote.differentthinking.infinote.views.profile.ProfileActivity;
 
 import java.util.List;
@@ -139,12 +133,6 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
     @Override
     public void showLoginActivity() {
         Intent intent = new Intent(this.context, LoginActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    public void showNewNoteActivity() {
-        Intent intent = new Intent(this.context, SingleNoteActivity.class);
         startActivity(intent);
     }
 
