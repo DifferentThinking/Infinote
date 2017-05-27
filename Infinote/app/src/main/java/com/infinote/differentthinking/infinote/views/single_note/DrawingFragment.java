@@ -126,8 +126,6 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         if (decodedString != null) {
             Bitmap bm = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             Drawable drawable = new BitmapDrawable(getResources(), bm);
-//            this.drawer.setBackgroundDrawable(drawable);
-//            this.canvas.drawBitmap(bm);
             this.canvas.setBackground(drawable);
         }
 
@@ -222,8 +220,6 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
                 Toast.makeText(getActivity(), "clicked index: " + index,
                         Toast.LENGTH_LONG).show();
 
-//                monoColorButton.setBackgroundResource(R.drawable.circlebuttontransparent);
-
                 switch (index) {
                     case 1:  canvas.setPaintStrokeColor(Color.BLACK);
                         break;
@@ -270,8 +266,8 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         alertDialog.setPositiveButton("Save",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Bitmap bm = canvas.getDrawingCache();
-                        byte[] canvasData = getCanvasData(bm);
+//                        Bitmap bm = canvas.getBitmap();
+                        byte[] canvasData = canvas.getBitmapAsByteArray();
                         String encodedPicture = Base64.encodeToString(canvasData, Base64.DEFAULT);
 
                         String title = editText.getText().toString();
