@@ -32,6 +32,7 @@ import com.infinote.differentthinking.infinote.utils.Drawer;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.views.auth.login.LoginActivity;
 import com.infinote.differentthinking.infinote.views.list_notes.base.ListNotesContract;
+import com.infinote.differentthinking.infinote.views.single_note.DrawingActivity;
 import com.infinote.differentthinking.infinote.views.single_note.SingleNoteActivity;
 import com.infinote.differentthinking.infinote.views.profile.ProfileActivity;
 
@@ -78,7 +79,7 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
             new FloatingActionButton.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                showNewNoteActivity();
+                showDrawerActivity();
                 }
             }
         );
@@ -144,6 +145,11 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
     @Override
     public void showNewNoteActivity() {
         Intent intent = new Intent(this.context, SingleNoteActivity.class);
+        startActivity(intent);
+    }
+
+    public void showDrawerActivity() {
+        Intent intent = new Intent(this.context, DrawingActivity.class);
         startActivity(intent);
     }
 

@@ -54,14 +54,8 @@
 
     <com.android.graphics.CanvasView
         android:id="@+id/canvas"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="left" />
-
-    <com.infinote.differentthinking.infinote.utils.Drawer
-        android:id="@+id/note_drawer"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:layout_gravity="right"/>
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
