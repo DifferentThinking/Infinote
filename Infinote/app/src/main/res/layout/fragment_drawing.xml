@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.infinote.differentthinking.infinote.views.drawing.SingleNoteFragment" >
+    tools:context="com.infinote.differentthinking.infinote.views.drawing.DrawingFragment" >
 
 
     <LinearLayout
@@ -52,7 +52,7 @@
 
     </LinearLayout>
 
-    <com.android.graphics.CanvasView
+    <com.infinote.differentthinking.infinote.utils.CanvasView
         android:id="@+id/canvas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
