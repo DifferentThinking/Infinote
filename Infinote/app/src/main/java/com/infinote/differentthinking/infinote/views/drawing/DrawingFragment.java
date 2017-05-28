@@ -8,6 +8,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -30,6 +31,8 @@ import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.drawing.base.DrawingContract;
 
+import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
+
 import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -43,14 +46,17 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private Context context;
     private InfinoteProgressDialog progressDialog;
     private Boolean darkMode = false;
+    AllAngleExpandableButton colorsButton;
+    AllAngleExpandableButton figuresButton;
+    AllAngleExpandableButton strokeButton;
+    AllAngleExpandableButton modeButton;
 
-    private Button noteSaveButton;
+    private FloatingActionButton noteSaveButton;
     private Button monoColorButton;
 
     private CanvasView canvas;
     private boolean editMode = false;
     private String pictureId;
-
     public static DrawingFragment newInstance() {
         return new DrawingFragment();
     }
@@ -60,16 +66,14 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_drawing, container, false);
 
-        AllAngleExpandableButton colorsButton = (AllAngleExpandableButton) view.findViewById(R.id.button_expandable);
+        this.colorsButton = (AllAngleExpandableButton) view.findViewById(R.id.button_expandable);
+        this.figuresButton = (AllAngleExpandableButton) view.findViewById(R.id.drawer_figures);
+        this.strokeButton = (AllAngleExpandableButton) view.findViewById(R.id.drawer_strokes);
+        this.modeButton = (AllAngleExpandableButton) view.findViewById(R.id.drawer_mode);
 
-        this.noteSaveButton = (Button) view.findViewById(R.id.note_save_button);
+        this.noteSaveButton = (FloatingActionButton) view.findViewById(R.id.note_save_button);
         this.canvas = (CanvasView) view.findViewById(R.id.canvas);
-
-        final FloatingActionButton darkModeButton = (FloatingActionButton) view.findViewById(R.id.button_darkmode);
         final Button monoColorButton = (Button) view.findViewById(R.id.button_monocolor);
-
-        darkModeButton.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
-        darkModeButton.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_darkmode));
 
         monoColorButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -84,35 +88,10 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
             }
         });
 
-
-        darkModeButton.setOnClickListener(
-                new FloatingActionButton.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        if (isInDarkMode()) {
-                            canvas.setBaseColor(Color.WHITE);
-                            if (canvas.getPaintStrokeColor() == Color.WHITE) {
-                                canvas.setPaintStrokeColor(Color.BLACK);
-                                monoColorButton.setBackgroundResource(R.drawable.circlebuttonblack);
-                            }
-
-                            darkModeButton.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_darkmode));
-                            darkMode = false;
-                        }
-                        else {
-                            canvas.setBaseColor(Color.BLACK);
-                            if (canvas.getPaintStrokeColor() == Color.BLACK) {
-                                canvas.setPaintStrokeColor(Color.WHITE);
-                                monoColorButton.setBackgroundResource(R.drawable.circlebuttonwhite);
-                            }
-                            darkModeButton.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_darkmode));
-                            darkMode = true;
-                        }
-                    }
-                }
-        );
-
-        this.createColorsButton(colorsButton);
+        this.createModeButton();
+        this.createStrokeButton();
+        this.createColorsButton();
+        this.createFiguresButton();
 
 
         this.setupAlertDialog();
@@ -191,7 +170,123 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         return darkMode;
     }
 
-    private void createColorsButton(AllAngleExpandableButton button) {
+    private void createModeButton() {
+        final List<ButtonData> buttonDatas = new ArrayList<>();
+
+        for (int i = 0; i < 2; i++) {
+            ButtonData buttonData =  ButtonData.buildTextButton("");
+            buttonDatas.add(buttonData);
+        }
+
+        modeButton.setButtonDatas(buttonDatas);
+        modeButton.setButtonEventListener(new ButtonEventListener() {
+            @Override
+            public void onButtonClicked(int index) {
+                switch (index) {
+                    case 1:
+                        canvas.setPaintStrokeColor(Color.rgb(0, 0, 0));
+                        canvas.setPaintStrokeWidth(3F);
+                        break;
+                    case 2:
+                        canvas.setPaintStrokeColor(Color.rgb(255, 255, 255));
+                        canvas.setPaintStrokeWidth(12F);
+                        break;
+                }
+            }
+
+            @Override
+            public void onExpand() {
+            }
+
+            @Override
+            public void onCollapse() {
+
+            }
+        });
+    }
+
+    private void createStrokeButton() {
+        final List<ButtonData> buttonDatas = new ArrayList<>();
+
+        for (int i = 0; i < 3; i++) {
+            ButtonData buttonData =  ButtonData.buildTextButton("");
+            buttonDatas.add(buttonData);
+        }
+
+        strokeButton.setButtonDatas(buttonDatas);
+        strokeButton.setButtonEventListener(new ButtonEventListener() {
+            @Override
+            public void onButtonClicked(int index) {
+                switch (index) {
+                    case 1:
+                        canvas.setPaintStyle(Paint.Style.STROKE);
+                        break;
+                    case 2:
+                        canvas.setPaintStyle(Paint.Style.FILL);
+                        break;
+                    case 3:
+                        canvas.setPaintStyle(Paint.Style.FILL_AND_STROKE);
+                        break;
+                }
+            }
+
+            @Override
+            public void onExpand() {
+            }
+
+            @Override
+            public void onCollapse() {
+
+            }
+        });
+    }
+
+    private void createFiguresButton() {
+        final List<ButtonData> buttonDatas = new ArrayList<>();
+
+        for (int i = 0; i < 6; i++) {
+            ButtonData buttonData =  ButtonData.buildTextButton("");
+            buttonDatas.add(buttonData);
+        }
+
+        figuresButton.setButtonDatas(buttonDatas);
+        figuresButton.setButtonEventListener(new ButtonEventListener() {
+            @Override
+            public void onButtonClicked(int index) {
+                switch (index) {
+                    case 1:
+                        canvas.setDrawer(CanvasView.Drawer.PEN);
+                        break;
+                    case 2:
+                        canvas.setDrawer(CanvasView.Drawer.LINE);
+                        break;
+                    case 3:
+                        canvas.setDrawer(CanvasView.Drawer.RECTANGLE);
+                        break;
+                    case 4:
+                        canvas.setDrawer(CanvasView.Drawer.CIRCLE);
+                        break;
+                    case 5:
+                        canvas.setDrawer(CanvasView.Drawer.ELLIPSE);
+                        break;
+                    case 6:
+                        canvas.setDrawer(CanvasView.Drawer.QUADRATIC_BEZIER);
+                        break;
+                }
+            }
+
+            @Override
+            public void onExpand() {
+            }
+
+            @Override
+            public void onCollapse() {
+
+            }
+        });
+    }
+
+    private void createColorsButton() {
         final List<ButtonData> buttonDatas = new ArrayList<>();
         ButtonData mainButton = ButtonData.buildIconButton(context, R.drawable.ic_action_pallette, 0);
         buttonDatas.add(mainButton);
@@ -211,17 +306,10 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
             buttonDatas.add(buttonData);
         }
 
-        final ButtonData test =  ButtonData.buildIconButton(context, R.drawable.ic_action_circle, 0);
-        test.setBackgroundColorId(context, R.color.blue);
-        buttonDatas.add(test);
-
-        button.setButtonDatas(buttonDatas);
-        button.setButtonEventListener(new ButtonEventListener() {
+        colorsButton.setButtonDatas(buttonDatas);
+        colorsButton.setButtonEventListener(new ButtonEventListener() {
             @Override
             public void onButtonClicked(int index) {
-                Toast.makeText(getActivity(), "clicked index: " + index,
-                        Toast.LENGTH_LONG).show();
-
                 switch (index) {
                     case 1:  canvas.setPaintStrokeColor(Color.BLACK);
                         break;

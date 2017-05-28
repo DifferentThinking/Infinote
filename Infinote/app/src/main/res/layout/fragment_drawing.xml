@@ -4,17 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.infinote.differentthinking.infinote.views.drawing.SingleNoteFragment" >
+    android:layout_gravity="center"
+    android:gravity="center"
+    tools:context="com.infinote.differentthinking.infinote.views.drawing.DrawingFragment" >
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <Button
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/note_save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save"
-            android:id="@+id/note_save_button" />
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_action_newnote"/>
 
         <com.fangxu.allangleexpandablebutton.AllAngleExpandableButton
             android:layout_width="wrap_content"
@@ -40,15 +43,53 @@
             android:layout_marginLeft="10dp"
             android:background="@drawable/circlebuttontransparent" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/button_darkmode"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            app:backgroundTint="@android:color/white"
-            android:layout_marginLeft="10dp"
-            app:fabSize="mini"
-             />
+        <com.fangxu.allangleexpandablebutton.AllAngleExpandableButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/drawer_figures"
+            app:aebAnimDurationMillis="130"
+            app:aebButtonElevation="4dp"
+            app:aebButtonGapDp="55dp"
+            app:aebStartAngleDegree="210"
+            app:aebEndAngleDegree="350"
+            app:aebMainButtonRotateAnimDurationMillis="130"
+            app:aebMainButtonRotateDegree="0"
+            app:aebMainButtonSizeDp="30dp"
+            app:aebIsSelectionMode="true"
+            app:aebMaskBackgroundColor="@color/transparent"
+            app:aebSubButtonSizeDp="30dp" />
+
+        <com.fangxu.allangleexpandablebutton.AllAngleExpandableButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/drawer_strokes"
+            app:aebAnimDurationMillis="130"
+            app:aebButtonElevation="4dp"
+            app:aebButtonGapDp="55dp"
+            app:aebStartAngleDegree="210"
+            app:aebEndAngleDegree="350"
+            app:aebMainButtonRotateAnimDurationMillis="130"
+            app:aebMainButtonRotateDegree="0"
+            app:aebMainButtonSizeDp="30dp"
+            app:aebIsSelectionMode="true"
+            app:aebMaskBackgroundColor="@color/transparent"
+            app:aebSubButtonSizeDp="30dp" />
+
+        <com.fangxu.allangleexpandablebutton.AllAngleExpandableButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/drawer_mode"
+            app:aebAnimDurationMillis="130"
+            app:aebButtonElevation="4dp"
+            app:aebButtonGapDp="55dp"
+            app:aebStartAngleDegree="210"
+            app:aebEndAngleDegree="350"
+            app:aebMainButtonRotateAnimDurationMillis="130"
+            app:aebMainButtonRotateDegree="0"
+            app:aebMainButtonSizeDp="30dp"
+            app:aebIsSelectionMode="true"
+            app:aebMaskBackgroundColor="@color/transparent"
+            app:aebSubButtonSizeDp="30dp" />
 
     </LinearLayout>
 
