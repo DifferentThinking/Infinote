@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.dd.CircularProgressButton;
 import com.infinote.differentthinking.infinote.R;
-import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.auth.login.base.LoginContract;
 import com.infinote.differentthinking.infinote.views.auth.register.RegisterActivity;

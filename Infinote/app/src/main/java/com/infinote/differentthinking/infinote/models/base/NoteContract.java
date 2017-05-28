@@ -17,4 +17,7 @@ public interface NoteContract {
 
     void setTitle(String title);
 
+    String getDate();
+
+    void setDate(String date);
 }

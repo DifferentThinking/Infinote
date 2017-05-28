@@ -31,7 +31,10 @@ import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivit
 import com.infinote.differentthinking.infinote.views.drawing.base.DrawingContract;
 
 import java.io.ByteArrayOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DrawingFragment extends Fragment implements DrawingContract.View {
@@ -275,15 +278,19 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
                        title = "No Title";
                     }
 
+                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    Date date = new Date();
+                    String dateAsString = dateFormat.format(date);
+
                     if(editMode) {
-                        presenter.updateNote(pictureId, encodedPicture, title);
+                        presenter.updateNote(pictureId, encodedPicture, title, dateAsString);
                     }
                     else {
                         if (presenter.isUserLoggedIn()) {
-                            presenter.saveNote(encodedPicture, title);
+                            presenter.saveNote(encodedPicture, title, dateAsString);
                         }
                         else {
-                            presenter.saveNoteLocally(encodedPicture, title);
+                            presenter.saveNoteLocally(encodedPicture, title, dateAsString);
                         }
                     }
                 }

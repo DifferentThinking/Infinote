@@ -16,7 +16,7 @@ public interface UserSessionContract {
 
     boolean isUserLoggedIn();
 
-    void addNote(String noteAsString, String title) throws IOException, ClassNotFoundException;
+    void addNote(String noteAsString, String title, String dateAsString) throws IOException, ClassNotFoundException;
 
     ArrayList<NoteContract> getNotes() throws IOException, ClassNotFoundException;
 

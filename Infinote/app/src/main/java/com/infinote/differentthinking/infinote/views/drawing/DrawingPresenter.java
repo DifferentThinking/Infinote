@@ -23,8 +23,8 @@ public class DrawingPresenter implements DrawingContract.Presenter {
     }
 
     @Override
-    public void saveNote(String encodedPicture, String title) {
-        this.noteData.saveNote(encodedPicture, title)
+    public void saveNote(String encodedPicture, String title, String dateAsString) {
+        this.noteData.saveNote(encodedPicture, title, dateAsString)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -59,15 +59,15 @@ public class DrawingPresenter implements DrawingContract.Presenter {
     }
 
     @Override
-    public void saveNoteLocally(String encodedPicture, String title) {
-        this.noteData.saveNoteLocally(encodedPicture, title);
+    public void saveNoteLocally(String encodedPicture, String title, String dateAsString) {
+        this.noteData.saveNoteLocally(encodedPicture, title, dateAsString);
         view.notifySuccessful();
         view.showListNotesActivity();
     }
 
     @Override
-    public void updateNote(String id, String encodedPicture, String title) {
-        this.noteData.updateNote(id, encodedPicture, title)
+    public void updateNote(String id, String encodedPicture, String title, String dateAsString) {
+        this.noteData.updateNote(id, encodedPicture, title, dateAsString)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

@@ -190,10 +190,10 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
                 }
 
                 imagePreview = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.note_image_preview);
+                TextView noteDate = (TextView) view.findViewById(R.id.tv_note_date);
                 TextView noteTitle = (TextView) view.findViewById(R.id.tv_note_title);
                 final ImageButton deleteNoteButton = (ImageButton) view.findViewById(R.id.note_delete_button);
                 noteTextTypeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/Champagne.ttf");
-
                 noteTitle.setTypeface(noteTextTypeFace);
 
                 String encodedImage = notes.get(position).getPicture();
@@ -217,6 +217,7 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
                     }
                 });
 
+                noteDate.setText(notes.get(position).getDate());
                 noteTitle.setText(notes.get(position).getTitle());
 
                 return view;

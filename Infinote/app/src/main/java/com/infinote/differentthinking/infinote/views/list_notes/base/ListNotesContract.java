@@ -41,6 +41,6 @@ public interface ListNotesContract {
 
         void getNotesLocally();
 
-        void saveNoteFromLocalStorage(String encodedPicture, String title);
+        void saveNoteFromLocalStorage(String encodedPicture, String title, String dateAsString);
     }
 }

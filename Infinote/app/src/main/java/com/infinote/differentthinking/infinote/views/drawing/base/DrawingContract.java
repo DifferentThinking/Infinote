@@ -16,12 +16,12 @@ public interface DrawingContract {
     }
 
     interface Presenter {
-        void saveNote(String encodedPicture, String title);
+        void saveNote(String encodedPicture, String title, String dateAsString);
 
         boolean isUserLoggedIn();
 
-        void saveNoteLocally(String encodedPicture, String title);
+        void saveNoteLocally(String encodedPicture, String title, String dateAsString);
 
-        void updateNote(String id, String encodedPicture, String title);
+        void updateNote(String id, String encodedPicture, String title, String dateAsString);
     }
 }

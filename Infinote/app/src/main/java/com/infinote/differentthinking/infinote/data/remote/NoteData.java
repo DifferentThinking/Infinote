@@ -37,11 +37,12 @@ public class NoteData implements NoteDataContract {
     }
 
     @Override
-    public Observable<Boolean> saveNote(String encodedPicture, String title) {
+    public Observable<Boolean> saveNote(String encodedPicture, String title, String dateAsString) {
         Map<String, String> noteCredentials = new HashMap<>();
         noteCredentials.put("username", userSession.getUsername());
         noteCredentials.put("picture", encodedPicture);
         noteCredentials.put("title", title);
+        noteCredentials.put("date", dateAsString);
 
         return httpRequester
             .post(apiConstants.notesForCurrentUserUrl(userSession.getUsername()), noteCredentials)
@@ -102,9 +103,9 @@ public class NoteData implements NoteDataContract {
     }
 
     @Override
-    public void saveNoteLocally(String encodedPicture, String title) {
+    public void saveNoteLocally(String encodedPicture, String title, String dateAsString) {
         try{
-            this.userSession.addNote(encodedPicture, title);
+            this.userSession.addNote(encodedPicture, title, dateAsString);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -128,11 +129,12 @@ public class NoteData implements NoteDataContract {
     }
 
     @Override
-    public Observable<Boolean> updateNote(String id, String encodedPicture, String title) {
+    public Observable<Boolean> updateNote(String id, String encodedPicture, String title, String dateAsString) {
         Map<String, String> noteCredentials = new HashMap<>();
         noteCredentials.put("picture", encodedPicture);
         noteCredentials.put("title", title);
         noteCredentials.put("username", userSession.getUsername());
+        noteCredentials.put("date", dateAsString);
 
         return httpRequester
                 .post(apiConstants.updateNoteById(id), noteCredentials)

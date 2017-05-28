@@ -41,7 +41,7 @@ public class ListNotesPresenter implements ListNotesContract.Presenter {
         ArrayList<NoteContract> localNotes = noteData.getNotesLocally();
 
         for (NoteContract note: localNotes) {
-            this.saveNoteFromLocalStorage(note.getPicture(), note.getTitle());
+            this.saveNoteFromLocalStorage(note.getPicture(), note.getTitle(), note.getDate());
         }
 
         noteData.clearLocalNotes();
@@ -112,8 +112,8 @@ public class ListNotesPresenter implements ListNotesContract.Presenter {
     }
 
     @Override
-    public void saveNoteFromLocalStorage(String encodedPicture, String title) {
-        this.noteData.saveNote(encodedPicture, title)
+    public void saveNoteFromLocalStorage(String encodedPicture, String title, String dateAsString) {
+        this.noteData.saveNote(encodedPicture, title, dateAsString)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

@@ -43,7 +43,7 @@ public class UserSession implements UserSessionContract {
     }
 
     @Override
-    public void addNote(String noteAsString, String title) throws IOException, ClassNotFoundException {
+    public void addNote(String noteAsString, String title, String dateAsString) throws IOException, ClassNotFoundException {
         ArrayList<NoteContract> notes;
         if (sharedPreferences.getString("notes", null) != null) {
             notes = (ArrayList<NoteContract>) ObjectSerializer.deserialize(sharedPreferences.getString("notes", null));
@@ -54,6 +54,7 @@ public class UserSession implements UserSessionContract {
         NoteContract note = new Note();
         note.setPicture(noteAsString);
         note.setTitle(title);
+        note.setDate(dateAsString);
 
         notes.add(note);
         sharedPreferences.edit().putString("notes", ObjectSerializer.serialize(notes)).commit();
