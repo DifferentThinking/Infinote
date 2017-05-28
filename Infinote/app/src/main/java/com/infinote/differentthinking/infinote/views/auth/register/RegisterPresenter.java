@@ -49,12 +49,10 @@ public class RegisterPresenter implements RegisterContract.Presenter {
                     @Override
                     public void onError(Throwable e) {
                         view.notifyError("Error ocurred when registering. Please try again later.");
-                        view.dismissDialog();
                     }
 
                     @Override
                     public void onComplete() {
-                        view.dismissDialog();
                     }
                 });
     }
@@ -64,7 +62,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
         this.view.showLoginActivity();
     }
 
-    private boolean validateEmail(String email) {
+    public boolean validateEmail(String email) {
         if (email.contains("@") && email.length() > 4) {
             return true;
 
@@ -76,7 +74,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
 
     }
 
-    private boolean validateUsernameAndPassword(String username, String password) {
+    public boolean validateUsernameAndPassword(String username, String password) {
         if (username.length() >= 4 || password.length() >= 4) {
             return true;
         }

@@ -101,7 +101,6 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         this.presenter = presenter;
     }
 
-    @Override
     public void setDialog(InfinoteProgressDialog progressDialog) {
         this.progressDialog = progressDialog;
     }

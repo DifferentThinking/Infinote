@@ -9,15 +9,11 @@ public interface LoginContract {
 
         void showDialogForLoading();
 
-        void dismissDialog();
-
         void notifySuccessful();
 
         void notifyError(String errorMessage);
 
         void showRegisterActivty();
-
-        void signalLoading();
     }
 
     interface Presenter {

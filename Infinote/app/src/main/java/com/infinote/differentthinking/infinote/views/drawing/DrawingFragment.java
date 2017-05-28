@@ -144,7 +144,6 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         this.presenter = presenter;
     }
 
-    @Override
     public void setDialog(InfinoteProgressDialog progressDialog) {
         this.progressDialog = progressDialog;
     }

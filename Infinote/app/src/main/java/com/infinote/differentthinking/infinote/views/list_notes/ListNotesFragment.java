@@ -119,7 +119,6 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
         this.presenter = presenter;
     }
 
-    @Override
     public void setDialog(InfinoteProgressDialog progressDialog) {
         this.progressDialog = progressDialog;
     }

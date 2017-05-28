@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
+import android.support.v8.renderscript.ScriptIntrinsicBLAS;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +30,8 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     private EditText firstnameEditText;
     private EditText lastnameEditText;
     private EditText usernameEditText;
-    private CircularProgressButton circularButton;
+    private CircularProgressButton registerButton;
+    private CountDownTimer timer;
 
     private TextView signUpText;
     private Typeface typeFace;
@@ -54,13 +57,24 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
         this.lastnameEditText = (EditText) view.findViewById(R.id.et_last_name);
         this.usernameEditText = (EditText) view.findViewById(R.id.et_username);
 
+        this.timer = new CountDownTimer(5000, 1000) {
+            @ScriptIntrinsicBLAS.Diag
+            public void onFinish() {
+                registerButton.setProgress(0);
+            }
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+        };
+
         typeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/SIMPLIFICA.ttf");
         signUpText = (TextView) view.findViewById(R.id.tv_create_acc);
         signUpText.setTypeface(typeFace);
 
-        this.circularButton = (CircularProgressButton) view.findViewById(R.id.btn_signup);
-        circularButton.setIndeterminateProgressMode(true);
-        circularButton.setOnClickListener(new View.OnClickListener() {
+        this.registerButton = (CircularProgressButton) view.findViewById(R.id.btn_signup);
+        registerButton.setIndeterminateProgressMode(true);
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String usernameTextField = usernameEditText.getText().toString();
@@ -69,7 +83,27 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
                 String lastnameTextField = lastnameEditText.getText().toString();
                 String passwordTextField = passwordEditText.getText().toString();
 
-                presenter.registerUser(usernameTextField, emailTextField, firstnameTextField, lastnameTextField, passwordTextField);
+                if (registerButton.getProgress() == 0) {
+                    registerButton.setProgress(50);
+                    if (!presenter.validateEmail(emailTextField)) {
+                        registerButton.setErrorText("Invalid email");
+                        registerButton.setProgress(-1);
+                        timer.start();
+                        return;
+                    }
+                    if (!presenter.validateUsernameAndPassword(usernameTextField, passwordTextField)) {
+                        registerButton.setErrorText("Invalid username/password");
+                        registerButton.setProgress(-1);
+                        timer.start();
+                        return;
+                    }
+
+                    presenter.registerUser(usernameTextField, emailTextField, firstnameTextField, lastnameTextField, passwordTextField);
+                } else if (registerButton.getProgress() == 100) {
+                    registerButton.setProgress(0);
+                } else {
+                    registerButton.setProgress(100);
+                }
             }
         });
 
@@ -93,11 +127,6 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     }
 
     @Override
-    public void setDialog(InfinoteProgressDialog progressDialog) {
-        this.progressDialog = progressDialog;
-    }
-
-    @Override
     public void setPresenter(RegisterContract.Presenter presenter) {
         this.presenter = presenter;
     }
@@ -116,12 +145,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
 
     @Override
     public void showDialogForLoading() {
-        this.progressDialog.showProgress("Loading...");
-    }
-
-    @Override
-    public void dismissDialog() {
-        this.progressDialog.dismissProgress();
+        this.registerButton.setProgress(50);
     }
 
     @Override
@@ -134,20 +158,5 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     public void notifyError(String errorMessage) {
         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG)
                 .show();
-    }
-
-    @Override
-    public void setProgressButttonTo100() {
-        circularButton.setProgress(100);
-    }
-
-    @Override
-    public void setProgressButttonTo50() {
-        circularButton.setProgress(50);
-    }
-
-    @Override
-    public void setProgressButttonTo0() {
-        circularButton.setProgress(0);
     }
 }

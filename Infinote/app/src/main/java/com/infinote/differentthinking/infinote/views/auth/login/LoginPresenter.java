@@ -34,7 +34,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                         new Observer<UserContract>() {
                             @Override
                             public void onSubscribe(Disposable d) {
-                                view.signalLoading();
+                                view.showDialogForLoading();
                             }
 
                             @Override
@@ -46,12 +46,10 @@ public class LoginPresenter implements LoginContract.Presenter {
                             @Override
                             public void onError(Throwable e) {
                                 view.notifyError("Invalid useranme or password");
-                                view.dismissDialog();
                             }
 
                             @Override
                             public void onComplete() {
-                                view.dismissDialog();
                             }
                         });
     }

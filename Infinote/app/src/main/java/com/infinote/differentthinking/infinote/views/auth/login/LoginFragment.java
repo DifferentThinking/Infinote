@@ -2,13 +2,11 @@ package com.infinote.differentthinking.infinote.views.auth.login;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v8.renderscript.Type;
+import android.support.v8.renderscript.ScriptIntrinsicBLAS;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +26,7 @@ import com.infinote.differentthinking.infinote.views.auth.register.RegisterActiv
 public class LoginFragment extends Fragment implements LoginContract.View {
     private TextView createAccountTextView;
     private TextView resetPasswordTextView;
-    private EditText emailEditText;
+    private EditText usernameEditText;
     private EditText passwordEditText;
     private CircularProgressButton loginButton;
 
@@ -38,7 +36,6 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     private CountDownTimer timer;
 
     private LoginContract.Presenter presenter;
-    private InfinoteProgressDialog progressDialog;
     private Context context;
 
     public static LoginFragment newInstance() {
@@ -51,9 +48,11 @@ public class LoginFragment extends Fragment implements LoginContract.View {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         this.timer = new CountDownTimer(5000, 1000) {
+            @ScriptIntrinsicBLAS.Diag
             public void onFinish() {
                 loginButton.setProgress(0);
             }
+            @Override
             public void onTick(long millisUntilFinished) {
 
             }
@@ -66,7 +65,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
         this.createAccountTextView = (TextView) view.findViewById(R.id.tv_signup);
         this.resetPasswordTextView = (TextView) view.findViewById(R.id.tv_forgot_password);
 
-        this.emailEditText = (EditText) view.findViewById(R.id.et_email);
+        this.usernameEditText = (EditText) view.findViewById(R.id.et_email);
         this.passwordEditText = (EditText) view.findViewById(R.id.et_password);
 
         this.loginButton = (CircularProgressButton) view.findViewById(R.id.btn_signin);
@@ -76,13 +75,13 @@ public class LoginFragment extends Fragment implements LoginContract.View {
             public void onClick(View v) {
                 if (loginButton.getProgress() == 0) {
                     loginButton.setProgress(50);
-                    if (!presenter.validateLoginUser(emailEditText.getText().toString(), passwordEditText.getText().toString())) {
-                        loginButton.setErrorText("Too short");
+                    if (!presenter.validateLoginUser(usernameEditText.getText().toString(), passwordEditText.getText().toString())) {
+                        loginButton.setErrorText("Invalid data");
                         loginButton.setProgress(-1);
                         timer.start();
                         return;
                     }
-                    presenter.loginUser(emailEditText.getText().toString(), passwordEditText.getText().toString());
+                    presenter.loginUser(usernameEditText.getText().toString(), passwordEditText.getText().toString());
                 } else if (loginButton.getProgress() == 100) {
                     loginButton.setProgress(0);
                 } else {
@@ -120,16 +119,6 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     }
 
     @Override
-    public void setDialog(InfinoteProgressDialog progressDialog) {
-        this.progressDialog = progressDialog;
-    }
-
-    @Override
-    public void signalLoading() {
-        loginButton.setProgress(50);
-    }
-
-    @Override
     public void setPresenter(LoginContract.Presenter presenter) {
         this.presenter = presenter;
     }
@@ -142,12 +131,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
 
     @Override
     public void showDialogForLoading() {
-        this.progressDialog.showProgress("Loading...");
-    }
-
-    @Override
-    public void dismissDialog() {
-        this.progressDialog.dismissProgress();
+        loginButton.setProgress(50);
     }
 
     @Override

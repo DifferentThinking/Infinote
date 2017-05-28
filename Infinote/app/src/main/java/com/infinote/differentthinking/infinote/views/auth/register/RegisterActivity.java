@@ -10,7 +10,6 @@ import com.infinote.differentthinking.infinote.views.auth.register.base.Register
 
 public class RegisterActivity extends AppCompatActivity {
     private RegisterContract.Presenter presenter;
-    private InfinoteProgressDialog dialong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +29,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         this.presenter = new RegisterPresenter(registerFragment, this);
-        this.dialong = new InfinoteProgressDialog();
-        this.dialong.setContext(this);
-        registerFragment.setDialog(this.dialong);
         registerFragment.setPresenter(this.presenter);
     }
 }

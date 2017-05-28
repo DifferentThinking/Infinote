@@ -9,7 +9,6 @@ import com.infinote.differentthinking.infinote.views.auth.login.base.LoginContra
 
 public class LoginActivity extends AppCompatActivity {
     private LoginContract.Presenter presenter;
-    private InfinoteProgressDialog dialong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +28,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         this.presenter = new LoginPresenter(loginFragment, this);
-        this.dialong = new InfinoteProgressDialog();
-        this.dialong.setContext(this);
-        loginFragment.setDialog(this.dialong);
         loginFragment.setPresenter(this.presenter);
     }
 }
