@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.infinote.differentthinking.infinote.views.single_note.SingleNoteFragment" >
+    tools:context="com.infinote.differentthinking.infinote.views.drawing.SingleNoteFragment" >
 
 
     <LinearLayout

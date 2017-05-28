@@ -1,10 +1,10 @@
-package com.infinote.differentthinking.infinote.views.single_note;
+package com.infinote.differentthinking.infinote.views.drawing;
 
 import android.content.Context;
 
 import com.infinote.differentthinking.infinote.data.remote.NoteData;
 import com.infinote.differentthinking.infinote.data.remote.UserData;
-import com.infinote.differentthinking.infinote.views.single_note.base.DrawingContract;
+import com.infinote.differentthinking.infinote.views.drawing.base.DrawingContract;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -53,13 +53,46 @@ public class DrawingPresenter implements DrawingContract.Presenter {
                 });
     }
 
+    @Override
     public boolean isUserLoggedIn() {
         return this.userData.isLoggedIn();
     }
 
+    @Override
     public void saveNoteLocally(String encodedPicture, String title) {
         this.noteData.saveNoteLocally(encodedPicture, title);
         view.notifySuccessful();
         view.showListNotesActivity();
+    }
+
+    @Override
+    public void updateNote(String id, String encodedPicture, String title) {
+        this.noteData.updateNote(id, encodedPicture, title)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        new Observer<Boolean>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+                                view.showDialogForLoading();
+                            }
+
+                            @Override
+                            public void onNext(Boolean value) {
+                                view.notifySuccessful();
+                                view.showListNotesActivity();
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                view.notifyError("Error saving.");
+                                view.dismissDialog();
+                            }
+
+                            @Override
+                            public void onComplete() {
+                                view.dismissDialog();
+                            }
+                        });
     }
 }

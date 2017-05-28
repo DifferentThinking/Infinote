@@ -16,6 +16,8 @@ public interface NoteDataContract {
 
     Observable<Boolean> deleteNoteById(String id);
 
+    Observable<Boolean> updateNote(String id, String encodedPicture, String title);
+
     void saveNoteLocally(String encodedPicture, String title);
 
     ArrayList<NoteContract> getNotesLocally();

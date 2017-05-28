@@ -27,7 +27,7 @@ import com.infinote.differentthinking.infinote.models.base.NoteContract;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.views.auth.login.LoginActivity;
 import com.infinote.differentthinking.infinote.views.list_notes.base.ListNotesContract;
-import com.infinote.differentthinking.infinote.views.single_note.DrawingActivity;
+import com.infinote.differentthinking.infinote.views.drawing.DrawingActivity;
 import com.infinote.differentthinking.infinote.views.profile.ProfileActivity;
 
 import java.util.List;
@@ -142,10 +142,12 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
     }
 
     @Override
-    public void showNewNoteActivityWithImage(byte[] encodedImage) {
+    public void showNewNoteActivityWithImage(String id, byte[] encodedImage, String title) {
         Intent intent = new Intent(this.context, DrawingActivity.class);
 
         intent.putExtra("ENCODED_IMAGE", encodedImage);
+        intent.putExtra("ID", id);
+        intent.putExtra("TITLE", title);
 
         startActivity(intent);
     }
@@ -203,7 +205,7 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
                 view.setOnClickListener(new Button.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showNewNoteActivityWithImage(decodedString);
+                        showNewNoteActivityWithImage(notes.get(position).get_id(), decodedString, notes.get(position).getTitle());
                     }
                 });
 

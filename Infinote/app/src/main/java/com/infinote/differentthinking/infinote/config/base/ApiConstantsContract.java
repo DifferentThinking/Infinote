@@ -11,6 +11,8 @@ public interface ApiConstantsContract {
 
     String singleUserUrl(String username);
 
+    String updateNoteById(String id);
+
     int responseSuccessCode();
 
     int responseErrorCode();

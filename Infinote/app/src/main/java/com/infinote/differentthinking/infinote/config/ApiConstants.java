@@ -30,6 +30,11 @@ public class ApiConstants implements ApiConstantsContract {
     }
 
     @Override
+    public String updateNoteById(String id) {
+        return API_URL + "/notes/" + id + "/update";
+    }
+
+    @Override
     public String deleteNoteUrl() {
         return API_URL + "/users/notes/delete";
     }

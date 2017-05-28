@@ -1,4 +1,4 @@
-package com.infinote.differentthinking.infinote.views.single_note;
+package com.infinote.differentthinking.infinote.views.drawing;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,8 +8,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -28,10 +26,9 @@ import com.fangxu.allangleexpandablebutton.AllAngleExpandableButton;
 import com.fangxu.allangleexpandablebutton.ButtonData;
 import com.fangxu.allangleexpandablebutton.ButtonEventListener;
 import com.infinote.differentthinking.infinote.R;
-import com.infinote.differentthinking.infinote.utils.Drawer;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
-import com.infinote.differentthinking.infinote.views.single_note.base.DrawingContract;
+import com.infinote.differentthinking.infinote.views.drawing.base.DrawingContract;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -48,6 +45,8 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private Button monoColorButton;
 
     private CanvasView canvas;
+    private boolean editMode = false;
+    private String pictureId;
 
     public static DrawingFragment newInstance() {
         return new DrawingFragment();
@@ -124,10 +123,9 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
 
         byte[] decodedString = this.getActivity().getIntent().getByteArrayExtra("ENCODED_IMAGE");
         if (decodedString != null) {
+            this.editMode = true;
+            this.pictureId = this.getActivity().getIntent().getStringExtra("ID");
             Bitmap bm = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-//            Drawable drawable = new BitmapDrawable(getResources(), bm);
-//            this.canvas.setBackground(drawable);
-//            this.canvas.set
             this.canvas.drawBitmap(bm);
         }
 
@@ -266,26 +264,28 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         alertDialog.setView(editText);
 
         alertDialog.setPositiveButton("Save",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-//                        Bitmap bm = canvas.getBitmap();
-                        byte[] canvasData = canvas.getBitmapAsByteArray();
-                        String encodedPicture = Base64.encodeToString(canvasData, Base64.DEFAULT);
+            new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    byte[] canvasData = canvas.getBitmapAsByteArray();
+                    String encodedPicture = Base64.encodeToString(canvasData, Base64.DEFAULT);
 
-                        String title = editText.getText().toString();
-                        if (title.equals("") || title.length() == 0) {
-                           title = "No Title";
-                        }
+                    String title = editText.getText().toString();
+                    if (title.equals("") || title.length() == 0) {
+                       title = "No Title";
+                    }
 
+                    if(editMode) {
+                        presenter.updateNote(pictureId, encodedPicture, title);
+                    }
+                    else {
                         if (presenter.isUserLoggedIn()) {
-                            Log.d("ASDFIADFOIASMKDO", "4");
                             presenter.saveNote(encodedPicture, title);
                         }
                         else {
-                            Log.d("ASDFIADFOIASMKDO", "3");
                             presenter.saveNoteLocally(encodedPicture, title);
                         }
                     }
+                }
                 });
 
         alertDialog.setNegativeButton("Cancel",

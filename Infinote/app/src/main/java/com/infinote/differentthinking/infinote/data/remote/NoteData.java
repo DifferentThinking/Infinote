@@ -101,6 +101,7 @@ public class NoteData implements NoteDataContract {
                 });
     }
 
+    @Override
     public void saveNoteLocally(String encodedPicture, String title) {
         try{
             this.userSession.addNote(encodedPicture, title);
@@ -110,6 +111,7 @@ public class NoteData implements NoteDataContract {
         }
     }
 
+    @Override
     public ArrayList<NoteContract> getNotesLocally() {
         try{
             return this.userSession.getNotes();
@@ -120,7 +122,34 @@ public class NoteData implements NoteDataContract {
         }
     }
 
+    @Override
     public void clearLocalNotes() {
         this.userSession.clearNotes();
+    }
+
+    @Override
+    public Observable<Boolean> updateNote(String id, String encodedPicture, String title) {
+        Map<String, String> noteCredentials = new HashMap<>();
+        noteCredentials.put("picture", encodedPicture);
+        noteCredentials.put("title", title);
+        noteCredentials.put("username", userSession.getUsername());
+
+        return httpRequester
+                .post(apiConstants.updateNoteById(id), noteCredentials)
+                .map(new Function<HttpResponseContract, Boolean>() {
+                    @Override
+                    public Boolean apply(HttpResponseContract iHttpResponse) throws Exception {
+                        if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
+                            throw new Error(iHttpResponse.getMessage());
+                        }
+                        String responseBody = iHttpResponse.getBody().toString();
+                        if (responseBody.contains("OK")) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                });
     }
 }

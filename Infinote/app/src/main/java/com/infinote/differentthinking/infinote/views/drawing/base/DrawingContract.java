@@ -1,4 +1,4 @@
-package com.infinote.differentthinking.infinote.views.single_note.base;
+package com.infinote.differentthinking.infinote.views.drawing.base;
 
 import com.infinote.differentthinking.infinote.base.BaseView;
 
@@ -21,5 +21,7 @@ public interface DrawingContract {
         boolean isUserLoggedIn();
 
         void saveNoteLocally(String encodedPicture, String title);
+
+        void updateNote(String id, String encodedPicture, String title);
     }
 }

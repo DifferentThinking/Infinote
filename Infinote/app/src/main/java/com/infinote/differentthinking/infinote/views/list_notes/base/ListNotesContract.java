@@ -23,7 +23,7 @@ public interface ListNotesContract {
 
         void hideLoadingPanel();
 
-        void showNewNoteActivityWithImage(byte[] encodedImage);
+        void showNewNoteActivityWithImage(String id, byte[] encodedImage, String title);
 
         void showDialogForDeleteingNote();
 

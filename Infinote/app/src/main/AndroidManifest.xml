@@ -23,7 +23,7 @@
             android:name=".views.profile.ProfileActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme" />
-        <activity android:name=".views.single_note.DrawingActivity"/>
+        <activity android:name=".views.drawing.DrawingActivity"/>
     </application>
 
 </manifest>

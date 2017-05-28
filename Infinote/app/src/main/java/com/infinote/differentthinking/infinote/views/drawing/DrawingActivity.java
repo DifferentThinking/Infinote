@@ -1,11 +1,11 @@
-package com.infinote.differentthinking.infinote.views.single_note;
+package com.infinote.differentthinking.infinote.views.drawing;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
-import com.infinote.differentthinking.infinote.views.single_note.base.DrawingContract;
+import com.infinote.differentthinking.infinote.views.drawing.base.DrawingContract;
 
 public class DrawingActivity extends AppCompatActivity {
     private DrawingContract.Presenter presenter;
