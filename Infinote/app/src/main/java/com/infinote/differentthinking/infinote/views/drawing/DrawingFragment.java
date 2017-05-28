@@ -259,8 +259,10 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         alertDialog.setTitle("Save note");
         alertDialog.setMessage("Please enter title");
 
-        final EditText editText = new EditText(this.getContext());
+        final EditText editText = new EditText(this.getContext(););
+
         alertDialog.setView(editText);
+        alertDialog.setCancelable(true);
 
         alertDialog.setPositiveButton("Save",
             new DialogInterface.OnClickListener() {
@@ -290,7 +292,8 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         alertDialog.setNegativeButton("Cancel",
             new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
+                    dialog.dismiss();
+                    setupAlertDialog();
                 }
             });
     }
