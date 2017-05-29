@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import com.fangxu.allangleexpandablebutton.ButtonData;
 import com.fangxu.allangleexpandablebutton.ButtonEventListener;
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
+import com.infinote.differentthinking.infinote.utils.TextPopup;
 import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.drawing.base.DrawingContract;
 
@@ -48,16 +50,20 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private DrawingContract.Presenter presenter;
     private Context context;
     private InfinoteProgressDialog progressDialog;
-    private Boolean darkMode = false;
+
     private AllAngleExpandableButton colorsButton;
     private AllAngleExpandableButton figuresButton;
     private AllAngleExpandableButton brushButton;
     private AllAngleExpandableButton modeButton;
     private SeekBar strokeSeekBar;
     private ImageButton saveButton;
+    private ImageButton textButton;
+    private TextPopup popup;
 
-    private FloatingActionButton noteSaveButton;
+    private int flag = 0;
 
+    private Button testButton;
+    private LinearLayout buttonBar;
     private CanvasView canvas;
     private boolean editMode = false;
     private String pictureId;
@@ -76,7 +82,25 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         this.modeButton = (AllAngleExpandableButton) view.findViewById(R.id.drawer_mode);
         this.strokeSeekBar = (SeekBar) view.findViewById(R.id.stroke_width);
         this.saveButton = (ImageButton) view.findViewById(R.id.save_button);
+        this.textButton = (ImageButton) view.findViewById(R.id.text_button);
         this.canvas = (CanvasView) view.findViewById(R.id.canvas);
+        this.buttonBar = (LinearLayout) view.findViewById(R.id.test_layout);
+        this.testButton = (Button) view.findViewById(R.id.test_button);
+
+
+        testButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (flag == 0) {
+                    flag = 1;
+                    buttonBar.setVisibility(LinearLayout.GONE);
+                }
+                else {
+                    flag = 0;
+                    buttonBar.setVisibility(LinearLayout.VISIBLE);
+                }
+            }
+        });
+
 
         this.strokeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -110,6 +134,16 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
                 alertDialog.show();
             }
         });
+        final DrawingContract.View currentView = this;
+        this.textButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popup = new TextPopup();
+                popup.setParentView(currentView);
+
+                popup.show(getFragmentManager(), "text_popup");
+            }
+        });
 
         byte[] decodedString = this.getActivity().getIntent().getByteArrayExtra("ENCODED_IMAGE");
         if (decodedString != null) {
@@ -120,6 +154,12 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         }
 
         return view;
+    }
+
+    @Override
+    public void setCanvasText(String text) {
+        canvas.setMode(CanvasView.Mode.TEXT);
+        canvas.setText(text);
     }
 
     @Override
@@ -172,10 +212,6 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     public void showListNotesActivity() {
         Intent intent = new Intent(this.context, ListNotesActivity.class);
         startActivity(intent);
-    }
-
-    public Boolean isInDarkMode() {
-        return darkMode;
     }
 
     private void createModeButton() {
@@ -331,7 +367,10 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         colorsButton.setButtonEventListener(new ButtonEventListener() {
             @Override
             public void onButtonClicked(int index) {
-                canvas.setMode(CanvasView.Mode.DRAW);
+                if(canvas.getMode() == CanvasView.Mode.TEXT) {
+                    canvas.setMode(CanvasView.Mode.DRAW);
+                }
+
                 switch (index) {
                     case 1:  canvas.setPaintStrokeColor(Color.BLACK);
                         break;

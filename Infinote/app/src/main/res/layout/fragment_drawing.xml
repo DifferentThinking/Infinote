@@ -70,8 +70,8 @@
             app:aebAnimDurationMillis="130"
             app:aebButtonElevation="4dp"
             app:aebButtonGapDp="55dp"
-            app:aebStartAngleDegree="210"
-            app:aebEndAngleDegree="350"
+            app:aebStartAngleDegree="270"
+            app:aebEndAngleDegree="270"
             app:aebMainButtonRotateAnimDurationMillis="130"
             app:aebMainButtonRotateDegree="0"
             app:aebMainButtonSizeDp="40dp"
@@ -88,8 +88,8 @@
             app:aebAnimDurationMillis="130"
             app:aebButtonElevation="4dp"
             app:aebButtonGapDp="55dp"
-            app:aebStartAngleDegree="210"
-            app:aebEndAngleDegree="350"
+            app:aebStartAngleDegree="270"
+            app:aebEndAngleDegree="270"
             app:aebMainButtonRotateAnimDurationMillis="130"
             app:aebMainButtonRotateDegree="0"
             app:aebMainButtonSizeDp="40dp"
@@ -114,6 +114,23 @@
             android:background="@null"/>
 
     </android.support.percent.PercentRelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Qko"
+        android:id="@+id/test_button"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/aluminum"
+        android:id="@+id/test_layout">
+
+    </LinearLayout>
+
+
 
     <com.android.graphics.CanvasView
         android:id="@+id/canvas"

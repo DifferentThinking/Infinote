@@ -13,6 +13,8 @@ public interface DrawingContract {
         void notifySuccessful();
 
         void notifyError(String errorMessage);
+
+        void setCanvasText(String text);
     }
 
     interface Presenter {
