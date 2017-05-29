@@ -70,21 +70,18 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
             }
         });
 
-<<<<<<< HEAD
         this.changePasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showChangePasswordActivity();
             }
         });
-=======
-        encodedPicture = this.getActivity().getIntent().getByteArrayExtra("PICTURE");
 
+        encodedPicture = this.getActivity().getIntent().getByteArrayExtra("PICTURE");
         if(encodedPicture != null) {
             Bitmap bmp = BitmapFactory.decodeByteArray(encodedPicture, 0, encodedPicture.length);
             profilePicture.setImageBitmap(bmp);
         }
->>>>>>> cb3de065cdc5c49e6c0ffe2ae4b7c7a102882513
 
         return view;
     }
