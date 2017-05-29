@@ -4,25 +4,20 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.media.Image;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.percent.PercentRelativeLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -35,8 +30,6 @@ import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.utils.TextPopup;
 import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.drawing.base.DrawingContract;
-
-import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 
 import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
@@ -51,6 +44,8 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private Context context;
     private InfinoteProgressDialog progressDialog;
 
+    private int colorScheme;
+
     private AllAngleExpandableButton colorsButton;
     private AllAngleExpandableButton figuresButton;
     private AllAngleExpandableButton brushButton;
@@ -63,7 +58,7 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private int flag = 0;
 
     private Button testButton;
-    private LinearLayout buttonBar;
+    private android.support.percent.PercentRelativeLayout percentLayout;
     private CanvasView canvas;
     private boolean editMode = false;
     private String pictureId;
@@ -84,19 +79,21 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         this.saveButton = (ImageButton) view.findViewById(R.id.save_button);
         this.textButton = (ImageButton) view.findViewById(R.id.text_button);
         this.canvas = (CanvasView) view.findViewById(R.id.canvas);
-        this.buttonBar = (LinearLayout) view.findViewById(R.id.test_layout);
         this.testButton = (Button) view.findViewById(R.id.test_button);
+        this.colorScheme = R.color.iron;
+
+        this.percentLayout = (android.support.percent.PercentRelativeLayout) view.findViewById(R.id.percent_layout);
 
 
         testButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (flag == 0) {
                     flag = 1;
-                    buttonBar.setVisibility(LinearLayout.GONE);
+                    percentLayout.setVisibility(PercentRelativeLayout.GONE);
                 }
                 else {
                     flag = 0;
-                    buttonBar.setVisibility(LinearLayout.VISIBLE);
+                    percentLayout.setVisibility(PercentRelativeLayout.VISIBLE);
                 }
             }
         });
@@ -218,7 +215,9 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         final List<ButtonData> buttonDatas = new ArrayList<>();
 
         ButtonData defaultButton = ButtonData.buildIconButton(context, R.mipmap.pen_icon, 0);
+        defaultButton.setBackgroundColorId(context, colorScheme);
         ButtonData eraserButton = ButtonData.buildIconButton(context, R.mipmap.eraser_icon, 0);
+        eraserButton.setBackgroundColorId(context, colorScheme);
 
         buttonDatas.add(defaultButton);
         buttonDatas.add(eraserButton);
@@ -254,8 +253,11 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         final List<ButtonData> buttonDatas = new ArrayList<>();
 
         ButtonData strokeButton = ButtonData.buildIconButton(context, R.mipmap.brush_icon, 0);
+        strokeButton.setBackgroundColorId(context, colorScheme);
         ButtonData fillButton = ButtonData.buildIconButton(context, R.mipmap.fill_icon, 0);
+        fillButton.setBackgroundColorId(context, colorScheme);
         ButtonData fillAndStrokeButton = ButtonData.buildIconButton(context, R.mipmap.fillandstroke_icon, 0);
+        fillAndStrokeButton.setBackgroundColorId(context, colorScheme);
 
         buttonDatas.add(strokeButton);
         buttonDatas.add(fillButton);
@@ -293,11 +295,17 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private void createFiguresButton() {
         final List<ButtonData> buttonDatas = new ArrayList<>();
         ButtonData penButton = ButtonData.buildIconButton(context, R.mipmap.pencil_icon, 0);
+        penButton.setBackgroundColorId(context, colorScheme);
         ButtonData lineButton = ButtonData.buildIconButton(context, R.mipmap.line_icon, 0);
+        lineButton.setBackgroundColorId(context, colorScheme);
         ButtonData rectangleButton = ButtonData.buildIconButton(context, R.mipmap.rectangle_icon, 0);
+        rectangleButton.setBackgroundColorId(context, colorScheme);
         ButtonData circleButton = ButtonData.buildIconButton(context, R.mipmap.circle_icon, 0);
+        circleButton.setBackgroundColorId(context, colorScheme);
         ButtonData elipseButton = ButtonData.buildIconButton(context, R.mipmap.elipse_icon, 0);
+        elipseButton.setBackgroundColorId(context, colorScheme);
         ButtonData curvedLineButton = ButtonData.buildIconButton(context, R.mipmap.curvedline_icon, 0);
+        curvedLineButton.setBackgroundColorId(context, colorScheme);
         buttonDatas.add(penButton);
         buttonDatas.add(lineButton);
         buttonDatas.add(rectangleButton);
@@ -346,6 +354,7 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private void createColorsButton() {
         final List<ButtonData> buttonDatas = new ArrayList<>();
         ButtonData mainButton = ButtonData.buildIconButton(context, R.drawable.ic_action_pallette, 0);
+        mainButton.setBackgroundColorId(context, colorScheme);
         buttonDatas.add(mainButton);
         int[] colors = {R.color.red,
                        R.color.blue,
