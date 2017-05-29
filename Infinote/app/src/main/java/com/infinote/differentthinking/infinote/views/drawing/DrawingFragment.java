@@ -55,13 +55,10 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private ImageButton textButton;
     private TextPopup popup;
 
-<<<<<<< HEAD
-=======
     private int flag = 0;
 
     private Button testButton;
     private android.support.percent.PercentRelativeLayout percentLayout;
->>>>>>> f2f5160990f1cb3d7b60c08b3ce3d411b4118b52
     private CanvasView canvas;
     private boolean editMode = false;
     private String pictureId;
