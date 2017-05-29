@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.android.graphics.CanvasView;
@@ -46,10 +47,11 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private Context context;
     private InfinoteProgressDialog progressDialog;
     private Boolean darkMode = false;
-    AllAngleExpandableButton colorsButton;
-    AllAngleExpandableButton figuresButton;
-    AllAngleExpandableButton strokeButton;
-    AllAngleExpandableButton modeButton;
+    private AllAngleExpandableButton colorsButton;
+    private AllAngleExpandableButton figuresButton;
+    private AllAngleExpandableButton strokeButton;
+    private AllAngleExpandableButton modeButton;
+    private SeekBar strokeSeekBar;
 
     private FloatingActionButton noteSaveButton;
     private Button monoColorButton;
@@ -70,10 +72,28 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         this.figuresButton = (AllAngleExpandableButton) view.findViewById(R.id.drawer_figures);
         this.strokeButton = (AllAngleExpandableButton) view.findViewById(R.id.drawer_strokes);
         this.modeButton = (AllAngleExpandableButton) view.findViewById(R.id.drawer_mode);
+        this.strokeSeekBar = (SeekBar) view.findViewById(R.id.stroke_width);
 
         this.noteSaveButton = (FloatingActionButton) view.findViewById(R.id.note_save_button);
         this.canvas = (CanvasView) view.findViewById(R.id.canvas);
         final Button monoColorButton = (Button) view.findViewById(R.id.button_monocolor);
+
+        this.strokeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                canvas.setPaintStrokeWidth(progress / 3);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         monoColorButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

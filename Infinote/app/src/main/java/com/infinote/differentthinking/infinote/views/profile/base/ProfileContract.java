@@ -13,6 +13,8 @@ public interface ProfileContract {
 
         void showDialogForLoading();
 
+        void showSettingsActivity();
+
         void dismissDialog();
     }
 

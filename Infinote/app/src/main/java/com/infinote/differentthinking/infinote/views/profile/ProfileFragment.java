@@ -3,14 +3,11 @@ package com.infinote.differentthinking.infinote.views.profile;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewDebug;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +18,7 @@ import com.infinote.differentthinking.infinote.models.base.UserContract;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.profile.base.ProfileContract;
+import com.infinote.differentthinking.infinote.views.settings.SettingsActivity;
 
 public class ProfileFragment extends Fragment implements ProfileContract.View {
     private ProfileContract.Presenter presenter;
@@ -30,14 +28,11 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     private TextView usernameTextView;
     private TextView emailTextView;
     private TextView fullNameTextView;
+    private ImageButton settingsButton;
+    private CircularProgressButton logoutButton;
 
     private Typeface usernameTypeFace;
     private Typeface detailsTypeFace;
-
-    private CircularProgressButton logoutButton;
-
-    private ImageButton settings;
-
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -55,7 +50,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         this.emailTextView = (TextView) view.findViewById(R.id.tv_profile_email);
         this.fullNameTextView = (TextView) view.findViewById(R.id.tv_profile_fullname);
         this.logoutButton = (CircularProgressButton) view.findViewById(R.id.logout_button);
-        this.settings = (ImageButton) view.findViewById(R.id.settings);
+        this.settingsButton = (ImageButton) view.findViewById(R.id.settings);
 
         this.usernameTextView.setTypeface(usernameTypeFace);
         this.fullNameTextView.setTypeface(detailsTypeFace);
@@ -77,10 +72,10 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
             }
         });
 
-        this.settings.setOnClickListener(new View.OnClickListener() {
+        this.settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showSettingsActivity();
             }
         });
 
@@ -114,6 +109,12 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     @Override
     public void showListNotesActivity() {
         Intent intent = new Intent(this.context, ListNotesActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showSettingsActivity() {
+        Intent intent = new Intent(this.context, SettingsActivity.class);
         startActivity(intent);
     }
 
