@@ -82,7 +82,7 @@ public class CanvasView extends View {
 
     // for Text
     private String text           = "";
-    private Typeface fontFamily   = Typeface.DEFAULT;
+    private Typeface fontFamily   = Typeface.createFromAsset(getContext().getAssets(), "fonts/Infinity.ttf");
     private float fontSize        = 32F;
     private Paint.Align textAlign = Paint.Align.RIGHT;  // fixed
     private Paint textPaint       = new Paint();

@@ -36,6 +36,8 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     private ImageButton settingsButton;
     private CircularProgressButton logoutButton;
 
+    private byte[] decodedString;
+
     private Typeface usernameTypeFace;
     private Typeface detailsTypeFace;
 
@@ -115,6 +117,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     @Override
     public void showListNotesActivity() {
         Intent intent = new Intent(this.context, ListNotesActivity.class);
+        intent.putExtra("PICTURE", decodedString);
         startActivity(intent);
     }
 
@@ -135,6 +138,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
             byte[] decodedString = Base64.decode(user.getProfile(), Base64.DEFAULT);
             Bitmap bmp = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             this.profileImage.setImageBitmap(bmp);
+            this.decodedString = decodedString;
         }
     }
 

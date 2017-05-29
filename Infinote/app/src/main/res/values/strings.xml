@@ -26,4 +26,19 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="create_acc_text">Create new\naccount</string>
+    <string name="enter_text">Enter text</string>
+    <string name="change_profile_picture">Change profile picture</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="change_password">Change password</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="success">Success</string>
+    <string name="error">Error</string>
+    <string name="infinotes">Infinotes</string>
+    <string name="complete">Complete</string>
+    <string name="username">Username</string>
+    <string name="title">Title</string>
+    <string name="last_modified">Last modified:</string>
+    <string name="today_17_02">Today, 17:02</string>
 </resources>

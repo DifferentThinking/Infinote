@@ -39,7 +39,7 @@
             android:id="@+id/tv_change_picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Change profile picture"
+            android:text="@string/change_profile_picture"
             android:textSize="20dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
@@ -55,6 +55,7 @@
             android:paddingEnd="24dp"
             android:paddingTop="25dp">
 
+<<<<<<< HEAD
             <!--<EditText-->
                 <!--android:id="@+id/ed_edit_firstname"-->
                 <!--android:background="@drawable/edittext_style"-->
@@ -76,12 +77,35 @@
                 <!--android:textColor="@color/black"-->
                 <!--android:inputType="textEmailAddress"-->
                 <!--android:drawableLeft="@mipmap/name_icon" />-->
+=======
+            <EditText
+                android:id="@+id/ed_edit_firstname"
+                android:background="@drawable/edittext_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/first_name"
+                android:textColorHint="@color/iron"
+                android:textColor="@color/black"
+                android:inputType="textEmailAddress"
+                android:drawableLeft="@mipmap/name_icon" />
+
+            <EditText
+                android:id="@+id/et_edit_lastname"
+                android:background="@drawable/edittext_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/last_name"
+                android:textColorHint="@color/iron"
+                android:textColor="@color/black"
+                android:inputType="textEmailAddress"
+                android:drawableLeft="@mipmap/name_icon" />
+>>>>>>> cb3de065cdc5c49e6c0ffe2ae4b7c7a102882513
 
             <TextView
                 android:id="@+id/tv_change_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Change password"
+                android:text="@string/change_password"
                 android:textSize="20dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="110dp" />

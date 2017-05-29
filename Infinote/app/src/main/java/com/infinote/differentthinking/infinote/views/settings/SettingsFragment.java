@@ -38,6 +38,8 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
     private TextView changePasswordButton;
     private ImageButton doneButton;
 
+    private byte[] encodedPicture;
+
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
     }
@@ -68,12 +70,21 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
             }
         });
 
+<<<<<<< HEAD
         this.changePasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showChangePasswordActivity();
             }
         });
+=======
+        encodedPicture = this.getActivity().getIntent().getByteArrayExtra("PICTURE");
+
+        if(encodedPicture != null) {
+            Bitmap bmp = BitmapFactory.decodeByteArray(encodedPicture, 0, encodedPicture.length);
+            profilePicture.setImageBitmap(bmp);
+        }
+>>>>>>> cb3de065cdc5c49e6c0ffe2ae4b7c7a102882513
 
         return view;
     }
@@ -93,12 +104,20 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
                 return;
             }
 
-            Bitmap bmp = BitmapFactory.decodeStream(inputStream);
-            profilePicture.setImageBitmap(bmp);
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
-            profilePictureAsString = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            if(encodedPicture != null) {
+                Bitmap bmp = BitmapFactory.decodeByteArray(encodedPicture, 0, encodedPicture.length);
+                profilePicture.setImageBitmap(bmp);
+            }
+            else {
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                Bitmap bmp = BitmapFactory.decodeStream(inputStream);
+                profilePicture.setImageBitmap(bmp);
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            }
+
+//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//            byte[] byteArray = stream.toByteArray();
+//            profilePictureAsString = Base64.encodeToString(byteArray, Base64.DEFAULT);
         }
     }
 
