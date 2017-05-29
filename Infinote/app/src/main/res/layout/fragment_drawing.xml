@@ -38,14 +38,6 @@
             app:aebSubButtonSizeDp="30dp"
             android:layout_gravity="center_vertical"/>
 
-        <Button
-            android:id="@+id/button_monocolor"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/circlebuttontransparent" />
-
         <com.fangxu.allangleexpandablebutton.AllAngleExpandableButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

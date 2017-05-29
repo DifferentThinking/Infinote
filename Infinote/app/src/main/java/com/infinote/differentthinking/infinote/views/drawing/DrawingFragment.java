@@ -51,14 +51,12 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private Boolean darkMode = false;
     private AllAngleExpandableButton colorsButton;
     private AllAngleExpandableButton figuresButton;
-    private AllAngleExpandableButton strokeButton;
     private AllAngleExpandableButton brushButton;
     private AllAngleExpandableButton modeButton;
     private SeekBar strokeSeekBar;
     private ImageButton saveButton;
 
     private FloatingActionButton noteSaveButton;
-    private Button monoColorButton;
 
     private CanvasView canvas;
     private boolean editMode = false;
@@ -79,7 +77,6 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         this.strokeSeekBar = (SeekBar) view.findViewById(R.id.stroke_width);
         this.saveButton = (ImageButton) view.findViewById(R.id.save_button);
         this.canvas = (CanvasView) view.findViewById(R.id.canvas);
-        final Button monoColorButton = (Button) view.findViewById(R.id.button_monocolor);
 
         this.strokeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -95,19 +92,6 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
-            }
-        });
-
-        monoColorButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (isInDarkMode()) {
-                    monoColorButton.setBackgroundResource(R.drawable.circlebuttonwhite);
-                    canvas.setPaintStrokeColor(Color.WHITE);
-                }
-                else {
-                    monoColorButton.setBackgroundResource(R.drawable.circlebuttonblack);
-                    canvas.setPaintStrokeColor(Color.BLACK);
-                }
             }
         });
 
