@@ -229,6 +229,7 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         brushButton.setButtonEventListener(new ButtonEventListener() {
             @Override
             public void onButtonClicked(int index) {
+                canvas.setMode(CanvasView.Mode.DRAW);
                 switch (index) {
                     case 1:
                         canvas.setPaintStyle(Paint.Style.STROKE);
@@ -272,6 +273,7 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         figuresButton.setButtonEventListener(new ButtonEventListener() {
             @Override
             public void onButtonClicked(int index) {
+                canvas.setMode(CanvasView.Mode.DRAW);
                 switch (index) {
                     case 1:
                         canvas.setDrawer(CanvasView.Drawer.PEN);
@@ -329,6 +331,7 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         colorsButton.setButtonEventListener(new ButtonEventListener() {
             @Override
             public void onButtonClicked(int index) {
+                canvas.setMode(CanvasView.Mode.DRAW);
                 switch (index) {
                     case 1:  canvas.setPaintStrokeColor(Color.BLACK);
                         break;

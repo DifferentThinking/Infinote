@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/button_expandable"
             android:layout_centerVertical="true"
-            app:layout_marginLeftPercent="16%"
+            app:layout_marginLeftPercent="14%"
             app:aebAnimDurationMillis="130"
             app:aebButtonElevation="4dp"
             app:aebButtonGapDp="55dp"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:id="@+id/drawer_figures"
-            app:layout_marginLeftPercent="32%"
+            app:layout_marginLeftPercent="28%"
             app:aebAnimDurationMillis="130"
             app:aebButtonElevation="4dp"
             app:aebButtonGapDp="55dp"
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:id="@+id/drawer_strokes"
-            app:layout_marginLeftPercent="48%"
+            app:layout_marginLeftPercent="42%"
             app:aebAnimDurationMillis="130"
             app:aebButtonElevation="4dp"
             app:aebButtonGapDp="55dp"
@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:id="@+id/drawer_mode"
-            app:layout_marginLeftPercent="64%"
+            app:layout_marginLeftPercent="56%"
             app:aebAnimDurationMillis="130"
             app:aebButtonElevation="4dp"
             app:aebButtonGapDp="55dp"
@@ -103,6 +103,15 @@
             android:layout_centerVertical="true"
             android:layout_height="wrap_content"
             app:layout_widthPercent="20%"/>
+
+        <ImageButton
+            android:id="@+id/text_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/text_icon"
+            app:layout_marginLeftPercent="70%"
+            android:layout_centerVertical="true"
+            android:background="@null"/>
 
     </android.support.percent.PercentRelativeLayout>
 
