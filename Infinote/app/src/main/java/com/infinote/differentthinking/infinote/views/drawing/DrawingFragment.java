@@ -80,9 +80,8 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         this.textButton = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.text_button);
         this.hideButton = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.hide_button);
         this.canvas = (CanvasView) view.findViewById(R.id.canvas);
-        this.colorScheme = R.color.iron;
-
         this.percentLayout = (android.support.percent.PercentRelativeLayout) view.findViewById(R.id.percent_layout);
+        this.colorScheme = R.color.iron;
 
         hideButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -138,6 +137,9 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
             public void onClick(View v) {
                 popup = new TextPopup();
                 popup.setParentView(currentView);
+
+                canvas.drawBitmap(canvas.getBitmap());
+                canvas.setText("");
 
                 popup.show(getFragmentManager(), "text_popup");
             }
