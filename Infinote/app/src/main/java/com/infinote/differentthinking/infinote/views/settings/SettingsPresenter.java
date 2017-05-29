@@ -35,6 +35,7 @@ public class SettingsPresenter implements SettingsContract.Presenter {
                     @Override
                     public void onNext(Boolean value) {
                         view.notifySuccessful("Profile updated successfully");
+                        view.showProfileActivity();
                     }
 
                     @Override

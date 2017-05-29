@@ -2,9 +2,13 @@ package com.infinote.differentthinking.infinote.views.profile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +29,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     private Context context;
     private InfinoteProgressDialog progressDialog;
 
+    private de.hdodenhof.circleimageview.CircleImageView profileImage;
     private TextView usernameTextView;
     private TextView emailTextView;
     private TextView fullNameTextView;
@@ -46,6 +51,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         this.usernameTypeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/ChampagneBold.ttf");
         this.detailsTypeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/Champagne.ttf");
 
+        this.profileImage = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.profile_image);
         this.usernameTextView = (TextView) view.findViewById(R.id.tv_profile_username);
         this.emailTextView = (TextView) view.findViewById(R.id.tv_profile_email);
         this.fullNameTextView = (TextView) view.findViewById(R.id.tv_profile_fullname);
@@ -124,6 +130,12 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         this.usernameTextView.setText(user.getUsername());
         this.emailTextView.setText(user.getEmail());
         this.fullNameTextView.setText(fullName);
+
+        if (user.getProfile() != null) {
+            byte[] decodedString = Base64.decode(user.getProfile(), Base64.DEFAULT);
+            Bitmap bmp = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            this.profileImage.setImageBitmap(bmp);
+        }
     }
 
     @Override

@@ -8,6 +8,7 @@ public class User implements UserContract {
     private String email;
     private String firstname;
     private String lastname;
+    private String profile;
 
     public String getId() {
         return this.id;
@@ -47,5 +48,13 @@ public class User implements UserContract {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 }

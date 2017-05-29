@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
+import com.infinote.differentthinking.infinote.views.profile.ProfileActivity;
 import com.infinote.differentthinking.infinote.views.settings.base.SettingsContract;
 
 import java.io.ByteArrayOutputStream;
@@ -117,6 +118,12 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
     public void notifyError(String errorMessage) {
         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG)
                 .show();
+    }
+
+    @Override
+    public void showProfileActivity() {
+        Intent intent = new Intent(this.context, ProfileActivity.class);
+        startActivity(intent);
     }
 
     @Override

@@ -66,7 +66,7 @@ public class UserData implements UserDataContract {
     public Observable<UserContract> signUp(String username, String email, String firstname, String lastname, String password) {
         Map<String, String> userCredentials = new HashMap<>();
         String passHash = hashProvider.hashPassword(password);
-        userCredentials.put("username", username.toLowerCase());
+        userCredentials.put("username", username);
         userCredentials.put("email", email);
         userCredentials.put("firstname", firstname);
         userCredentials.put("lastname", lastname);
@@ -102,18 +102,15 @@ public class UserData implements UserDataContract {
                         }
                         String responseBody = iHttpResponse.getBody().toString();
                         String userJson = jsonParser.getDirectMember(responseBody, "result");
-                        UserContract resultUser = jsonParser.fromJson(userJson, userModelType);
+                        return jsonParser.fromJson(userJson, userModelType);
 
-                        return resultUser;
                     }
                 });
     }
 
     public Observable<Boolean> savePictureForUser(String profilePictureAsString) {
         Map<String, String> body = new HashMap<>();
-        body.put("username", "ojn");
         body.put("profile", profilePictureAsString);
-        body.put("pictureasdasdf", profilePictureAsString);
 
         return httpRequester
             .post(apiConstants.profilePictureUrl(userSession.getUsername()), body)

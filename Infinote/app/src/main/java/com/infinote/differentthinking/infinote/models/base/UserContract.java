@@ -20,4 +20,8 @@ public interface UserContract {
     String getEmail();
 
     void setEmail(String email);
+
+    String getProfile();
+
+    void setProfile(String profile);
 }

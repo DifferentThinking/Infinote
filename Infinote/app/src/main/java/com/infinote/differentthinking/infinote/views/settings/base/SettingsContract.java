@@ -10,6 +10,8 @@ public interface SettingsContract {
 
         void notifyError(String errorMessage);
 
+        void showProfileActivity();
+
         void dismissDialog();
     }
 
