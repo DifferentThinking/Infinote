@@ -56,8 +56,6 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private SeekBar strokeSeekBar;
     private ImageButton saveButton;
 
-    private FloatingActionButton noteSaveButton;
-
     private CanvasView canvas;
     private boolean editMode = false;
     private String pictureId;
@@ -321,9 +319,9 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
                        R.color.light_green,
                        R.color.pink};
 
-        for (int i = 0; i < colors.length; i++) {
+        for (int color: colors) {
             ButtonData buttonData =  ButtonData.buildTextButton("");
-            buttonData.setBackgroundColorId(context, colors[i]);
+            buttonData.setBackgroundColorId(context, color);
             buttonDatas.add(buttonData);
         }
 

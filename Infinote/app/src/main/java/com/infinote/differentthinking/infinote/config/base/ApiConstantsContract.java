@@ -13,6 +13,8 @@ public interface ApiConstantsContract {
 
     String updateNoteById(String id);
 
+    String profilePictureUrl(String username);
+
     int responseSuccessCode();
 
     int responseErrorCode();

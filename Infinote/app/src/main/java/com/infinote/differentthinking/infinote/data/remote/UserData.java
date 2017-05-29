@@ -57,13 +57,11 @@ public class UserData implements UserDataContract {
                         UserContract resultUser = jsonParser.fromJson(userJson, userModelType);
 
                         userSession.setUsername(resultUser.getUsername());
-                        //userSession.setId(resultUser.getId());
                         return resultUser;
                     }
                 });
     }
 
-    //String username, String email, String firstname, String lastname, String password
     @Override
     public Observable<UserContract> signUp(String username, String email, String firstname, String lastname, String password) {
         Map<String, String> userCredentials = new HashMap<>();
@@ -109,6 +107,27 @@ public class UserData implements UserDataContract {
                         return resultUser;
                     }
                 });
+    }
+
+    public Observable<Boolean> savePictureForUser(String profilePictureAsString) {
+        Map<String, String> body = new HashMap<>();
+        body.put("username", "ojn");
+        body.put("profile", profilePictureAsString);
+        body.put("pictureasdasdf", profilePictureAsString);
+
+        return httpRequester
+            .post(apiConstants.profilePictureUrl(userSession.getUsername()), body)
+            .map(new Function<HttpResponseContract, Boolean>() {
+                @Override
+                public Boolean apply(HttpResponseContract iHttpResponse) throws Exception {
+                    if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
+                        throw new Error(iHttpResponse.getMessage());
+                    }
+                    String responseBody = iHttpResponse.getBody();
+                    return responseBody.contains("OK");
+
+                }
+            });
     }
 
     public void logoutUser() {

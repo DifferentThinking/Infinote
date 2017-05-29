@@ -115,6 +115,7 @@ public class OkHttpRequester implements OkHttpRequesterContract {
                     response.message(), response.code());
             return Observable.just(responseParsed);
         } catch (IOException e) {
+            Log.d("error"," SADDD");
             return Observable.error(e);
         }
     }

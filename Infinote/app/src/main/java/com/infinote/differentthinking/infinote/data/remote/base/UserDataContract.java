@@ -12,6 +12,8 @@ public interface UserDataContract {
 
     Observable<UserContract> getInfoForCurrentUser();
 
+    Observable<Boolean> savePictureForUser(String profilePictureAsString);
+
     void logoutUser();
 
     boolean isLoggedIn();
