@@ -48,7 +48,7 @@
             android:background="@drawable/edittext_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
+            android:hint="@string/username"
             android:textColor="@color/black"
             android:textColorHint="@color/iron"/>
 
@@ -90,9 +90,9 @@
             android:layout_marginTop="32dp"
             android:textColor="@color/white"
             android:textSize="18sp"
-            app:cpb_textComplete="Complete"
-            app:cpb_textError="Error"
-            app:cpb_textIdle="Sign up"
+            app:cpb_textComplete="@string/complete"
+            app:cpb_textError="@string/error"
+            app:cpb_textIdle="@string/signup_text"
             app:cpb_cornerRadius="48dp"/>
 
         <TextView

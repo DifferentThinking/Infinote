@@ -25,7 +25,7 @@
             android:background="@drawable/edittext_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter text"
+            android:hint="@string/enter_text"
             android:textColorHint="@color/iron"
             android:textColor="@color/black"
             android:inputType="text"

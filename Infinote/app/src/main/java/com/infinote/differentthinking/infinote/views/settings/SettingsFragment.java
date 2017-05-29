@@ -36,6 +36,8 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
     private TextView changePictureButton;
     private ImageButton doneButton;
 
+    private byte[] encodedPicture;
+
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
     }
@@ -65,6 +67,13 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
             }
         });
 
+        encodedPicture = this.getActivity().getIntent().getByteArrayExtra("PICTURE");
+
+        if(encodedPicture != null) {
+            Bitmap bmp = BitmapFactory.decodeByteArray(encodedPicture, 0, encodedPicture.length);
+            profilePicture.setImageBitmap(bmp);
+        }
+
         return view;
     }
 
@@ -83,12 +92,20 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
                 return;
             }
 
-            Bitmap bmp = BitmapFactory.decodeStream(inputStream);
-            profilePicture.setImageBitmap(bmp);
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
-            profilePictureAsString = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            if(encodedPicture != null) {
+                Bitmap bmp = BitmapFactory.decodeByteArray(encodedPicture, 0, encodedPicture.length);
+                profilePicture.setImageBitmap(bmp);
+            }
+            else {
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                Bitmap bmp = BitmapFactory.decodeStream(inputStream);
+                profilePicture.setImageBitmap(bmp);
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            }
+
+//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//            byte[] byteArray = stream.toByteArray();
+//            profilePictureAsString = Base64.encodeToString(byteArray, Base64.DEFAULT);
         }
     }
 
