@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -50,8 +52,10 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private AllAngleExpandableButton colorsButton;
     private AllAngleExpandableButton figuresButton;
     private AllAngleExpandableButton strokeButton;
+    private AllAngleExpandableButton brushButton;
     private AllAngleExpandableButton modeButton;
     private SeekBar strokeSeekBar;
+    private ImageButton saveButton;
 
     private FloatingActionButton noteSaveButton;
     private Button monoColorButton;
@@ -70,11 +74,10 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
 
         this.colorsButton = (AllAngleExpandableButton) view.findViewById(R.id.button_expandable);
         this.figuresButton = (AllAngleExpandableButton) view.findViewById(R.id.drawer_figures);
-        this.strokeButton = (AllAngleExpandableButton) view.findViewById(R.id.drawer_strokes);
+        this.brushButton = (AllAngleExpandableButton) view.findViewById(R.id.drawer_strokes);
         this.modeButton = (AllAngleExpandableButton) view.findViewById(R.id.drawer_mode);
         this.strokeSeekBar = (SeekBar) view.findViewById(R.id.stroke_width);
-
-        this.noteSaveButton = (FloatingActionButton) view.findViewById(R.id.note_save_button);
+        this.saveButton = (ImageButton) view.findViewById(R.id.save_button);
         this.canvas = (CanvasView) view.findViewById(R.id.canvas);
         final Button monoColorButton = (Button) view.findViewById(R.id.button_monocolor);
 
@@ -116,7 +119,8 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
 
         this.setupAlertDialog();
         this.canvas.setDrawingCacheEnabled(true);
-        this.noteSaveButton.setOnClickListener(new Button.OnClickListener() {
+
+        this.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialog.show();
@@ -193,10 +197,11 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private void createModeButton() {
         final List<ButtonData> buttonDatas = new ArrayList<>();
 
-        for (int i = 0; i < 2; i++) {
-            ButtonData buttonData =  ButtonData.buildTextButton("");
-            buttonDatas.add(buttonData);
-        }
+        ButtonData defaultButton = ButtonData.buildIconButton(context, R.mipmap.pen_icon, 0);
+        ButtonData eraserButton = ButtonData.buildIconButton(context, R.mipmap.eraser_icon, 0);
+
+        buttonDatas.add(defaultButton);
+        buttonDatas.add(eraserButton);
 
         modeButton.setButtonDatas(buttonDatas);
         modeButton.setButtonEventListener(new ButtonEventListener() {
@@ -208,8 +213,8 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
                         canvas.setPaintStrokeWidth(3F);
                         break;
                     case 2:
-                        canvas.setPaintStrokeColor(Color.rgb(255, 255, 255));
-                        canvas.setPaintStrokeWidth(12F);
+                        canvas.setPaintStrokeColor(canvas.getBaseColor());
+                        canvas.setPaintStrokeWidth(24F);
                         break;
                 }
             }
@@ -228,13 +233,16 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private void createStrokeButton() {
         final List<ButtonData> buttonDatas = new ArrayList<>();
 
-        for (int i = 0; i < 3; i++) {
-            ButtonData buttonData =  ButtonData.buildTextButton("");
-            buttonDatas.add(buttonData);
-        }
+        ButtonData strokeButton = ButtonData.buildIconButton(context, R.mipmap.brush_icon, 0);
+        ButtonData fillButton = ButtonData.buildIconButton(context, R.mipmap.fill_icon, 0);
+        ButtonData fillAndStrokeButton = ButtonData.buildIconButton(context, R.mipmap.fillandstroke_icon, 0);
 
-        strokeButton.setButtonDatas(buttonDatas);
-        strokeButton.setButtonEventListener(new ButtonEventListener() {
+        buttonDatas.add(strokeButton);
+        buttonDatas.add(fillButton);
+        buttonDatas.add(fillAndStrokeButton);
+
+        brushButton.setButtonDatas(buttonDatas);
+        brushButton.setButtonEventListener(new ButtonEventListener() {
             @Override
             public void onButtonClicked(int index) {
                 switch (index) {
@@ -263,11 +271,18 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
 
     private void createFiguresButton() {
         final List<ButtonData> buttonDatas = new ArrayList<>();
-
-        for (int i = 0; i < 6; i++) {
-            ButtonData buttonData =  ButtonData.buildTextButton("");
-            buttonDatas.add(buttonData);
-        }
+        ButtonData penButton = ButtonData.buildIconButton(context, R.mipmap.pencil_icon, 0);
+        ButtonData lineButton = ButtonData.buildIconButton(context, R.mipmap.line_icon, 0);
+        ButtonData rectangleButton = ButtonData.buildIconButton(context, R.mipmap.rectangle_icon, 0);
+        ButtonData circleButton = ButtonData.buildIconButton(context, R.mipmap.circle_icon, 0);
+        ButtonData elipseButton = ButtonData.buildIconButton(context, R.mipmap.elipse_icon, 0);
+        ButtonData curvedLineButton = ButtonData.buildIconButton(context, R.mipmap.curvedline_icon, 0);
+        buttonDatas.add(penButton);
+        buttonDatas.add(lineButton);
+        buttonDatas.add(rectangleButton);
+        buttonDatas.add(circleButton);
+        buttonDatas.add(elipseButton);
+        buttonDatas.add(curvedLineButton);
 
         figuresButton.setButtonDatas(buttonDatas);
         figuresButton.setButtonEventListener(new ButtonEventListener() {

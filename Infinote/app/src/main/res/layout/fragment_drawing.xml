@@ -12,12 +12,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/note_save_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_action_newnote"/>
+
+        <ImageButton
+            android:id="@+id/save_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/save_icon"
+            android:layout_gravity="center_vertical"
+            android:background="@null"/>
 
         <com.fangxu.allangleexpandablebutton.AllAngleExpandableButton
             android:layout_width="wrap_content"
@@ -33,7 +35,8 @@
             app:aebMainButtonSizeDp="30dp"
             app:aebIsSelectionMode="true"
             app:aebMaskBackgroundColor="@color/transparent"
-            app:aebSubButtonSizeDp="30dp" />
+            app:aebSubButtonSizeDp="30dp"
+            android:layout_gravity="center_vertical"/>
 
         <Button
             android:id="@+id/button_monocolor"
@@ -46,6 +49,7 @@
         <com.fangxu.allangleexpandablebutton.AllAngleExpandableButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:id="@+id/drawer_figures"
             app:aebAnimDurationMillis="130"
             app:aebButtonElevation="4dp"
@@ -54,14 +58,15 @@
             app:aebEndAngleDegree="350"
             app:aebMainButtonRotateAnimDurationMillis="130"
             app:aebMainButtonRotateDegree="0"
-            app:aebMainButtonSizeDp="30dp"
+            app:aebMainButtonSizeDp="40dp"
             app:aebIsSelectionMode="true"
             app:aebMaskBackgroundColor="@color/transparent"
-            app:aebSubButtonSizeDp="30dp" />
+            app:aebSubButtonSizeDp="40dp" />
 
         <com.fangxu.allangleexpandablebutton.AllAngleExpandableButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:id="@+id/drawer_strokes"
             app:aebAnimDurationMillis="130"
             app:aebButtonElevation="4dp"
@@ -70,14 +75,15 @@
             app:aebEndAngleDegree="350"
             app:aebMainButtonRotateAnimDurationMillis="130"
             app:aebMainButtonRotateDegree="0"
-            app:aebMainButtonSizeDp="30dp"
+            app:aebMainButtonSizeDp="40dp"
             app:aebIsSelectionMode="true"
             app:aebMaskBackgroundColor="@color/transparent"
-            app:aebSubButtonSizeDp="30dp" />
+            app:aebSubButtonSizeDp="40dp" />
 
         <com.fangxu.allangleexpandablebutton.AllAngleExpandableButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:id="@+id/drawer_mode"
             app:aebAnimDurationMillis="130"
             app:aebButtonElevation="4dp"
@@ -86,15 +92,16 @@
             app:aebEndAngleDegree="350"
             app:aebMainButtonRotateAnimDurationMillis="130"
             app:aebMainButtonRotateDegree="0"
-            app:aebMainButtonSizeDp="30dp"
+            app:aebMainButtonSizeDp="40dp"
             app:aebIsSelectionMode="true"
             app:aebMaskBackgroundColor="@color/transparent"
-            app:aebSubButtonSizeDp="30dp" />
+            app:aebSubButtonSizeDp="40dp" />
 
         <android.support.v7.widget.AppCompatSeekBar
             android:id="@+id/stroke_width"
+            android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content" />
+            android:layout_width="70dp" />
 
     </LinearLayout>
 
