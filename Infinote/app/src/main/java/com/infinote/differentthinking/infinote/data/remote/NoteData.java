@@ -1,7 +1,6 @@
 package com.infinote.differentthinking.infinote.data.remote;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.infinote.differentthinking.infinote.config.ApiConstants;
 import com.infinote.differentthinking.infinote.data.remote.base.NoteDataContract;
@@ -12,7 +11,6 @@ import com.infinote.differentthinking.infinote.utils.GsonParser;
 import com.infinote.differentthinking.infinote.utils.OkHttpRequester;
 import com.infinote.differentthinking.infinote.data.local.UserSession;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,14 +24,12 @@ public class NoteData implements NoteDataContract {
     private final ApiConstants apiConstants;
     private final GsonParser jsonParser;
     private final UserSession userSession;
-    private final Type noteModelType;
 
     public NoteData(Context context) {
         this.jsonParser = new GsonParser();
         this.httpRequester = new OkHttpRequester();
         this.apiConstants = new ApiConstants();
         this.userSession = new UserSession(context);
-        this.noteModelType = Note.class;
     }
 
     @Override
@@ -52,13 +48,8 @@ public class NoteData implements NoteDataContract {
                 if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
                     throw new Error(iHttpResponse.getMessage());
                 }
-                String responseBody = iHttpResponse.getBody().toString();
-                if (responseBody.contains("OK")) {
-                   return true;
-                }
-                else {
-                    return false;
-                }
+                String responseBody = iHttpResponse.getBody();
+                return responseBody.contains("OK");
                 }
             });
     }
@@ -72,7 +63,7 @@ public class NoteData implements NoteDataContract {
                         if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
                             throw new Error(iHttpResponse.getMessage());
                         }
-                        String responseBody = iHttpResponse.getBody().toString();
+                        String responseBody = iHttpResponse.getBody();
                         String noteJsonArray = jsonParser.getDirectMember(responseBody, "result");
                         return jsonParser.getDirectArray(noteJsonArray, "notes", Note.class);
                     }
@@ -91,13 +82,9 @@ public class NoteData implements NoteDataContract {
                         if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
                             throw new Error(iHttpResponse.getMessage());
                         }
-                        String responseBody = iHttpResponse.getBody().toString();
-                        if (responseBody.contains("OK")) {
-                            return true;
-                        }
-                        else {
-                            return false;
-                        }
+                        String responseBody = iHttpResponse.getBody();
+                        return responseBody.contains("OK");
+
                     }
                 });
     }
@@ -144,13 +131,9 @@ public class NoteData implements NoteDataContract {
                         if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
                             throw new Error(iHttpResponse.getMessage());
                         }
-                        String responseBody = iHttpResponse.getBody().toString();
-                        if (responseBody.contains("OK")) {
-                            return true;
-                        }
-                        else {
-                            return false;
-                        }
+                        String responseBody = iHttpResponse.getBody();
+                        return responseBody.contains("OK");
+
                     }
                 });
     }

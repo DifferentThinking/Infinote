@@ -8,7 +8,6 @@ public class ApiConstants implements ApiConstantsContract {
     private static final String URL_SIGN_IN = API_URL + "/auth/login";
     private static final String URL_SIGN_UP = API_URL + "/auth/register";
 
-    private static final int RESPONSE_SUCCESS_CODE = 200;
     private static final int RESPONSE_ERROR_CODE = 404;
 
     @Override
@@ -49,11 +48,6 @@ public class ApiConstants implements ApiConstantsContract {
     @Override
     public String singleUserUrl(String username) {
         return API_URL + "/users/" + username;
-    }
-
-    @Override
-    public int responseSuccessCode() {
-        return RESPONSE_SUCCESS_CODE;
     }
 
     @Override

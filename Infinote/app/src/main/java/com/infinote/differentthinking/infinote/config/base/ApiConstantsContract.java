@@ -17,8 +17,6 @@ public interface ApiConstantsContract {
 
     String userPasswordUrl(String useranme);
 
-    int responseSuccessCode();
-
     int responseErrorCode();
 
 }

@@ -22,7 +22,5 @@ public interface LoginContract {
         boolean validateLoginUser(String username, String password);
 
         void onCreateAccountClicked();
-
-        void onForgotPasswordClicked();
     }
 }

@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 
 
 import com.infinote.differentthinking.infinote.R;
-import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.views.auth.register.base.RegisterContract;
 
 public class RegisterActivity extends AppCompatActivity {

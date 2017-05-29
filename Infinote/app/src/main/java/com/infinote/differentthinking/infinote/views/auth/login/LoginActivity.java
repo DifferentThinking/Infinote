@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.infinote.differentthinking.infinote.R;
-import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.views.auth.login.base.LoginContract;
 
 public class LoginActivity extends AppCompatActivity {

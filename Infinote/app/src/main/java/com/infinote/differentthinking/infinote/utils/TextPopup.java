@@ -6,18 +6,15 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
 import com.infinote.differentthinking.infinote.R;
-import com.infinote.differentthinking.infinote.views.drawing.DrawingFragment;
 import com.infinote.differentthinking.infinote.views.drawing.base.DrawingContract;
 
 public class TextPopup extends DialogFragment {
 
-    private LayoutInflater inflater;
     private EditText textInput;
     private View view;
     private DrawingContract.View parent;
@@ -25,7 +22,7 @@ public class TextPopup extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        this.inflater = getActivity().getLayoutInflater();
+        LayoutInflater inflater = getActivity().getLayoutInflater();
         this.view = inflater.inflate(R.layout.custom_text_alert, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

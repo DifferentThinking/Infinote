@@ -1,16 +1,5 @@
 package com.infinote.differentthinking.infinote.utils;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -29,18 +18,15 @@ public class GsonParser implements GsonParserContract {
     @Override
     public String toJson(Object src) {
         Gson gson = new Gson();
-        String json = gson.toJson(src);
+        return gson.toJson(src);
 
-        return json;
     }
 
     @Override
     public <T> T fromJson(String json, Type classOfT) {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-        T result = gson.fromJson(json, classOfT);
-
-        return result;
+        return gson.fromJson(json, classOfT);
     }
 
     @Override

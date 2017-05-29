@@ -102,8 +102,7 @@ public class OkHttpRequester implements OkHttpRequesterContract {
         }
 
 
-        RequestBody requestBody = bodyBuilder.build();
-        return requestBody;
+        return bodyBuilder.build();
     }
 
     private Observable<HttpResponseContract> createResponse(Request request) {

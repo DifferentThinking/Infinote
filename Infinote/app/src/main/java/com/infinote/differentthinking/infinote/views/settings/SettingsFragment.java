@@ -7,8 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +29,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
     private Context context;
     private InfinoteProgressDialog progressDialog;
 
-    private String profilePictureAsString;
+    private String profilePictureAsString = "";
 
     private de.hdodenhof.circleimageview.CircleImageView profilePicture;
     private TextView changePictureButton;

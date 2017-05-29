@@ -1,7 +1,6 @@
 package com.infinote.differentthinking.infinote.data.remote;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.infinote.differentthinking.infinote.config.ApiConstants;
 import com.infinote.differentthinking.infinote.data.remote.base.UserDataContract;
@@ -52,7 +51,7 @@ public class UserData implements UserDataContract {
                         if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
                             throw new Error(iHttpResponse.getMessage());
                         }
-                        String responseBody = iHttpResponse.getBody().toString();
+                        String responseBody = iHttpResponse.getBody();
                         String userJson = jsonParser.getDirectMember(responseBody, "result");
                         UserContract resultUser = jsonParser.fromJson(userJson, userModelType);
 
@@ -81,12 +80,10 @@ public class UserData implements UserDataContract {
                             throw new Error(iHttpResponse.getMessage());
                         }
 
-                        String responseBody = iHttpResponse.getBody().toString();
+                        String responseBody = iHttpResponse.getBody();
 
                         String userJson = jsonParser.getDirectMember(responseBody, "result");
-                        UserContract resultUser = jsonParser.fromJson(userJson, userModelType);
-
-                        return resultUser;
+                        return jsonParser.fromJson(userJson, userModelType);
                     }
                 });
     }
@@ -100,7 +97,7 @@ public class UserData implements UserDataContract {
                         if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
                             throw new Error(iHttpResponse.getMessage());
                         }
-                        String responseBody = iHttpResponse.getBody().toString();
+                        String responseBody = iHttpResponse.getBody();
                         String userJson = jsonParser.getDirectMember(responseBody, "result");
                         return jsonParser.fromJson(userJson, userModelType);
 

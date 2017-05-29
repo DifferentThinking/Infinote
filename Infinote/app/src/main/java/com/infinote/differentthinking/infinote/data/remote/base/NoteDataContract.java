@@ -5,7 +5,6 @@ import com.infinote.differentthinking.infinote.models.base.NoteContract;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import io.reactivex.Observable;
 

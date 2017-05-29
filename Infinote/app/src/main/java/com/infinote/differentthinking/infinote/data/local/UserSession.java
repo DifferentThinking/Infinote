@@ -22,24 +22,22 @@ public class UserSession implements UserSessionContract {
 
     @Override
     public String getUsername() {
-        String username = sharedPreferences.getString("username", null);
-        return username;
+        return sharedPreferences.getString("username", null);
     }
 
     @Override
     public void setUsername(String username) {
-        sharedPreferences.edit().putString("username", username).commit();
+        sharedPreferences.edit().putString("username", username).apply();
     }
 
     @Override
     public String getId() {
-        String id = sharedPreferences.getString("id", null);
-        return id;
+        return sharedPreferences.getString("id", null);
     }
 
     @Override
     public void setId(String id) {
-        sharedPreferences.edit().putString("id", id).commit();
+        sharedPreferences.edit().putString("id", id).apply();
     }
 
     @Override
@@ -57,7 +55,7 @@ public class UserSession implements UserSessionContract {
         note.setDate(dateAsString);
 
         notes.add(note);
-        sharedPreferences.edit().putString("notes", ObjectSerializer.serialize(notes)).commit();
+        sharedPreferences.edit().putString("notes", ObjectSerializer.serialize(notes)).apply();
     }
 
     @Override
@@ -72,7 +70,7 @@ public class UserSession implements UserSessionContract {
     }
 
     public void clearNotes() {
-        sharedPreferences.edit().putString("notes", null).commit();
+        sharedPreferences.edit().putString("notes", null).apply();
     }
 
     public boolean isUserLoggedIn() {

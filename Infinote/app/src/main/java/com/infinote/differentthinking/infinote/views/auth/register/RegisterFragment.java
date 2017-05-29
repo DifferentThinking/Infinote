@@ -22,7 +22,6 @@ import com.infinote.differentthinking.infinote.views.auth.login.LoginActivity;
 import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.auth.register.base.RegisterContract;
 
-
 public class RegisterFragment extends Fragment implements RegisterContract.View {
     private TextView alreadyHaveAccountView;
     private EditText emailEditText;

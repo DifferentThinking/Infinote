@@ -6,7 +6,7 @@ import android.content.Context;
 import com.infinote.differentthinking.infinote.utils.base.InfinoteProgressDialogContract;
 
 public class InfinoteProgressDialog implements InfinoteProgressDialogContract {
-    ProgressDialog dialog;
+    private ProgressDialog dialog;
 
     public void setContext(Context context) {
         this.dialog = new ProgressDialog(context);
