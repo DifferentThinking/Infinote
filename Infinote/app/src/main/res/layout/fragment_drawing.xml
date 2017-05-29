@@ -7,8 +7,6 @@
     tools:context="com.infinote.differentthinking.infinote.views.drawing.DrawingFragment"
     android:animateLayoutChanges="true">
 
-
-
     <com.android.graphics.CanvasView
         android:id="@+id/canvas"
         app:layout_marginTopPercent="0%"
@@ -16,19 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Qko"
-            android:layout_centerInParent="true"
-            android:id="@+id/test_button" />
-
-    </RelativeLayout>
 
     <android.support.percent.PercentRelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -38,14 +23,16 @@
         android:id="@+id/percent_layout"
         app:layout_heightPercent="10%">
 
-        <ImageButton
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/save_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@mipmap/save_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/save_big"
             android:layout_alignParentLeft="true"
+            app:layout_marginLeftPercent="1%"
             android:layout_centerVertical="true"
-            android:background="@null"/>
+            app:civ_border_width="2dp"
+            app:civ_border_color="#000000"/>
 
         <com.fangxu.allangleexpandablebutton.AllAngleExpandableButton
             android:layout_width="0dp"
@@ -127,15 +114,35 @@
             android:layout_height="wrap_content"
             app:layout_widthPercent="20%"/>
 
-        <ImageButton
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/text_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@mipmap/text_icon"
+            android:src="@mipmap/text_big"
             app:layout_marginLeftPercent="70%"
             android:layout_centerVertical="true"
-            android:background="@null"/>
+            app:civ_border_width="2dp"
+            app:civ_border_color="#000000"/>
 
+    </android.support.percent.PercentRelativeLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/hide_button"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@mipmap/arrow_up"
+        app:layout_marginTopPercent="10%"
+        android:layout_centerHorizontal="true"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#000000"/>
+
+    <android.support.percent.PercentRelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        app:layout_heightPercent="90%"
+        app:layout_marginTopPercent="10%">
     </android.support.percent.PercentRelativeLayout>
 
 </android.support.percent.PercentRelativeLayout>
