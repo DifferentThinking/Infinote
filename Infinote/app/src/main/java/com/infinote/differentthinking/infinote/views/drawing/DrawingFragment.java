@@ -4,18 +4,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.media.Image;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.percent.PercentRelativeLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,10 +27,9 @@ import com.fangxu.allangleexpandablebutton.ButtonData;
 import com.fangxu.allangleexpandablebutton.ButtonEventListener;
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
+import com.infinote.differentthinking.infinote.utils.TextPopup;
 import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.drawing.base.DrawingContract;
-
-import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 
 import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
@@ -48,14 +43,25 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private DrawingContract.Presenter presenter;
     private Context context;
     private InfinoteProgressDialog progressDialog;
-    private Boolean darkMode = false;
+
+    private int colorScheme;
+
     private AllAngleExpandableButton colorsButton;
     private AllAngleExpandableButton figuresButton;
     private AllAngleExpandableButton brushButton;
     private AllAngleExpandableButton modeButton;
     private SeekBar strokeSeekBar;
     private ImageButton saveButton;
+    private ImageButton textButton;
+    private TextPopup popup;
 
+<<<<<<< HEAD
+=======
+    private int flag = 0;
+
+    private Button testButton;
+    private android.support.percent.PercentRelativeLayout percentLayout;
+>>>>>>> f2f5160990f1cb3d7b60c08b3ce3d411b4118b52
     private CanvasView canvas;
     private boolean editMode = false;
     private String pictureId;
@@ -74,7 +80,27 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         this.modeButton = (AllAngleExpandableButton) view.findViewById(R.id.drawer_mode);
         this.strokeSeekBar = (SeekBar) view.findViewById(R.id.stroke_width);
         this.saveButton = (ImageButton) view.findViewById(R.id.save_button);
+        this.textButton = (ImageButton) view.findViewById(R.id.text_button);
         this.canvas = (CanvasView) view.findViewById(R.id.canvas);
+        this.testButton = (Button) view.findViewById(R.id.test_button);
+        this.colorScheme = R.color.iron;
+
+        this.percentLayout = (android.support.percent.PercentRelativeLayout) view.findViewById(R.id.percent_layout);
+
+
+        testButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (flag == 0) {
+                    flag = 1;
+                    percentLayout.setVisibility(PercentRelativeLayout.GONE);
+                }
+                else {
+                    flag = 0;
+                    percentLayout.setVisibility(PercentRelativeLayout.VISIBLE);
+                }
+            }
+        });
+
 
         this.strokeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -108,6 +134,16 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
                 alertDialog.show();
             }
         });
+        final DrawingContract.View currentView = this;
+        this.textButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popup = new TextPopup();
+                popup.setParentView(currentView);
+
+                popup.show(getFragmentManager(), "text_popup");
+            }
+        });
 
         byte[] decodedString = this.getActivity().getIntent().getByteArrayExtra("ENCODED_IMAGE");
         if (decodedString != null) {
@@ -118,6 +154,12 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         }
 
         return view;
+    }
+
+    @Override
+    public void setCanvasText(String text) {
+        canvas.setMode(CanvasView.Mode.TEXT);
+        canvas.setText(text);
     }
 
     @Override
@@ -172,15 +214,13 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         startActivity(intent);
     }
 
-    public Boolean isInDarkMode() {
-        return darkMode;
-    }
-
     private void createModeButton() {
         final List<ButtonData> buttonDatas = new ArrayList<>();
 
         ButtonData defaultButton = ButtonData.buildIconButton(context, R.mipmap.pen_icon, 0);
+        defaultButton.setBackgroundColorId(context, colorScheme);
         ButtonData eraserButton = ButtonData.buildIconButton(context, R.mipmap.eraser_icon, 0);
+        eraserButton.setBackgroundColorId(context, colorScheme);
 
         buttonDatas.add(defaultButton);
         buttonDatas.add(eraserButton);
@@ -216,8 +256,11 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         final List<ButtonData> buttonDatas = new ArrayList<>();
 
         ButtonData strokeButton = ButtonData.buildIconButton(context, R.mipmap.brush_icon, 0);
+        strokeButton.setBackgroundColorId(context, colorScheme);
         ButtonData fillButton = ButtonData.buildIconButton(context, R.mipmap.fill_icon, 0);
+        fillButton.setBackgroundColorId(context, colorScheme);
         ButtonData fillAndStrokeButton = ButtonData.buildIconButton(context, R.mipmap.fillandstroke_icon, 0);
+        fillAndStrokeButton.setBackgroundColorId(context, colorScheme);
 
         buttonDatas.add(strokeButton);
         buttonDatas.add(fillButton);
@@ -255,11 +298,17 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private void createFiguresButton() {
         final List<ButtonData> buttonDatas = new ArrayList<>();
         ButtonData penButton = ButtonData.buildIconButton(context, R.mipmap.pencil_icon, 0);
+        penButton.setBackgroundColorId(context, colorScheme);
         ButtonData lineButton = ButtonData.buildIconButton(context, R.mipmap.line_icon, 0);
+        lineButton.setBackgroundColorId(context, colorScheme);
         ButtonData rectangleButton = ButtonData.buildIconButton(context, R.mipmap.rectangle_icon, 0);
+        rectangleButton.setBackgroundColorId(context, colorScheme);
         ButtonData circleButton = ButtonData.buildIconButton(context, R.mipmap.circle_icon, 0);
+        circleButton.setBackgroundColorId(context, colorScheme);
         ButtonData elipseButton = ButtonData.buildIconButton(context, R.mipmap.elipse_icon, 0);
+        elipseButton.setBackgroundColorId(context, colorScheme);
         ButtonData curvedLineButton = ButtonData.buildIconButton(context, R.mipmap.curvedline_icon, 0);
+        curvedLineButton.setBackgroundColorId(context, colorScheme);
         buttonDatas.add(penButton);
         buttonDatas.add(lineButton);
         buttonDatas.add(rectangleButton);
@@ -308,6 +357,7 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private void createColorsButton() {
         final List<ButtonData> buttonDatas = new ArrayList<>();
         ButtonData mainButton = ButtonData.buildIconButton(context, R.drawable.ic_action_pallette, 0);
+        mainButton.setBackgroundColorId(context, colorScheme);
         buttonDatas.add(mainButton);
         int[] colors = {R.color.red,
                        R.color.blue,
@@ -329,7 +379,10 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         colorsButton.setButtonEventListener(new ButtonEventListener() {
             @Override
             public void onButtonClicked(int index) {
-                canvas.setMode(CanvasView.Mode.DRAW);
+                if(canvas.getMode() == CanvasView.Mode.TEXT) {
+                    canvas.setMode(CanvasView.Mode.DRAW);
+                }
+
                 switch (index) {
                     case 1:  canvas.setPaintStrokeColor(Color.BLACK);
                         break;
