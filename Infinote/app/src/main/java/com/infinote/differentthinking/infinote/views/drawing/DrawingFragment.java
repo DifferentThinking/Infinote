@@ -58,7 +58,6 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
 
     private int flag = 0;
 
-    private Button testButton;
     private android.support.percent.PercentRelativeLayout percentLayout;
     private CanvasView canvas;
     private boolean editMode = false;
@@ -81,23 +80,9 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         this.textButton = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.text_button);
         this.hideButton = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.hide_button);
         this.canvas = (CanvasView) view.findViewById(R.id.canvas);
-        this.testButton = (Button) view.findViewById(R.id.test_button);
         this.colorScheme = R.color.iron;
 
         this.percentLayout = (android.support.percent.PercentRelativeLayout) view.findViewById(R.id.percent_layout);
-
-        testButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (flag == 0) {
-                    flag = 1;
-                    percentLayout.setVisibility(PercentRelativeLayout.GONE);
-                }
-                else {
-                    flag = 0;
-                    percentLayout.setVisibility(PercentRelativeLayout.VISIBLE);
-                }
-            }
-        });
 
         hideButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
