@@ -1,7 +1,6 @@
 package com.infinote.differentthinking.infinote.views.settings;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.infinote.differentthinking.infinote.data.remote.UserData;
 import com.infinote.differentthinking.infinote.views.settings.base.SettingsContract;

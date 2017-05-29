@@ -11,14 +11,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.infinote.differentthinking.infinote.R;
-import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
 import com.infinote.differentthinking.infinote.views.change_password.base.ChangePasswordContract;
 import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
 
 public class ChangePasswordFragment extends Fragment implements ChangePasswordContract.View {
     private ChangePasswordContract.Presenter presenter;
     private Context context;
-    private InfinoteProgressDialog progressDialog;
 
     private com.dd.CircularProgressButton changePasswordButton;
     private EditText changePasswordEditText;

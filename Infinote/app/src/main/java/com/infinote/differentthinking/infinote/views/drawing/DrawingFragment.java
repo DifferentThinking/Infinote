@@ -194,14 +194,6 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         this.progressDialog = progressDialog;
     }
 
-    private byte[] getCanvasData(Bitmap bm) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-
-        return byteArray;
-    }
-
     @Override
     public void showDialogForLoading() {
         this.progressDialog.showProgress("Loading...");
