@@ -51,8 +51,9 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private AllAngleExpandableButton brushButton;
     private AllAngleExpandableButton modeButton;
     private SeekBar strokeSeekBar;
-    private ImageButton saveButton;
-    private ImageButton textButton;
+    private de.hdodenhof.circleimageview.CircleImageView saveButton;
+    private de.hdodenhof.circleimageview.CircleImageView textButton;
+    private de.hdodenhof.circleimageview.CircleImageView hideButton;
     private TextPopup popup;
 
     private int flag = 0;
@@ -76,14 +77,14 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         this.brushButton = (AllAngleExpandableButton) view.findViewById(R.id.drawer_strokes);
         this.modeButton = (AllAngleExpandableButton) view.findViewById(R.id.drawer_mode);
         this.strokeSeekBar = (SeekBar) view.findViewById(R.id.stroke_width);
-        this.saveButton = (ImageButton) view.findViewById(R.id.save_button);
-        this.textButton = (ImageButton) view.findViewById(R.id.text_button);
+        this.saveButton = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.save_button);
+        this.textButton = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.text_button);
+        this.hideButton = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.hide_button);
         this.canvas = (CanvasView) view.findViewById(R.id.canvas);
         this.testButton = (Button) view.findViewById(R.id.test_button);
         this.colorScheme = R.color.iron;
 
         this.percentLayout = (android.support.percent.PercentRelativeLayout) view.findViewById(R.id.percent_layout);
-
 
         testButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -94,6 +95,21 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
                 else {
                     flag = 0;
                     percentLayout.setVisibility(PercentRelativeLayout.VISIBLE);
+                }
+            }
+        });
+
+        hideButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (flag == 0) {
+                    flag = 1;
+                    percentLayout.setVisibility(PercentRelativeLayout.GONE);
+                    hideButton.setImageResource(R.mipmap.arrow_down);
+                }
+                else {
+                    flag = 0;
+                    percentLayout.setVisibility(PercentRelativeLayout.VISIBLE);
+                    hideButton.setImageResource(R.mipmap.arrow_up);
                 }
             }
         });
