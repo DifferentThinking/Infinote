@@ -29,6 +29,8 @@ public interface ListNotesContract {
 
         void dismissDialog();
 
+        void showDrawerActivity();
+
         ArrayAdapter<NoteContract> getNoteAdapter();
     }
 

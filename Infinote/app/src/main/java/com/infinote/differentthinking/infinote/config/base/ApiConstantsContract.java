@@ -15,6 +15,8 @@ public interface ApiConstantsContract {
 
     String profilePictureUrl(String username);
 
+    String userPasswordUrl(String useranme);
+
     int responseSuccessCode();
 
     int responseErrorCode();

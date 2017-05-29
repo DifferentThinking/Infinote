@@ -127,6 +127,25 @@ public class UserData implements UserDataContract {
             });
     }
 
+    public Observable<Boolean> updatePasswordForUser(String password) {
+        Map<String, String> body = new HashMap<>();
+        String passHash = hashProvider.hashPassword(password);
+        body.put("passHash", passHash);
+
+        return httpRequester
+                .post(apiConstants.userPasswordUrl(userSession.getUsername()), body)
+                .map(new Function<HttpResponseContract, Boolean>() {
+                    @Override
+                    public Boolean apply(HttpResponseContract iHttpResponse) throws Exception {
+                        if (iHttpResponse.getCode() == apiConstants.responseErrorCode()) {
+                            throw new Error(iHttpResponse.getMessage());
+                        }
+                        String responseBody = iHttpResponse.getBody();
+                        return responseBody.contains("OK");
+                    }
+                });
+    }
+
     public void logoutUser() {
         this.userSession.clearSession();
     }

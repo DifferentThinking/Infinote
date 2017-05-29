@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
+import com.infinote.differentthinking.infinote.views.change_password.ChangePasswordActivity;
 import com.infinote.differentthinking.infinote.views.profile.ProfileActivity;
 import com.infinote.differentthinking.infinote.views.settings.base.SettingsContract;
 
@@ -34,6 +35,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
 
     private de.hdodenhof.circleimageview.CircleImageView profilePicture;
     private TextView changePictureButton;
+    private TextView changePasswordButton;
     private ImageButton doneButton;
 
     public static SettingsFragment newInstance() {
@@ -48,13 +50,14 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
         this.changePictureButton = (TextView) view.findViewById(R.id.tv_change_picture);
         this.profilePicture = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.profile_pic_settings);
         this.doneButton = (ImageButton) view.findViewById(R.id.done_button);
+        this.changePasswordButton = (TextView) view.findViewById(R.id.tv_change_password);
 
         this.changePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, 1);
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            startActivityForResult(intent, 1);
             }
         });
 
@@ -62,6 +65,13 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
             @Override
             public void onClick(View v) {
                 presenter.saveProfilePicture(profilePictureAsString);
+            }
+        });
+
+        this.changePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showChangePasswordActivity();
             }
         });
 
@@ -106,6 +116,12 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
 
     public void setDialog(InfinoteProgressDialog progressDialog) {
         this.progressDialog = progressDialog;
+    }
+
+    @Override
+    public void showChangePasswordActivity() {
+        Intent intent = new Intent(this.context, ChangePasswordActivity.class);
+        startActivity(intent);
     }
 
     @Override

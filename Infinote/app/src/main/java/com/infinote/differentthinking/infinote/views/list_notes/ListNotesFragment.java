@@ -135,6 +135,7 @@ public class ListNotesFragment extends Fragment implements ListNotesContract.Vie
         startActivity(intent);
     }
 
+    @Override
     public void showDrawerActivity() {
         Intent intent = new Intent(this.context, DrawingActivity.class);
         startActivity(intent);

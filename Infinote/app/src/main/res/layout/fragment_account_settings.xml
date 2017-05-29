@@ -55,27 +55,27 @@
             android:paddingEnd="24dp"
             android:paddingTop="25dp">
 
-            <EditText
-                android:id="@+id/ed_edit_firstname"
-                android:background="@drawable/edittext_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="First name"
-                android:textColorHint="@color/iron"
-                android:textColor="@color/black"
-                android:inputType="textEmailAddress"
-                android:drawableLeft="@mipmap/name_icon" />
+            <!--<EditText-->
+                <!--android:id="@+id/ed_edit_firstname"-->
+                <!--android:background="@drawable/edittext_style"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="First name"-->
+                <!--android:textColorHint="@color/iron"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:inputType="textEmailAddress"-->
+                <!--android:drawableLeft="@mipmap/name_icon" />-->
 
-            <EditText
-                android:id="@+id/et_edit_lastname"
-                android:background="@drawable/edittext_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Last name"
-                android:textColorHint="@color/iron"
-                android:textColor="@color/black"
-                android:inputType="textEmailAddress"
-                android:drawableLeft="@mipmap/name_icon" />
+            <!--<EditText-->
+                <!--android:id="@+id/et_edit_lastname"-->
+                <!--android:background="@drawable/edittext_style"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="Last name"-->
+                <!--android:textColorHint="@color/iron"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:inputType="textEmailAddress"-->
+                <!--android:drawableLeft="@mipmap/name_icon" />-->
 
             <TextView
                 android:id="@+id/tv_change_password"

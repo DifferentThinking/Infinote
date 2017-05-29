@@ -25,6 +25,7 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".views.drawing.DrawingActivity"/>
         <activity android:name=".views.settings.SettingsActivity" />
+        <activity android:name=".views.change_password.ChangePasswordActivity" />
     </application>
 
 </manifest>

@@ -12,6 +12,8 @@ public interface SettingsContract {
 
         void showProfileActivity();
 
+        void showChangePasswordActivity();
+
         void dismissDialog();
     }
 

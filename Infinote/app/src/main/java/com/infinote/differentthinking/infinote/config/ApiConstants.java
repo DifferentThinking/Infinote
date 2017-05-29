@@ -32,6 +32,11 @@ public class ApiConstants implements ApiConstantsContract {
     }
 
     @Override
+    public String userPasswordUrl(String useranme) {
+        return API_URL + "/users/" + useranme + "/password";
+    }
+
+    @Override
     public String updateNoteById(String id) {
         return API_URL + "/notes/" + id + "/update";
     }
