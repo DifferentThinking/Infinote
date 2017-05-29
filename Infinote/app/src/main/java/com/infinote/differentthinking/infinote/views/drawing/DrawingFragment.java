@@ -54,6 +54,9 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private de.hdodenhof.circleimageview.CircleImageView saveButton;
     private de.hdodenhof.circleimageview.CircleImageView textButton;
     private de.hdodenhof.circleimageview.CircleImageView hideButton;
+    private de.hdodenhof.circleimageview.CircleImageView undoButton;
+    private de.hdodenhof.circleimageview.CircleImageView redoButton;
+
     private TextPopup popup;
 
     private int flag = 0;
@@ -79,6 +82,8 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         this.saveButton = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.save_button);
         this.textButton = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.text_button);
         this.hideButton = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.hide_button);
+        this.undoButton = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.undo_button);
+        this.redoButton = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.redo_button);
         this.canvas = (CanvasView) view.findViewById(R.id.canvas);
         this.percentLayout = (android.support.percent.PercentRelativeLayout) view.findViewById(R.id.percent_layout);
         this.colorScheme = R.color.iron;
@@ -98,6 +103,17 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
             }
         });
 
+        undoButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                canvas.undo();
+            }
+        });
+
+        redoButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                canvas.redo();
+            }
+        });
 
         this.strokeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

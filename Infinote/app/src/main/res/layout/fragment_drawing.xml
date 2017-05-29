@@ -112,7 +112,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_height="wrap_content"
-            app:layout_widthPercent="20%"/>
+            app:layout_widthPercent="15%"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/text_button"
@@ -136,6 +136,32 @@
         app:layout_marginRightPercent="3%"
         app:civ_border_width="2dp"
         app:civ_border_color="#000000"/>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignRight="@id/hide_button"
+        app:layout_marginTopPercent="10%"
+        app:layout_marginRightPercent="8%">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/undo_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/undo"
+            android:layout_marginRight="7dp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#000000"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/redo_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/redo"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#000000"/>
+
+    </LinearLayout>
 
     <android.support.percent.PercentRelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
