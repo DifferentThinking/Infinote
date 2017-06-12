@@ -47,3 +47,4 @@ public class TextPopup extends DialogFragment {
         this.parent = v;
     }
 }
+

@@ -1,6 +1,7 @@
 package com.infinote.differentthinking.infinote.views.drawing;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,7 +10,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.percent.PercentRelativeLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -27,6 +30,7 @@ import com.fangxu.allangleexpandablebutton.ButtonData;
 import com.fangxu.allangleexpandablebutton.ButtonEventListener;
 import com.infinote.differentthinking.infinote.R;
 import com.infinote.differentthinking.infinote.utils.InfinoteProgressDialog;
+import com.infinote.differentthinking.infinote.utils.SaveDialog;
 import com.infinote.differentthinking.infinote.utils.TextPopup;
 import com.infinote.differentthinking.infinote.views.list_notes.ListNotesActivity;
 import com.infinote.differentthinking.infinote.views.drawing.base.DrawingContract;
@@ -58,6 +62,7 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
     private de.hdodenhof.circleimageview.CircleImageView redoButton;
 
     private TextPopup popup;
+    private SaveDialog saveDialog;
 
     private int flag = 0;
 
@@ -71,7 +76,7 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_drawing, container, false);
 
         this.colorsButton = (AllAngleExpandableButton) view.findViewById(R.id.button_expandable);
@@ -137,17 +142,21 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
         this.createColorsButton();
         this.createFiguresButton();
 
-
-        this.setupAlertDialog();
         this.canvas.setDrawingCacheEnabled(true);
-
+        final DrawingContract.View currentView = this;
         this.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alertDialog.show();
+                saveDialog = new SaveDialog();
+                saveDialog.setParentView(currentView);
+                saveDialog.setCanvas(canvas);
+                saveDialog.setEditMode(editMode);
+                saveDialog.setPictureId(pictureId);
+                saveDialog.setPresenter(presenter);
+
+                saveDialog.show(getFragmentManager(), "save_dialog");
             }
         });
-        final DrawingContract.View currentView = this;
         this.textButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -424,53 +433,5 @@ public class DrawingFragment extends Fragment implements DrawingContract.View {
 
             }
         });
-    }
-
-    private void setupAlertDialog() {
-        this.alertDialog = new AlertDialog.Builder(this.getActivity());
-        alertDialog.setTitle("Save note");
-        alertDialog.setMessage("Please enter title");
-
-        final EditText editText = new EditText(this.getContext());
-
-        alertDialog.setView(editText);
-        alertDialog.setCancelable(true);
-
-        alertDialog.setPositiveButton("Save",
-            new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    byte[] canvasData = canvas.getBitmapAsByteArray();
-                    String encodedPicture = Base64.encodeToString(canvasData, Base64.DEFAULT);
-
-                    String title = editText.getText().toString();
-                    if (title.equals("") || title.length() == 0) {
-                       title = "No Title";
-                    }
-
-                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                    Date date = new Date();
-                    String dateAsString = dateFormat.format(date);
-
-                    if(editMode) {
-                        presenter.updateNote(pictureId, encodedPicture, title, dateAsString);
-                    }
-                    else {
-                        if (presenter.isUserLoggedIn()) {
-                            presenter.saveNote(encodedPicture, title, dateAsString);
-                        }
-                        else {
-                            presenter.saveNoteLocally(encodedPicture, title, dateAsString);
-                        }
-                    }
-                }
-                });
-
-        alertDialog.setNegativeButton("Cancel",
-            new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    setupAlertDialog();
-                }
-            });
     }
 }
