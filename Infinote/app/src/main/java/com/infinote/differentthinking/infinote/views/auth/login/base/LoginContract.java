@@ -14,6 +14,8 @@ public interface LoginContract {
         void notifyError(String errorMessage);
 
         void showRegisterActivty();
+
+        void setErrorButton();
     }
 
     interface Presenter {

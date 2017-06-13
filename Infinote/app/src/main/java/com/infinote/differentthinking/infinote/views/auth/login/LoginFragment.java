@@ -46,7 +46,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        this.timer = new CountDownTimer(5000, 1000) {
+        this.timer = new CountDownTimer(3000, 1000) {
             @ScriptIntrinsicBLAS.Diag
             public void onFinish() {
                 loginButton.setProgress(0);
@@ -75,9 +75,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
                 if (loginButton.getProgress() == 0) {
                     loginButton.setProgress(50);
                     if (!presenter.validateLoginUser(usernameEditText.getText().toString(), passwordEditText.getText().toString())) {
-                        loginButton.setErrorText("Invalid data");
-                        loginButton.setProgress(-1);
-                        timer.start();
+                        setErrorButton();
                         return;
                     }
                     presenter.loginUser(usernameEditText.getText().toString(), passwordEditText.getText().toString());
@@ -108,6 +106,13 @@ public class LoginFragment extends Fragment implements LoginContract.View {
         );
 
         return view;
+    }
+
+    @Override
+    public void setErrorButton() {
+        loginButton.setErrorText("Invalid credentials");
+        loginButton.setProgress(-1);
+        timer.start();
     }
 
     @Override

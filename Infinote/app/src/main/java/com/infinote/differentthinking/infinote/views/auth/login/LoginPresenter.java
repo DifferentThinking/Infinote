@@ -44,7 +44,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                             @Override
                             public void onError(Throwable e) {
-                                view.notifyError("Invalid useranme or password");
+                                view.setErrorButton();
                             }
 
                             @Override
