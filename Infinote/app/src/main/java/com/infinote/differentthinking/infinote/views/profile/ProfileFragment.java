@@ -122,7 +122,10 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     @Override
     public void showSettingsActivity() {
         Intent intent = new Intent(this.context, SettingsActivity.class);
-        intent.putExtra("PICTURE", decodedString);
+        if (decodedString != null) {
+            intent.putExtra("PICTURE", decodedString);
+        }
+
         startActivity(intent);
     }
 

@@ -78,7 +78,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
         });
 
         encodedPicture = this.getActivity().getIntent().getByteArrayExtra("PICTURE");
-        Log.d("PIC", encodedPicture.length +"");
+
         if(encodedPicture != null) {
             Bitmap bmp = BitmapFactory.decodeByteArray(encodedPicture, 0, encodedPicture.length);
             profilePicture.setImageBitmap(bmp);
