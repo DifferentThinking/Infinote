@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +78,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
         });
 
         encodedPicture = this.getActivity().getIntent().getByteArrayExtra("PICTURE");
+        Log.d("PIC", encodedPicture.length +"");
         if(encodedPicture != null) {
             Bitmap bmp = BitmapFactory.decodeByteArray(encodedPicture, 0, encodedPicture.length);
             profilePicture.setImageBitmap(bmp);
@@ -99,20 +102,12 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
                 return;
             }
 
-            if(encodedPicture != null) {
-                Bitmap bmp = BitmapFactory.decodeByteArray(encodedPicture, 0, encodedPicture.length);
-                profilePicture.setImageBitmap(bmp);
-            }
-            else {
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                Bitmap bmp = BitmapFactory.decodeStream(inputStream);
-                profilePicture.setImageBitmap(bmp);
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            }
-
-//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//            byte[] byteArray = stream.toByteArray();
-//            profilePictureAsString = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            Bitmap bmp = BitmapFactory.decodeStream(inputStream);
+            profilePicture.setImageBitmap(bmp);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            profilePictureAsString = Base64.encodeToString(byteArray, Base64.DEFAULT);
         }
     }
 
